@@ -34,9 +34,16 @@
           :nav="item"
         ></nav-item>
         <!-- Admin -->
-        <div v-if="authenticated_user.role == 'admin'">
+        <div v-if="authenticated_user.role == 'admin' || authenticated_user.role == 'superadmin'">
           <nav-item
             v-for="item in adminNav"
+            :key="item.title"
+            :nav="item"
+          ></nav-item>
+        </div>
+         <div v-if="authenticated_user.role == 'superadmin'">
+          <nav-item
+            v-for="item in superadminNav"
             :key="item.title"
             :nav="item"
           ></nav-item>
@@ -150,6 +157,13 @@ export default {
           icon: "mdi-account",
           location: "/d/notifications",
         },
+      ],
+      superadminNav: [
+        {
+          title: "Entities",
+          icon: "mdi-account-group-outline",
+          location: "/d/entities",
+        }, 
       ],
     };
   },

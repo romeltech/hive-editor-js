@@ -19,20 +19,20 @@ export default {
     };
   },
   methods: {
-    getUser() {
+    getData() {
       axios
-        .get("/d/user/get/" + this.$route.params.id)
+        .get("/d/car/get/" + this.$route.params.id)
         .then((response) => {
           this.objectData = Object.assign({}, response.data);
         })
         .catch((err) => {});
     },
     savedResponse() {
-      this.getUser();
+      this.getData();
     },
   },
   mounted() {
-    this.getUser();
+    this.getData();
   },
 };
 </script>

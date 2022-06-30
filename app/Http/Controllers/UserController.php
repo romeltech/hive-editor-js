@@ -35,7 +35,7 @@ class UserController extends Controller
     public function getAllUsers()
     {
         // Fetch All Users
-        $users = User::all();
+        $users = User::where('role' , '!=', 'superadmin')->paginate(10);
         return response()->json($users, 200);
     }
 
