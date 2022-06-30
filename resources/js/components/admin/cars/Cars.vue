@@ -63,10 +63,14 @@ export default {
       pageLoading: true,
       search: "",
       headers: [
-        { text: "Full Name", value: "full_name" },
-        { text: "Email", value: "email" },
-        { text: "Phone", value: "phone" },
-        { text: "Role", value: "role" },
+        { text: "Plate No", value: "plate_no" },
+        { text: "Cars", value: "title" },
+        { text: "Year", value: "year" },
+        { text: "Color", value: "color" },
+        { text: "Chassis No.", value: "chassis_no" },
+        { text: "Registration Exp.", value: "registration_expiry" },
+        { text: "Insurance Exp.", value: "insurance_expiry" },
+        { text: "KM Registered", value: "km" },
         { text: "Status", value: "status" },
         { text: "Actions", align: "end", value: "actions", sortable: false },
       ],
@@ -75,9 +79,10 @@ export default {
   },
   methods: {
     async getAllData() {
-      const response = await axios.get("/d/user/get/all");
-      
-      this.data_lists = Object.assign([], response.data);
+      const response = await axios.get("/d/cars/fetch/all");
+      if(response.data){
+        this.data_lists = Object.assign([], response.data.data);
+      }
     },
     editData(obj) {
       this.$router.push({

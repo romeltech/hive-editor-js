@@ -10,7 +10,7 @@
             <v-form ref="form">
               <v-card :loading="loading">
                 <v-card-title>
-                  <h4>Edit {{ cardTitle }}</h4>
+                  <h4>{{ cardTitle }}</h4>
                 </v-card-title>
                 <v-card-text>
                   <v-switch

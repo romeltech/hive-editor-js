@@ -77,7 +77,7 @@ export default {
     async getAllUsers() {
       const response = await axios.get("/d/user/get/all");
       console.log(response.data);
-      this.user_lists = Object.assign([], response.data);
+      this.user_lists = Object.assign([], response.data.data);
     },
     editUser(user) {
       this.$router.push({

@@ -10,7 +10,7 @@
             <v-form ref="form">
               <v-card :loading="loading">
                 <v-card-title>
-                  <h4>Edit {{ cardTitle }}</h4>
+                  <h4>{{ cardTitle }}</h4>
                 </v-card-title>
                 <v-card-text>
                   <v-switch
@@ -19,23 +19,7 @@
                     :color="`${statusSwitch == true ? 'success' : 'grey'}`"
                     :label="`${statusSwitch == true ? 'Active' : 'Disabled'}`"
                   ></v-switch>
-                  <!-- <ValidationProvider
-                    v-slot="{ errors }"
-                    rules="required"
-                    name="Username"
-                  >
-                    <div class="d-flex">
-                      <v-text-field
-                        autofocus
-                        dense
-                        outlined
-                        v-model="usersObj.username"
-                        label="Username *"
-                        :error-messages="errors"
-                        required
-                      ></v-text-field>
-                    </div>
-                  </ValidationProvider> -->
+                  
                   <ValidationProvider
                     v-slot="{ errors }"
                     rules="required"

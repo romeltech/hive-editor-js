@@ -17,25 +17,23 @@ class CarController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+ 
+    public function saveData(Request $request)
+    { 
+       
+        
+        if(isset($request['data']['id'])){
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+            $data = Car::where('id' ,'=', $request['data']['id'])->first();
+            $data->update($request['data']);
+            $msg = "data has been updated";
+        }else{
+            $data = Car::create($request['data']);
+            $msg = "data has been created";
+        }
+        return response()->json([
+            'message' => $msg
+        ], 200);
     }
 
     /**
@@ -44,9 +42,10 @@ class CarController extends Controller
      * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function show(Car $car)
+    public function fetch()
     {
-        //
+        $data = Car::orderBy('year', 'asc')->paginate(10);
+        return response()->json($data, 200);
     }
 
     /**
@@ -55,22 +54,13 @@ class CarController extends Controller
      * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function edit(Car $car)
+    public function edit($id)
     {
-        //
+        $data = Car::where('id', $id)->first();
+        return response()->json($data, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Car  $car
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Car $car)
-    {
-        //
-    }
+ 
 
     /**
      * Remove the specified resource from storage.
