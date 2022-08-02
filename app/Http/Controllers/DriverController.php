@@ -17,68 +17,70 @@ class DriverController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+ 
+    public function saveData(Request $request)
+    {   
+        if(isset($request['data']['id'])){
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+            $data = Driver::where('id' ,'=', $request['data']['id'])->first();
+            $data->update($request['data']);
+            $msg = "data has been updated";
+        }else{
+            $data = Driver::create($request['data']);
+            $msg = "data has been created";
+        }
+        return response()->json([
+            'message' => $msg
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Driver  $driver
+     * @param  \App\Models\Driver  $car
      * @return \Illuminate\Http\Response
      */
-    public function show(Driver $driver)
+    public function fetch($perPage, $search)
     {
-        //
+        if($search != '-'){
+            $data = Driver::where('fullname', 'LIKE', '%'.$search.'%')->
+                    orWhere('phone', 'LIKE', '%'.$search.'%')
+                    ->orderBy('fullname', 'asc')->paginate($perPage);
+        }else{ 
+            $data = Driver::orderBy('fullname', 'asc')->paginate($perPage);
+        }
+        return response()->json($data, 200);
+    }
+
+    public function fetchAll(){
+        
+        $data = Driver::where('status', 'active')->orderBy('fullname', 'asc')->get();
+       
+        return response()->json($data, 200);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Driver  $driver
+     * @param  \App\Models\Driver  $car
      * @return \Illuminate\Http\Response
      */
-    public function edit(Driver $driver)
-    {
-        //
+    public function edit($id)
+    { 
+        
+        $data = Driver::where('id', '=',$id)->first();
+        return response()->json($data, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Driver  $driver
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Driver $driver)
-    {
-        //
-    }
+ 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Driver  $driver
+     * @param  \App\Models\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Driver $driver)
+    public function destroy(Driver $car)
     {
         //
     }

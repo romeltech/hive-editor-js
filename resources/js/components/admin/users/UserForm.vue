@@ -75,15 +75,14 @@
                     >
                     </v-autocomplete>
                   </ValidationProvider>
-                  <ValidationProvider v-slot="{ errors }" rules="" name="Phone">
+                 
                     <v-text-field
                       dense
                       outlined
                       v-model="usersObj.phone"
-                      label="Phone"
-                      :error-messages="errors"
+                      label="Phone" 
                     ></v-text-field>
-                  </ValidationProvider>
+                 
                   <div v-if="pagetitle !== 'edit'">
                     <ValidationProvider
                       v-slot="{ errors }"

@@ -5,9 +5,9 @@
 </template>
 
 <script>
-import NotificationForm from "./NotificationForm";
+import notificationForm from "./NotificationForm";
 export default {
-  components: { NotificationForm },
+  components: { notificationForm },
   data() {
     return {
       //   pagetitle: 'Create New' ,

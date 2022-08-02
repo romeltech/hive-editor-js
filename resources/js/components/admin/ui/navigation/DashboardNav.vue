@@ -136,7 +136,7 @@ export default {
           location: "/d/dashboard",
         },
         {
-          title: "Cars",
+          title: "Vehicles",
           icon: "mdi-account",
           location: "/d/cars",
         },

@@ -28,53 +28,13 @@
                     <v-text-field
                       dense
                       outlined
-                      v-model="usersObj.full_name"
+                      v-model="usersObj.fullname"
                       label="Full Name *"
                       :error-messages="errors"
                       required
                     ></v-text-field>
                   </ValidationProvider>
-                  <ValidationProvider
-                    v-slot="{ errors }"
-                    rules="email"
-                    name="Email"
-                  >
-                    <div class="d-flex">
-                      <v-text-field
-                        autocomplete="false"
-                        dense
-                        outlined
-                        v-model="usersObj.email"
-                        label="Email"
-                        :error-messages="emailExisted ? emailExisted : errors"
-                        required
-                      ></v-text-field>
-                      <v-progress-circular
-                        v-if="is_checking_mail == true"
-                        :size="25"
-                        :width="2"
-                        indeterminate
-                        color="primary"
-                        class="ml-3 mt-2"
-                      ></v-progress-circular>
-                    </div>
-                  </ValidationProvider>
-                  <ValidationProvider
-                    v-slot="{ errors }"
-                    rules="required"
-                    name="role"
-                  >
-                    <v-autocomplete
-                      dense
-                      v-model="usersObj.role"
-                      :items="rolesArray"
-                      label="Role *"
-                      outlined
-                      required
-                      :error-messages="errors"
-                    >
-                    </v-autocomplete>
-                  </ValidationProvider>
+                   
                   <ValidationProvider v-slot="{ errors }" rules="" name="Phone">
                     <v-text-field
                       dense
@@ -84,40 +44,7 @@
                       :error-messages="errors"
                     ></v-text-field>
                   </ValidationProvider>
-                  <div v-if="pagetitle !== 'edit'">
-                    <ValidationProvider
-                      v-slot="{ errors }"
-                      :rules="`${pagetitle == 'edit' ? '' : 'required|min:9'}`"
-                      name="Password"
-                    >
-                      <v-text-field
-                        dense
-                        type="password"
-                        v-model="usersObj.password"
-                        label="Password *"
-                        outlined
-                        :required="pagetitle == 'edit' ? false : true"
-                        name="password"
-                        :error-messages="errors"
-                      ></v-text-field>
-                    </ValidationProvider>
-                    <ValidationProvider
-                      v-slot="{ errors }"
-                      rules="required|confirmed:Password"
-                      name="Password Confirmation"
-                    >
-                      <v-text-field
-                        dense
-                        type="password"
-                        v-model="usersObj.password_confirmation"
-                        label="Confirm Password *"
-                        name="password_confirmation"
-                        required
-                        outlined
-                        :error-messages="errors"
-                      ></v-text-field>
-                    </ValidationProvider>
-                  </div>
+                 
                   <v-card-actions>
                     <v-btn
                       v-if="pagetitle == 'edit'"
@@ -126,7 +53,7 @@
                       @click="deleteData()"
                       >delete</v-btn
                     >
-                    <v-spacer></v-spacer>
+                  
                     <v-btn class="primary" :disabled="!valid" @click="submit"
                       >Save</v-btn
                     >
@@ -169,29 +96,24 @@ export default {
   },
   data() {
     return {
-      statusSwitch: true,
-      rolesArray: ["admin", "staff"],
+      statusSwitch: true, 
       actionSave: this.pagetitle,
       cardTitle: "New Driver",
       emailExisted: "",
-      usersObj: {},
-      origEmail: this.objectdata ? this.objectdata.email : "",
-      newStatus: "",
-      // ui
-      is_checking_mail: false,
+      usersObj: {}, 
+      newStatus: "", 
       sbOptions: {},
       confOptions: {},
       loading: this.objectdata ? true : false,
-      email_already_exists: false,
+       
     };
   },
   watch: {
     objectdata: {
       handler(val, oldVal) {
         if (val != oldVal) {
-          this.usersObj = Object.assign({}, val);
-          this.origEmail = val.email;
-          this.cardTitle = val.full_name;
+          this.usersObj = Object.assign({}, val); 
+          this.cardTitle = "Update Driver";
           this.statusSwitch = val.status == "active" ? true : false;
         }
         this.loading = false;
@@ -200,62 +122,22 @@ export default {
     },
   },
   methods: {
-    async emailCheck() {
-      if (this.usersObj.email) {
-        this.is_checking_mail = true;
-        await axios
-          .post("/d/user/check/email", {
-            email: this.usersObj.email,
-          })
-          .then((response) => {
-            if (response.data.email_existed == true) {
-              this.email_already_exists = true;
-              this.emailExisted = "Email already registered"; // Set error message
-            } else {
-              this.email_already_exists = false;
-              this.emailExisted = ""; // Empty error message
-            }
-            this.is_checking_mail = false;
-          })
-          .catch((err) => {
-            console.log("Email Check Error");
-            console.log(err.response);
-            this.is_checking_mail = false;
-          });
-      }
-    },
+  
     submit() {
       this.loading = true;
 
       // Set status value
       this.usersObj.status = this.statusSwitch == true ? "active" : "disabled";
 
-      // Check if the email is changed
-      if (this.usersObj.email == this.origEmail) {
-        delete this.usersObj["email"];
-      }
-
-      // Check the email if exists
-      this.emailCheck().then(() => {
-        // Set error message if email already exists
-        if (this.email_already_exists == true) {
-          this.sbOptions = {
-            status: true,
-            type: "error",
-            text: "Email already registered",
-          };
-          this.loading = false;
-          return false;
-        }
-
+      let dataForm = { data: this.usersObj };
         // Send data to save
         axios
-          .post("/d/user/save", this.usersObj)
+          .post("/d/driver/save", dataForm)
           .then((response) => {
             this.sbOptions = {
               status: true,
               type: "success",
-              text: "User has been saved",
+              text: "Data has been saved",
             };
             if (this.pagetitle == "edit") {
               this.$emit("saved", true);
@@ -264,7 +146,7 @@ export default {
                 this.loading = false;
                 this.usersObj = {};
                 this.$refs.user_form_observer.reset();
-                this.$router.push({ name: "Users" });
+                this.$router.push({ name: "Drivers" });
               });
             }
           })
@@ -277,7 +159,7 @@ export default {
               text: "Error saving data",
             };
           });
-      });
+       
     },
     deleteData() {
       this.confOptions = {
@@ -291,13 +173,13 @@ export default {
     confResponse(value) {
       if (value == true) {
         axios
-          .post("/d/user/delete/" + this.usersObj.id)
+          .post("/d/driver/delete/" + this.usersObj.id)
           .then((response) => {
             this.$emit("saved", true);
             this.sbOptions = {
               status: true,
               type: "success",
-              text: "User has been deleted",
+              text: "Data has been deleted",
             };
           })
           .catch((err) => {

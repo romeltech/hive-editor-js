@@ -23,12 +23,31 @@ const helpers_plugin = {
     install(Vue, options) {
         // Date format
         Vue.prototype.formatDateHelper = date => {
-            return new Date(date).toLocaleString("en-US", {
+            return new Date(date).toLocaleString("en-GB", {
                 day: "2-digit",
                 year: "numeric",
-                month: "long"
+                month: "2-digit"
             });
         };
+
+        Vue.prototype.isExpired = (date) => {
+            let ndate = new Date(date).toLocaleString();
+            ndate = new Date(ndate).getTime();
+            var vd = new Date().getTime();
+
+            var d = new Date(date);
+            d.setDate(d.getDate()-30);
+            let vdate = d.toLocaleString(); 
+            vdate = new Date(vdate).getTime(); 
+             
+            if(ndate > vd && vdate < ndate && vd > vdate){
+                return 'orange accent-3';
+            }else if(ndate <= vd){
+                return 'red accent-4 white--text';
+            }
+
+            return null; 
+        }
         // Base URL
         Vue.prototype.$baseUrl = window.location.origin;
     }
