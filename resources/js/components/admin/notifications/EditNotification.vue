@@ -9,33 +9,30 @@
 </template>
 
 <script>
-import NotificationForm from "./NotificationForm.vue";
-
+import notificationForm from "./NotificationForm";
 export default {
-  components: { NotificationForm },
+  components: { notificationForm },
   data() {
     return {
       objectData: {},
     };
   },
   methods: {
-    getUser() {
+    getData() {
       axios
-        .get("/d/user/get/" + this.$route.params.id)
+        .get("/d/notification/get/" + this.$route.params.id)
         .then((response) => {
+          console.log(response.data);
           this.objectData = Object.assign({}, response.data);
         })
         .catch((err) => {});
     },
     savedResponse() {
-      this.getUser();
+      this.getData();
     },
   },
   mounted() {
-    this.getUser();
+    this.getData();
   },
 };
 </script>
-
-<style>
-</style>

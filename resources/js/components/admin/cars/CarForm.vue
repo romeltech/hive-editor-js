@@ -13,11 +13,7 @@
       </template>
     </v-app-bar>
     <v-container class="pt-3 mx-4" v-if="pagetitle == 'edit'">
-      <v-btn
-        class="secondary" 
-        @click="newIncident"
-        >NEW INCIDENT</v-btn
-      >
+      <v-btn class="secondary" @click="newIncident">NEW INCIDENT</v-btn>
     </v-container>
     <v-container class="py-2">
       <v-tabs-items v-model="tab">
@@ -129,6 +125,7 @@
                                   label="Current KM *"
                                   outlined
                                   required
+                                  type="number"
                                   hide-details
                                   :error-messages="errors"
                                 ></v-text-field>
@@ -139,15 +136,17 @@
                                 v-slot="{ errors }"
                                 rules="required"
                                 name="year"
-                              >
+                              > 
                                 <v-text-field
                                   dense
                                   v-model="formObj.year"
                                   label="Year *"
                                   :disabled="pagetitle == 'edit' ? true : false"
                                   outlined
-                                  required
+                                  required  
+                                  type="text"
                                   hide-details
+                                  maxlength="4"
                                   :error-messages="errors"
                                 ></v-text-field>
                               </ValidationProvider>
@@ -205,27 +204,75 @@
             </v-card-text>
           </v-card>
         </v-tab-item>
-           <v-tab-item key="history">
+        <v-tab-item key="history">
           <v-card flat>
             <v-card-text>
-                <v-tool-bar class="d-flex">
-                  Filter by:
-                            <v-text-field
-                                  dense 
-                                  label="Incidents"
-                                  outlined
-                                  hide-details 
-                                ></v-text-field>
-                                 <v-text-field
-                                  dense 
-                                  label="Incidents"
-                                  outlined
-                                  hide-details 
-                                ></v-text-field>
-                </v-tool-bar>
+              <h3 class="mb-2">
+                {{ formObj.title }} ({{ formObj.plate_no }}) :
+                {{ formObj.chassis_no }}
+              </h3>
+              <v-toolbar class="d-flex align-center">
+                <div>Filter by:</div>
+                <v-autocomplete
+                  dense
+                  :items="service"
+                  label="Type"
+                  outlined
+                  clearable
+                  hide-details
+                  v-model="filterObj.type"
+                  class="mx-2"
+                ></v-autocomplete>
+                <v-text-field
+                  type="date"
+                  dense
+                  label="Start Date"
+                  outlined
+                  v-model="filterObj.start_date"
+                  hide-details
+                  class="mx-2"
+                ></v-text-field>
+                <v-text-field
+                  type="date"
+                  dense
+                  label="End Date"
+                  outlined
+                  v-model="filterObj.end_date"
+                  hide-details
+                  class="mx-2"
+                ></v-text-field>
+
+                <v-btn class="primary small" @click="searchFilter"
+                  >SEARCH</v-btn
+                >
+              </v-toolbar>
             </v-card-text>
           </v-card>
-           </v-tab-item>
+
+          <v-card v-if="searchHistory">
+            <v-card-text>
+              <v-toolbar class="mb-2">
+                Results:
+                <v-spacer></v-spacer>
+                <v-spacer></v-spacer>
+                <v-text-field
+                  v-model="search"
+                  append-icon="mdi-magnify"
+                  label="Search"
+                  single-line
+                  hide-details
+                ></v-text-field>
+              </v-toolbar>
+
+              <v-data-table
+                class="elevation-1"
+                :headers="headers"
+                :items="searchData"
+                :search="search"
+              ></v-data-table>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
       </v-tabs-items>
     </v-container>
     <!-- actions and dialogs -->
@@ -259,20 +306,37 @@ export default {
   data() {
     return {
       statusSwitch: true,
+
+      searchHistory: false,
+      searchData: [],
       rolesArray: ["admin", "staff"],
       actionSave: this.pagetitle,
       cardTitle: "Register Vehicle",
-      emailExisted: "",
+      service: ["Service", "Petrol", "Others"],
+      headers: [
+        {
+          text: "Type",
+          align: "start",
+          value: "type",
+        },
+        { text: "Driver In", value: "driver_in.fullname" },
+        { text: "Driver Out", value: "driver_out.fullname" },
+        { text: "Date In", value: "date_in" },
+        { text: "Date Out", value: "date_out" },
+        { text: "KM In", value: "km_in" },
+        { text: "KM Out", value: "km_out" },
+        { text: "Cost", value: "cost" },
+        { text: "Note", value: "remarks" },
+      ],
       formObj: {},
-      origEmail: this.objectdata ? this.objectdata.email : "",
       newStatus: "",
+      search: "",
       // ui
       is_checking_mail: false,
       sbOptions: {},
+      filterObj: {},
       confOptions: {},
       loading: this.objectdata ? true : false,
-      email_already_exists: false,
-
       tab: null,
     };
   },
@@ -289,9 +353,47 @@ export default {
     },
   },
   methods: {
-    newIncident: function(){
-      console.log("New");
+    newIncident: function () {
+      this.$router
+        .push("/d/car/new-incident/" + this.formObj.id)
+        .catch((err) => {});
     },
+
+    searchFilter: function () {
+      this.loading = true;
+      this.searchData = [];
+
+      this.sbOptions = {
+        status: true,
+        type: "info",
+        text: "Searching....",
+      };
+
+      if (this.filterObj.start_date && this.filterObj.end_date) {
+        this.filterObj.car_id = this.formObj.id;
+        this.searchHistory = true;
+
+        axios
+          .post("/d/car/fetch/incidents", this.filterObj)
+          .then((response) => {
+            if (response.data) {
+              setTimeout(() => {
+                this.searchData = Object.assign([], response.data.data);
+                console.log(this.searchData);
+                this.loading = false;
+              }, 2000);
+            }
+          });
+      } else {
+        this.loading = false;
+        this.sbOptions = {
+          status: true,
+          type: "error",
+          text: "Select Start and End Date.",
+        };
+      }
+    },
+
     submit() {
       this.loading = true;
 
@@ -350,14 +452,16 @@ export default {
     confResponse(value) {
       if (value == true) {
         axios
-          .post("/d/car/delete/" + this.formObj.id)
+          .get("/d/car/delete/" + this.formObj.id)
           .then((response) => {
-            this.$emit("saved", true);
             this.sbOptions = {
               status: true,
               type: "success",
               text: "Data has been deleted",
             };
+            setTimeout(() => {
+              this.$router.push({ name: "Cars" });
+            }, 800);
           })
           .catch((err) => {
             console.log(err.response.data);

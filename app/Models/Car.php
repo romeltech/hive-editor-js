@@ -20,5 +20,6 @@ class Car extends Model
     public function drivers()
     {
         return $this->belongsToMany(Driver::class);
-    } 
+    }  
+    
 }

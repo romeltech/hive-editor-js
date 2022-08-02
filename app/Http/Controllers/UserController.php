@@ -22,7 +22,7 @@ class UserController extends Controller
                 if($user->role == 'admin'){
                     $access = "admin";
                 }else{
-                    $access = "employee";
+                    $access = "staff";
                 }
             }
         }
@@ -32,11 +32,20 @@ class UserController extends Controller
         ], 200);
     }
 
-    public function getAllUsers()
+    public function getAllUsers($perPage, $search)
     {
-        // Fetch All Users
-        $users = User::where('role' , '!=', 'superadmin')->paginate(10);
-        return response()->json($users, 200);
+        // Fetch All Users 
+        
+        if($search != '-'){
+            $data = User::where('role' , '!=', 'superadmin')->where('full_name', 'LIKE', '%'.$search.'%')->
+                    orWhere('phone', 'LIKE', '%'.$search.'%')->
+                    orWhere('email', 'LIKE', '%'.$search.'%')->
+                    orWhere('role', 'LIKE', '%'.$search.'%')
+                    ->orderBy('full_name', 'asc')->paginate($perPage);
+        }else{ 
+            $data = User::where('role' , '!=', 'superadmin')->orderBy('role', 'asc')->paginate($perPage);
+        }
+        return response()->json($data, 200);
     }
 
     public function getSingleUser($id)
@@ -76,7 +85,7 @@ class UserController extends Controller
             $user->update($arrDetail);
             $msg = "User has been updated";
         }else{
-            $password = bcrypt(Str::random());
+            $password = Hash::make($request['password']);
             $arrDetail = array(
                 'email' => $request['email'],
                 'full_name' => $request['full_name'],
