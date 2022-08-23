@@ -16,14 +16,10 @@ class UserController extends Controller
         if(Auth::guest()){
             $access = "guest";
         }else{
-            $user = User::where('id', auth()->user()->id)->first();
+            $user = auth()->user()->load(['profile']);
 
-            if(isset($user)){
-                if($user->role == 'admin'){
-                    $access = "admin";
-                }else{
-                    $access = "staff";
-                }
+            if(isset($user)){ 
+                $access = $user->role; 
             }
         }
         return response()->json([

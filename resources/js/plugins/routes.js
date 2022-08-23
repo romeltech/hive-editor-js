@@ -1,24 +1,16 @@
 import store from "../store";
-import Dashboard from "../components/admin/Dashboard";
+import Home from "../components/admin/home";
 import ForbiddenPage from "../components/admin/ForbiddenPage";
 import NotFoundPage from "../components/admin/NotFoundPage";
 import Users from "../components/admin/users/Users";
 import EditUser from "../components/admin/users/EditUser";
 import NewUser from "../components/admin/users/NewUser";
 
-import Cars from "../components/admin/cars/Cars";
-import EditCar from "../components/admin/cars/EditCar";
-import Incident from "../components/admin/cars/IncidentForm";
-import NewCar from "../components/admin/cars/NewCar";
-
-import Drivers from "../components/admin/drivers/Drivers";
-import EditDriver from "../components/admin/drivers/EditDriver";
-import NewDriver from "../components/admin/drivers/NewDriver";
-
-import Notifications from "../components/admin/notifications/Notifications";
-import EditNotification from "../components/admin/notifications/EditNotification";
-import NewNotification from "../components/admin/notifications/NewNotification";
-let adminOnly = ['superadmin', 'admin'];
+import Medias from "../components/admin/medias/Medias";
+import EditMedia from "../components/admin/medias/EditMedia"; 
+import NewMedia from "../components/admin/medias/NewMedia";
+ 
+let adminOnly = ['superadmin', 'admin', 'moderator'];
 let auth = store.state.authUser;
 export const routes = [
     /**
@@ -36,9 +28,9 @@ export const routes = [
     },
  
     {
-        path: "/d/dashboard",
-        component: Dashboard,
-        name: "dashboard",
+        path: "/d/home",
+        component: Home,
+        name: "home",
         beforeEnter: (to, from, next) => { 
             auth.userObject.status == 'active'
                 ? next()
@@ -91,148 +83,68 @@ export const routes = [
         }
     },
 
-     /**
-     * Cars
-     *
+    /**
+     * Moderator Medias
      */
-    {
-        path: "/d/cars",
-        component: Cars,
-        name: "Cars",
+     {
+        path: "/d/admin/medias",
+        component: Medias,
+        name: "medias",
         beforeEnter: (to, from, next) => { 
-            auth.userObject.status == 'active'
+            adminOnly.includes(auth.userObject.role) == true &&  auth.userObject.status == 'active'
+                ? next()
+                : next({ name: "ForbiddenPage" }); 
+        }
+    },
+     {
+        path: "/d/admin/medias/page/:page",
+        component: Medias,
+        name: "page-medias",
+        beforeEnter: (to, from, next) => { 
+            adminOnly.includes(auth.userObject.role) == true &&  auth.userObject.status == 'active'
                 ? next()
                 : next({ name: "ForbiddenPage" }); 
         }
     },
     {
-        path: "/d/cars/page/:page",
-        component: Cars,
-        name: "page-cars",
+        path: "/d/admin/media/new",
+        component: NewMedia,
+        name: "NewMedia",
         beforeEnter: (to, from, next) => { 
-            auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
-    },
-    {
-        path: "/d/car/new",
-        component: NewCar,
-        name: "NewCar",
-        beforeEnter: (to, from, next) => { 
-            auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
-    },
-    {
-        path: "/d/car/edit/:id",
-        component: EditCar,
-        name: "EditCar",
-        beforeEnter: (to, from, next) => { 
-            auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
-    },
-    {
-        path: "/d/car/new-incident/:id",
-        component: Incident,
-        name: "Incident",
-        beforeEnter: (to, from, next) => { 
-            auth.userObject.status == 'active'
+            adminOnly.includes(auth.userObject.role) == true &&  auth.userObject.status == 'active'
                 ? next()
                 : next({ name: "ForbiddenPage" }); 
         }
     },
 
      /**
-     * Drivers
+     * probation
      *
      */
     {
-        path: "/d/drivers",
-        component: Drivers,
-        name: "Drivers",
-        beforeEnter: (to, from, next) => { 
-            auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
+        path: "/d/probation", 
+        beforeEnter() { window.open("https://apps.powerapps.com/play/e9518081-dc6e-4271-898e-f89256779243?tenantId=692f378a-47f8-404f-a997-88087a473145", '_blank'); }
     },
-    {
-        path: "/d/drivers/page/:page",
-        component: Drivers,
-        name: "page-drivers",
-        beforeEnter: (to, from, next) => { 
-            auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
-    },
-    {
-        path: "/d/driver/new",
-        component: NewDriver,
-        name: "NewDriver",
-        beforeEnter: (to, from, next) => { 
-            auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
-    },
-    {
-        path: "/d/driver/edit/:id",
-        component: EditDriver,
-        name: "EditDriver",
-        beforeEnter: (to, from, next) => { 
-            auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
-    },
+     
+  
 
      /**
-     * Notifications
+     * Performance
      *
      */
-      {
-        path: "/d/notifications",
-        component: Notifications,
-        name: "Notifications",
-        beforeEnter: (to, from, next) => { 
-            adminOnly.includes(auth.userObject.role) == true &&  auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
-    },
     {
-        path: "/d/notifications/page/:page",
-        component: Notifications,
-        name: "page-notifications",
-        beforeEnter: (to, from, next) => { 
-            adminOnly.includes(auth.userObject.role) == true &&  auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
-    },
+        path: "/d/performance", 
+        beforeEnter() { window.open("https://apps.powerapps.com/play/5fc03a77-0902-4004-b5eb-4886dc2b35ac?tenantId=692f378a-47f8-404f-a997-88087a473145", '_blank'); } 
+    }, 
+
     {
-        path: "/d/notification/new",
-        component: NewNotification,
-        name: "Notification",
-        beforeEnter: (to, from, next) => { 
-            adminOnly.includes(auth.userObject.role) == true &&  auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
-    },
+        path: "/d/moderators", 
+        beforeEnter() { window.location.href = '/d/admin/medias'; } 
+    }, 
+
     {
-        path: "/d/notification/edit/:id",
-        component: EditNotification,
-        name: "EditNotification",
-        beforeEnter: (to, from, next) => { 
-            adminOnly.includes(auth.userObject.role) == true &&  auth.userObject.status == 'active'
-                ? next()
-                : next({ name: "ForbiddenPage" }); 
-        }
-    },
+        path: "/d/frontend", 
+        beforeEnter() { window.location.href = '/d/home'; } 
+    }, 
+ 
 ];

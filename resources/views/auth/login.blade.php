@@ -2,9 +2,10 @@
 
 @section('content')
     <div id="g-login" class="container-fluid py-16 d-flex flex-column align-center gag-container-bg">
-        <div class="col-12 col-md-4">
-            <v-card id="loginform" class="px-5">
-                <v-card-title class="px-5 pt-8 pb-0">Login</v-card-title>
+        <div class="col-12 col-md-3">
+            <v-card id="loginform" class="px-5 pt-3">
+                <v-img src="{{ asset('images/newhivelogoCloser.png') }}"></v-img>
+                <v-card-title class="px-5 pt-5 pb-0">Login</v-card-title>
                 <v-card-text class="py-5">
                     <v-form autocomplete="off" method="POST" action="{{ route('login') }}" ref="form" v-model="loginValid"
                         lazy-validation>

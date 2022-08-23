@@ -8,12 +8,14 @@ require("./bootstrap");
 
 // window.Vue = require('vue').default;
 import Vue from "vue";
+import CKEditor from '@ckeditor/ckeditor5-vue2';
 import VueRouter from "vue-router";
 import store from "./store";
 import { routes } from "./plugins/routes";
 import vuetify from "./plugins/vuetify";
 
 Vue.use(VueRouter);
+Vue.use( CKEditor );
 const router = new VueRouter({
     routes,
     mode: "history"
@@ -69,8 +71,12 @@ Vue.use(helpers_plugin);
  * Global Components
  */
 Vue.component(
-    "dashboard-nav",
-    require("./components/admin/ui/navigation/DashboardNav.vue").default
+    "navigation-main",
+    require("./components/admin/ui/navigation/NavigationMain.vue").default
+);
+Vue.component(
+    "navigation-admin",
+    require("./components/admin/ui/admin/Navigation.vue").default
 );
 Vue.component("snack-bar", require("./components/common/SnackBar.vue").default);
 Vue.component("dialog-loader", require("./components/common/DialogLoader.vue").default);
