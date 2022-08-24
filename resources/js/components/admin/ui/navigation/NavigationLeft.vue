@@ -47,49 +47,49 @@ export default {
         {
           title: "NEWS & ARTICLES",
           icon: "mdi-account",
-          location: "/d/cars",
+          location: "/d/news-articles",
         },
         {
           title: "BRANDS",
           icon: "mdi-account",
-          location: "/d/drivers",
+          location: "/d/brands",
         },
         {
           title: "COLEAGUES",
           icon: "mdi-account",
-          location: "/d/wallet",
+          location: "/d/colleagues",
         },
         {
           title: "TRAINING VIDEOS",
           icon: "mdi-account",
-          location: "/d/wallet",
+          location: "/d/training-videos",
         },
         {
           title: "CAREERS",
           icon: "mdi-account",
-          location: "/d/wallet",
+          location: "/d/careers",
         },
       ],
       secondaryNav: [
         {
           title: "BIRTHDAYS",
           icon: "mdi-home-outline",
-          location: "/d/home",
+          location: "/d/birthdays",
         },
         {
           title: "POLLS",
           icon: "mdi-account",
-          location: "/d/cars",
+          location: "/d/polls",
         },
         {
           title: "EVENTS",
           icon: "mdi-account",
-          location: "/d/drivers",
+          location: "/d/events",
         },
         {
           title: "MARKETPLACE",
           icon: "mdi-account",
-          location: "/d/drivers",
+          location: "/d/marketplace",
         },
       ],
     };

@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ModeratorController;
 
 
@@ -57,11 +58,14 @@ Route::group(['prefix'=>'d','as'=>'moderator.', 'middleware' => 'auth'], functio
      * News & Articles
      */
     Route::get('/admin/posts-fetch/{perPage}/{search}/{orderBy}', [PostController::class, 'fetch'])->name('posts.paginate.fetch');
-    //  Route::get('/driver/fetch/all', [DriverController::class, 'fetchAll'])->name('drivers.fetch.all');
+    Route::post('/admin/media/save', [PostController::class, 'saveData'])->name('save.post.data');
     // Route::get('/drivers/fetch/{perPage}/{search}', [DriverController::class, 'fetch'])->name('driver.paginate.fetch');
-     Route::post('/admin/post-editor/upload', [PostController::class, 'upload'])->name('upload.files');
-    // Route::get('/driver/get/{id}', [DriverController::class, 'edit'])->name('driver.get.single');
- 
+    Route::post('/admin/post-editor/upload', [PostController::class, 'upload'])->name('upload.files'); 
+    
+    // Media Images 
+    Route::get('/admin/fetch/all/images', [ImageController::class, 'getMediaFiles'])->name('images.fetch.all');
+    Route::post('/admin/file/upload',  [ImageController::class, 'dropzoneUpload'])->name('dropzone.upload')->middleware('auth');
+    
 });
 
 Route::group(['prefix'=>'d','as'=>'home.', 'middleware' => 'auth'], function(){
@@ -76,3 +80,5 @@ Route::group(['prefix'=>'d','as'=>'home.', 'middleware' => 'auth'], function(){
      
      
 }); 
+
+Route::get('/file/{path}',  [ImageController::class, 'showFile'])->name('file.show')->middleware('auth');

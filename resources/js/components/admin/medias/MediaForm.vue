@@ -73,9 +73,78 @@
                           <v-btn
                             class="primary"
                             :disabled="!valid"
+                            small
                             @click="submit"
                             >Save</v-btn
                           >
+                        </v-card-text>
+                      </v-card>
+                      <v-divider></v-divider>
+                      <v-card>
+                        <v-card-text>
+                          <v-img
+                            style="border-radius: 4px"
+                            :lazy-src="`${
+                              $baseUrl + '/images/placeholder-image.png'
+                            }`"
+                            max-height="200"
+                            width="200"
+                            :aspect-ratio="1"
+                            :src="`${
+                              selectedImage.hasOwnProperty('id')
+                                ? $baseUrl + '/file/' + selectedImage.path
+                                : $baseUrl + '/images/placeholder-image.png'
+                            }`"
+                          >
+                            <template v-slot:placeholder>
+                              <v-row
+                                class="fill-height ma-0"
+                                align="center"
+                                justify="center"
+                              >
+                                <v-progress-circular
+                                  indeterminate
+                                  color="grey lighten-5"
+                                ></v-progress-circular>
+                              </v-row>
+                            </template>
+                          </v-img>
+                          <v-divider></v-divider>
+                          <div
+                            class="d-flex"
+                            style="
+                              width: 100%;
+                              position: absolute;
+                              bottom: 0;
+                              top: auto;
+                              right: auto;
+                              left: 0;
+                            "
+                          >
+                            <v-btn
+                              v-show="
+                                selectedImage.hasOwnProperty('id')
+                                  ? true
+                                  : false
+                              "
+                              width="50%"
+                              color="rgba(245, 245, 245, .75)"
+                              class="flex-grow-1 elevation-0 rounded-0"
+                              @click="removeImage('thumbnail')"
+                              >Remove</v-btn
+                            >
+                            <v-btn
+                              width="50%"
+                              color="rgba(245, 245, 245, .75)"
+                              class="flex-grow-1 elevation-0 rounded-0"
+                              @click="addImage('thumbnail')"
+                              >{{
+                                selectedImage.hasOwnProperty("id")
+                                  ? "Replace"
+                                  : "Upload"
+                              }}</v-btn
+                            >
+                          </div>
                         </v-card-text>
                       </v-card>
                     </v-col>
@@ -93,63 +162,74 @@
       :conf-options="confOptions"
       @response="confResponse"
     ></confirmation-dialog>
+
+    <v-dialog
+      v-model="studioSettings.dialog"
+      persistent
+      width="1000"
+      style="min-height: 400px"
+    >
+      <v-card>
+        <Studio :studio-options="studioSettings" @responded="studioResponse" />
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
 import CKEditor from "@ckeditor/ckeditor5-vue2";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
- 
+import Studio from "../../admin/studio/Studio";
 import {
   ValidationObserver,
   ValidationProvider,
 } from "vee-validate/dist/vee-validate.full";
- 
+
 class UploadAdapter {
-        constructor(loader) {
-            this.loader = loader;
-        }
+  constructor(loader) {
+    this.loader = loader;
+  }
 
-        upload() {
-            return this.loader.file
-                .then( uploadedFile => {
-                    return new Promise( ( resolve, reject ) => {
-                    const data = new FormData();
-                    data.append( 'upload', uploadedFile );
+  upload() {
+    return this.loader.file.then((uploadedFile) => {
+      return new Promise((resolve, reject) => {
+        const data = new FormData();
+        data.append("upload", uploadedFile);
 
-                    axios( {
-                        url: '/d/admin/post-editor/upload',
-                        method: 'post',
-                        data,
-                        headers: {
-                            'Content-Type': 'multipart/form-data;'
-                        },
-                        withCredentials: false
-                    } ).then( response => {
-                        if ( response.data.result == 'success' ) {
-                            resolve( {
-                                default: response.data.url
-                            } );
-                        } else {
-                            reject( response.data.message );
-                        }
-                    } ).catch( response => {
-                        reject( 'Upload failed' );
-                    } );
+        axios({
+          url: "/d/admin/post-editor/upload",
+          method: "post",
+          data,
+          headers: {
+            "Content-Type": "multipart/form-data;",
+          },
+          withCredentials: false,
+        })
+          .then((response) => {
+            if (response.data.result == "success") {
+              resolve({
+                default: response.data.url,
+              });
+            } else {
+              reject(response.data.message);
+            }
+          })
+          .catch((response) => {
+            reject("Upload failed");
+          });
+      });
+    });
+  }
 
-                } );
-            } );
-        }
-
-        abort() {
-        }
-    }
+  abort() {}
+}
 
 export default {
   name: "MediaForm",
   components: {
     ValidationProvider,
     ValidationObserver,
-   CKEditor,
+    CKEditor,
+    Studio,
   },
   props: {
     objectdata: {
@@ -163,6 +243,11 @@ export default {
   },
   data() {
     return {
+      studioSettings: {
+        dialog: false,
+        multiSelect: false,
+      },
+      selectedImage: {},
       statusSwitch: true,
       rolesArray: ["admin", "staff"],
       actionSave: this.pagetitle,
@@ -179,23 +264,6 @@ export default {
       editor: ClassicEditor,
       editorData: "",
       editorConfig: {
-        toolbar: [
-          "heading",
-          "|",
-          "bold",
-          "italic",
-          "link",
-          "bulletedList",
-          "numberedList",
-          "|",
-          "insertTable",
-          "|",
-          "imageUpload",
-          "mediaEmbed",
-          "|",
-          "undo",
-          "redo",
-        ],
         table: {
           toolbar: ["tableColumn", "tableRow", "mergeTableCells"],
         },
@@ -216,15 +284,30 @@ export default {
     },
   },
   methods: {
-    uploader(editor) {
-      editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
-            // Configure the URL to the upload script in your back-end here!
-            return new UploadAdapter( loader );
-        };
+    studioResponse: function (v) {
+      this.studioSettings.dialog = v.dialog;
+      this.selectedImage =
+        v.images != null ? Object.assign({}, v.images[0]) : {};
     },
-    submit() {
+    removeImage: function () {
+      this.selectedImage = [];
+    },
+    addImage: function () {
+      this.studioSettings.dialog = true;
+    },
+    uploader(editor) {
+      editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
+        return new UploadAdapter(loader);
+      };
+    },
+    submit: function () {
       this.loading = true;
+      let images = this.selectedImage.hasOwnProperty("id")
+        ? this.selectedImage.id
+        : null;
 
+      this.formObj.content = this.editorData;
+      this.formObj.type = "post";
       // Set status value
       this.formObj.status = this.statusSwitch == true ? "active" : "draft";
       let dataForm = { data: this.formObj };
@@ -233,10 +316,7 @@ export default {
         let bdata = this.formObj;
         delete bdata["created_at"];
         delete bdata["updated_at"];
-        delete bdata["km"];
-        delete bdata["year"];
-        delete bdata["chassis_no"];
-        dataForm = { data: bdata };
+        dataForm = { data: bdata, image: images };
       }
 
       // Send data to save
@@ -248,12 +328,14 @@ export default {
             type: "success",
             text: "Data has been saved",
           };
+          
           if (this.pagetitle == "edit") {
             this.$emit("saved", true);
           } else {
             this.$nextTick(() => {
               this.loading = false;
               this.formObj = {};
+              this.removeImage();
               this.$refs.user_form_observer.reset();
               this.$router.push({ name: "Medias" });
             });

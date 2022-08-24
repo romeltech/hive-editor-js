@@ -8,7 +8,7 @@ require("./bootstrap");
 
 // window.Vue = require('vue').default;
 import Vue from "vue";
-import CKEditor from '@ckeditor/ckeditor5-vue2';
+import CKEditor from '@ckeditor/ckeditor5-vue2';    
 import VueRouter from "vue-router";
 import store from "./store";
 import { routes } from "./plugins/routes";

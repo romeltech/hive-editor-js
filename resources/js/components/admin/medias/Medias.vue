@@ -70,17 +70,14 @@
                     <th class="text-left cursor-pointer" @click="OrderByField('user_id')">Author</th>
                     <th class="text-left cursor-pointer" @click="OrderByField('created_at')">Published Date</th> 
                     <th class="text-left cursor-pointer" @click="OrderByField('status')">Status</th>
-                    
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody v-if="items && Object.keys(items).length > 0">
-                  <tr v-for="(item, index) in items" :key="index">
-                    
+                  <tr v-for="(item, index) in items" :key="index"> 
                     <td>{{ item.title }}</td>
-                    <td>{{ item.user_id }}</td>
-                    <td>{{ item.created_at }}</td>
-                    
+                    <td>{{ item.user_id ? item.users.profile.fullname : '' }}</td>
+                    <td>{{ formatDateHelper(item.created_at) }}</td>
                     <td>
                       <v-chip
                         small

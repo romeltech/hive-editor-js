@@ -55,7 +55,9 @@ class PostController extends Controller
  
     public function saveData(Request $request)
     {  
+        $user_id = auth()->user()->id; 
         
+        $request['data'] = array_merge(array('user_id' =>$user_id), $request['data']);
         if(isset($request['data']['id'])){
 
             $data = Post::where('id' ,'=', $request['data']['id'])->first();
@@ -90,10 +92,10 @@ class PostController extends Controller
         if($search != '-'){
             $data = Post::where('title', 'LIKE', '%'.$search.'%')->
                     orWhere('content', 'LIKE', '%'.$search.'%')->
-                   orderBy($field, $sort)->paginate($perPage);
+                   orderBy($field, $sort)->with('users.profile')->paginate($perPage);
         }else{
 
-            $data = Post::orderBy($field, $sort)->paginate($perPage);
+            $data = Post::orderBy($field, $sort)->with('users.profile')->paginate($perPage);
         }
         return response()->json($data, 200);
     }

@@ -24118,8 +24118,7 @@ footer {
   max-height: 95vh;
 }
 
-.nav-right,
-.nav-left {
+.nav-right, .nav-left {
   overflow-y: auto;
 }
 
@@ -24171,8 +24170,7 @@ footer {
   position: fixed;
 }
 
-.section-content,
-.section-like {
+.section-content, .section-like {
   padding: 10px 0;
 }
 
@@ -24180,8 +24178,7 @@ footer {
   margin-top: 10px;
 }
 
-.v-list .v-list-item--active,
-.v-list .v-list-item--active .v-icon {
+.v-list .v-list-item--active, .v-list .v-list-item--active .v-icon {
   color: #fff;
 }
 
@@ -24193,8 +24190,7 @@ footer {
   margin: 0 auto;
 }
 
-.header-joiner,
-.header-birthday {
+.header-joiner, .header-birthday {
   text-align: center;
 }
 
@@ -24202,14 +24198,10 @@ footer {
   .main-content {
     width: 100%;
   }
-
   .content-title small {
     float: none;
   }
-
   .fixed-position {
     position: relative;
   }
 }
-
-

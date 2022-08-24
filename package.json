@@ -14,7 +14,7 @@
         "deepmerge": "^4.2.2",
         "laravel-mix": "^6.0.6",
         "postcss": "^8.3.0",
-        "resolve-url-loader": "^2.3.1",
+        "resolve-url-loader": "^5.0.0",
         "sass": "^1.20.1",
         "sass-loader": "^8.0.0",
         "vue": "^2.6.14",
@@ -35,6 +35,7 @@
         "targets-webpack-plugin": "^3.0.0",
         "vee-validate": "^3.4.5",
         "vue-router": "^3.5.1",
+        "vue2-dropzone": "^3.6.0",
         "vuetify": "^2.5.9",
         "vuex": "^3.6.2"
     }
