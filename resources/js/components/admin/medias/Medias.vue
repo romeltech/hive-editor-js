@@ -19,7 +19,9 @@
       <!-- content here -->
       <v-row class="mt-2">
         <v-col cols="12" class="py-0">
-          <v-btn to="/d/admin/media/new" class="secondary mb-5">New News &amp; Article</v-btn>
+          <v-btn to="/d/admin/media/new" class="secondary mb-5"
+            >Create News &amp; Article</v-btn
+          >
         </v-col>
         <v-col class="col-md-12 mt-1 col-sm-12">
           <v-card class="px-5">
@@ -39,6 +41,7 @@
               </v-col>
 
               <v-spacer></v-spacer>
+
               <v-col class="col-md-3 col-sm-12">
                 <v-text-field
                   v-model="search"
@@ -49,7 +52,7 @@
                   clearable
                   label="Search"
                   type="text"
-                  hide-details 
+                  hide-details
                   @click:append-outer="searchData"
                   @keydown.enter="searchData"
                   @click:clear="clearSearch('search')"
@@ -66,17 +69,46 @@
               <template v-slot:default>
                 <thead>
                   <tr>
-                    <th class="text-left cursor-pointer" @click="OrderByField('title')">Title</th> 
-                    <th class="text-left cursor-pointer" @click="OrderByField('user_id')">Author</th>
-                    <th class="text-left cursor-pointer" @click="OrderByField('created_at')">Published Date</th> 
-                    <th class="text-left cursor-pointer" @click="OrderByField('status')">Status</th>
+                    <th
+                      class="text-left cursor-pointer"
+                      @click="OrderByField('id')"
+                    >
+                      ID
+                    </th>
+                    <th
+                      class="text-left cursor-pointer"
+                      @click="OrderByField('title')"
+                    >
+                      Title
+                    </th>
+                    <th
+                      class="text-left cursor-pointer"
+                      @click="OrderByField('user_id')"
+                    >
+                      Author
+                    </th>
+                    <th
+                      class="text-left cursor-pointer"
+                      @click="OrderByField('created_at')"
+                    >
+                      Published Date
+                    </th>
+                    <th
+                      class="text-left cursor-pointer"
+                      @click="OrderByField('status')"
+                    >
+                      Status
+                    </th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody v-if="items && Object.keys(items).length > 0">
-                  <tr v-for="(item, index) in items" :key="index"> 
+                  <tr v-for="(item, index) in items" :key="index">
+                    <td>{{ item.id }}</td>
                     <td>{{ item.title }}</td>
-                    <td>{{ item.user_id ? item.users.profile.fullname : '' }}</td>
+                    <td>
+                      {{ item.user_id ? item.users.profile.fullname : "" }}
+                    </td>
                     <td>{{ formatDateHelper(item.created_at) }}</td>
                     <td>
                       <v-chip
@@ -154,7 +186,7 @@ export default {
       totalData: 0,
       origTotalData: 0,
       showPerPage: 10,
-      origCnt: 0, 
+      origCnt: 0,
       search: "",
       items: [],
       orderBy: [],
@@ -162,37 +194,43 @@ export default {
     };
   },
   methods: {
-
-    OrderByField: function(v){
+    OrderByField: function (v) {
       this.orderBy[0] = v;
-      if(this.orderByCount % 2){
-         this.orderBy[1] = 'DESC';
-      }else{
-       this.orderBy[1] = 'ASC';
+      if (this.orderByCount % 2) {
+        this.orderBy[1] = "DESC";
+      } else {
+        this.orderBy[1] = "ASC";
       }
       this.orderByCount++;
-   
+
       this.getAllData(this.page, this.orderBy);
     },
-    async getAllData(page,orderby=null) {
+    async getAllData(page, orderby = null) {
       let response = "";
       let sort = "-";
-      if(orderby && orderby.length > 0){
+      if (orderby && orderby.length > 0) {
         sort = orderby.toString();
       }
-     
+
       if (this.search) {
         response = await axios.get(
           "/d/admin/posts-fetch/" +
             this.showPerPage +
             "/" +
-            this.search + "/"+sort+
+            this.search +
+            "/" +
+            sort +
             "/?page=" +
             page
         );
       } else {
         response = await axios.get(
-          "/d/admin/posts-fetch/" + this.showPerPage + "/-/"+sort+"/?page=" + page
+          "/d/admin/posts-fetch/" +
+            this.showPerPage +
+            "/-/" +
+            sort +
+            "/?page=" +
+            page
         );
       }
 
@@ -214,15 +252,21 @@ export default {
       }
 
       if (this.search && this.search.length > 2) {
-        
-         let sort = "-";
-         console.log(this.orderBy);
-          if(this.orderBy && this.orderBy.length > 0){
-            sort = this.orderBy.toString();
-          }
-          
+        let sort = "-";
+        console.log(this.orderBy);
+        if (this.orderBy && this.orderBy.length > 0) {
+          sort = this.orderBy.toString();
+        }
+
         await axios
-          .get("/d/admin/posts-fetch/" + this.showPerPage + "/" + this.search+"/"+sort)
+          .get(
+            "/d/admin/posts-fetch/" +
+              this.showPerPage +
+              "/" +
+              this.search +
+              "/" +
+              sort
+          )
           .then((res) => {
             this.items = res.data.data;
 
@@ -272,8 +316,7 @@ export default {
     },
   },
   created() {
-    
-   this.search = this.localStorage.getItem("vmedia");
+    this.search = this.localStorage.getItem("vmedia");
     if (this.$route.params.page) {
       this.getAllData(this.$route.params.page).then(() => {
         this.pageLoading = false;
@@ -286,7 +329,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      this.getAllData(this.$route.params.page,this.orderBy);
+      this.getAllData(this.$route.params.page, this.orderBy);
     },
   },
 };

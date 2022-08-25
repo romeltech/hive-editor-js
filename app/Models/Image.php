@@ -14,7 +14,7 @@ class image extends Model
 
     public function posts()
     {
-        // return $this->morphedByMany(Category::class, 'section_id');
+        
         return $this->morphedByMany(
             Post::class,
             'imageable',

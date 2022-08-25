@@ -58,15 +58,20 @@ class PostController extends Controller
         $user_id = auth()->user()->id; 
         
         $request['data'] = array_merge(array('user_id' =>$user_id), $request['data']);
-        if(isset($request['data']['id'])){
-
-            $data = Post::where('id' ,'=', $request['data']['id'])->first();
+        if(isset($request['id'])){ 
+            $data = Post::find($request['id']);
+            //$data = Post::where('id' ,'=', $request['id'])->first();
             $data->update($request['data']);
             $msg = "data has been updated";
         }else{
             $data = Post::create($request['data']);
             $msg = "data has been created";
         }
+
+        if(@$request['image']){
+            $data->images()->sync([$request['image']]);
+        }
+
         return response()->json([
             'message' => $msg
         ], 200);
@@ -108,7 +113,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $data = Post::where('id', $id)->first();
+        $data = Post::where('id', $id)->with('images')->first();
         return response()->json($data, 200);
     }  
 

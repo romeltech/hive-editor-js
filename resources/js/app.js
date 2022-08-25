@@ -88,6 +88,7 @@ Vue.component("confirmation-dialog", require("./components/common/ConfirmationDi
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 store.dispatch("fetchAuthUser").then(() => {
+    
     const app = new Vue({
         vuetify,
         store,
@@ -99,15 +100,11 @@ store.dispatch("fetchAuthUser").then(() => {
                 loginValid: true,
                 loginEmail: "",
                 loginEmailrules: [
-                    value => !!value || "Required",
-                    value => /.+@.+\..+/.test(value) || "E-mail must be valid"
+                    value => !!value || "Required"                   
                 ],
                 loginPassword: "",
                 loginPasswordrules: [
-                    value => !!value || "Required",
-                    value =>
-                        (value && value.length > 8) ||
-                        "Password must be atleast 8 characters"
+                    value => !!value || "Required" 
                 ]
             };
         },

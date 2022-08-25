@@ -24174,6 +24174,11 @@ footer {
   padding: 10px 0;
 }
 
+.section-content {
+  max-height: 300px;
+  overflow: hidden;
+}
+
 .section-comment {
   margin-top: 10px;
 }
@@ -24184,6 +24189,7 @@ footer {
 
 .ck-editor__editable {
   min-height: 250px;
+  max-height: 500px;
 }
 
 .speak-up .v-image {
@@ -24192,6 +24198,10 @@ footer {
 
 .header-joiner, .header-birthday {
   text-align: center;
+}
+
+.bordered-file.selected-file {
+  box-shadow: 0 3px 1px -2px rgb(17, 94, 161), 0 2px 2px 0 rgb(17, 94, 161), 0 1px 5px 0 rgb(17, 94, 161) !important;
 }
 
 @media only screen and (max-width: 900px) {

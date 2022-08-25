@@ -1,10 +1,10 @@
 <template>
   <div>
-    <car-form
+    <media-form
       :objectdata="objectData"
       :pagetitle="'edit'"
       @saved="savedResponse"
-    ></car-form>
+    ></media-form>
   </div>
 </template>
 
@@ -21,7 +21,7 @@ export default {
   methods: {
     getData() {
       axios
-        .get("/d/car/get/" + this.$route.params.id)
+        .get("/d/admin/media/get/" + this.$route.params.id)
         .then((response) => {
           this.objectData = Object.assign({}, response.data);
         })

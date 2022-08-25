@@ -74,22 +74,7 @@ export default {
           name: "Steve Ayala 5",
           icon: "mdi-cake",
         },
-             {
-          name: "Steve Ayala 2",
-          icon: "mdi-cake",
-        },
-        {
-          name: "Steve Ayala 3",
-          icon: "mdi-cake",
-        },
-        {
-          name: "Steve Ayala 4",
-          icon: "mdi-cake",
-        },
-        {
-          name: "Steve Ayala 5",
-          icon: "mdi-cake",
-        },
+    
       ],
       joiners: [
         {
@@ -132,36 +117,7 @@ export default {
           icon: "mdi-account-check",
           position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
         },
-         {
-          name: "Steve Ayala 2",
-          icon: "mdi-account-check",
-          position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-        },
-        {
-          name: "Steve Ayala 3",
-          icon: "mdi-account-check",
-          position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-        },
-        {
-          name: "Steve Ayala 4",
-          icon: "mdi-account-check",
-          position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-        },
-        {
-          name: "Steve Ayala 5",
-          icon: "mdi-account-check",
-          position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-        },
-        {
-          name: "Steve Ayala 6",
-          icon: "mdi-account-check",
-          position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-        },
-        {
-          name: "Steve Ayala 7",
-          icon: "mdi-account-check",
-          position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-        },
+          
       ],
     };
   },

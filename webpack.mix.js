@@ -61,4 +61,5 @@ if (mix.inProduction()) {
             useBuiltIns: "usage",
             targets: { firefox: "50", ie: 11 }
         });
+        mix.version();
 }

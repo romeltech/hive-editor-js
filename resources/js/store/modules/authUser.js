@@ -7,9 +7,7 @@ let getters = {
 };
 const actions = {
     async fetchAuthUser({ commit }) {
-        const response = await axios.get("/auth_user");
-        // console.log(response.data.user_access);
-        commit("setAuthUserAccess", response.data.user_access);
+        const response = await axios.get("/auth_user"); 
         commit("setAuthenticatedUser", response.data.user);
     }
 };

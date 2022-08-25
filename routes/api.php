@@ -18,5 +18,3 @@ use App\Http\Controllers\CarController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) { 
     return $request->user();
 });
-
-Route::get('/cron/vehicles', [CarController::class, 'ExpiryNotification'])->name('cron.job.api');

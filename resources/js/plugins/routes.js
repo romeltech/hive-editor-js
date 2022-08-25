@@ -96,6 +96,16 @@ export const routes = [
                 : next({ name: "ForbiddenPage" }); 
         }
     },
+    {
+        path: "/d/admin/medias/edit/:id",
+        component: EditMedia,
+        name: "EditMedia",
+        beforeEnter: (to, from, next) => { 
+            adminOnly.includes(auth.userObject.role) == true &&  auth.userObject.status == 'active'
+                ? next()
+                : next({ name: "ForbiddenPage" }); 
+        }
+    },
      {
         path: "/d/admin/medias/page/:page",
         component: Medias,

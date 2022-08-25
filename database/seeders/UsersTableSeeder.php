@@ -21,6 +21,14 @@ class UsersTableSeeder extends Seeder
             'status'     => 'active', // active, draft, trashed 
         ]);
         $user->save();
+
+        $profile = new \App\Models\Profile([
+            'user_id' => '1',
+            'fullname'      => 'Steve Ayala',
+            'position'   => 'Sr. Fullstack Developer',
+            'slug'      => 'moikzz214', 
+        ]);
+        $profile->save();
          
     }
 }

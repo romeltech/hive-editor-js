@@ -8,8 +8,10 @@
 
     <v-container class="py-2">
       <v-card flat>
-        <v-card-title v-if="pagetitle !== 'edit'">
+        <v-card-title >
           <h4>{{ cardTitle }}</h4>
+          <v-spacer></v-spacer>
+          <v-btn v-if="pagetitle == 'edit'" @click="newPost" fab x-small><v-icon>mdi-plus-box</v-icon></v-btn>
         </v-card-title>
         <v-card-text>
           <v-row>
@@ -62,10 +64,12 @@
                               statusSwitch == true ? 'Active' : 'Draft'
                             }`"
                           ></v-switch>
+                          <div class="d-flex">
                           <v-btn
                             v-if="pagetitle == 'edit'"
                             text
                             color="error"
+                            small
                             @click="deleteData()"
                             >delete</v-btn
                           >
@@ -77,11 +81,13 @@
                             @click="submit"
                             >Save</v-btn
                           >
+                          </div>
                         </v-card-text>
                       </v-card>
                       <v-divider></v-divider>
                       <v-card>
                         <v-card-text>
+                          <small>Featured Image</small>
                           <v-img
                             style="border-radius: 4px"
                             :lazy-src="`${
@@ -91,7 +97,7 @@
                             width="200"
                             :aspect-ratio="1"
                             :src="`${
-                              selectedImage.hasOwnProperty('id')
+                              selectedImage && selectedImage.hasOwnProperty('id')
                                 ? $baseUrl + '/file/' + selectedImage.path
                                 : $baseUrl + '/images/placeholder-image.png'
                             }`"
@@ -123,7 +129,7 @@
                           >
                             <v-btn
                               v-show="
-                                selectedImage.hasOwnProperty('id')
+                               selectedImage && selectedImage.hasOwnProperty('id')
                                   ? true
                                   : false
                               "
@@ -139,7 +145,7 @@
                               class="flex-grow-1 elevation-0 rounded-0"
                               @click="addImage('thumbnail')"
                               >{{
-                                selectedImage.hasOwnProperty("id")
+                               selectedImage && selectedImage.hasOwnProperty("id")
                                   ? "Replace"
                                   : "Upload"
                               }}</v-btn
@@ -155,6 +161,18 @@
           </v-row>
         </v-card-text>
       </v-card>
+       
+      <v-row class="mt-1"  v-if="pagetitle == 'edit'">
+        <v-col class="col-9">
+            <v-card> 
+              <v-card-text>
+                <h5>Comment(s)</h5>
+                <v-divider></v-divider>
+              </v-card-text>
+            </v-card>
+        </v-col>
+      </v-row>
+
     </v-container>
     <!-- actions and dialogs -->
     <snack-bar :snackbar-options="sbOptions"></snack-bar>
@@ -277,6 +295,9 @@ export default {
         if (val != oldVal) {
           this.formObj = Object.assign({}, val);
           this.statusSwitch = val.status == "active" ? true : false;
+           
+          this.editorData = this.formObj.content;
+          this.selectedImage = this.formObj.images[0];
         }
         this.loading = false;
       },
@@ -284,6 +305,9 @@ export default {
     },
   },
   methods: {
+    newPost: function(){
+      this.$router.push({ name: "NewMedia" });
+    },
     studioResponse: function (v) {
       this.studioSettings.dialog = v.dialog;
       this.selectedImage =
@@ -311,12 +335,15 @@ export default {
       // Set status value
       this.formObj.status = this.statusSwitch == true ? "active" : "draft";
       let dataForm = { data: this.formObj };
-
       if (this.formObj.id) {
+        let postID = this.formObj.id;
         let bdata = this.formObj;
         delete bdata["created_at"];
         delete bdata["updated_at"];
-        dataForm = { data: bdata, image: images };
+        delete bdata["images"];
+        delete bdata["id"];
+        delete bdata["user_id"];
+        dataForm = { data: bdata, image: images, id: postID };
       }
 
       // Send data to save

@@ -29,8 +29,7 @@ Auth::routes([
     'verify' => false, // Email Verification Routes...
 ]);
 Route::get('/', function () { return redirect('/d/home');});
-Route::get('/home', function () { return redirect('/d/home');});
-
+Route::get('/home', function () { return redirect('/d/home');}); 
 
 Route::group(['prefix'=>'d','as'=>'moderator.', 'middleware' => 'auth'], function(){
 
@@ -59,7 +58,7 @@ Route::group(['prefix'=>'d','as'=>'moderator.', 'middleware' => 'auth'], functio
      */
     Route::get('/admin/posts-fetch/{perPage}/{search}/{orderBy}', [PostController::class, 'fetch'])->name('posts.paginate.fetch');
     Route::post('/admin/media/save', [PostController::class, 'saveData'])->name('save.post.data');
-    // Route::get('/drivers/fetch/{perPage}/{search}', [DriverController::class, 'fetch'])->name('driver.paginate.fetch');
+    Route::get('/admin/media/get/{id}', [PostController::class, 'edit'])->name('show.single.post');
     Route::post('/admin/post-editor/upload', [PostController::class, 'upload'])->name('upload.files'); 
     
     // Media Images 

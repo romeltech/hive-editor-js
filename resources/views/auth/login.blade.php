@@ -10,10 +10,10 @@
                     <v-form autocomplete="off" method="POST" action="{{ route('login') }}" ref="form" v-model="loginValid"
                         lazy-validation>
                         @csrf
-                        <v-text-field outlined required autocomplete="off" id="email" type="email" name="email"
-                            label="{{ __('Email') }}" v-model="loginEmail" :rules="loginEmailrules" autofocus
-                            @error('email') value="{{ old('email') }}" error
-                            error-messages="{{ old('email') }} do not match in our records" @enderror>
+                        <v-text-field outlined required autocomplete="off" id="username" type="username" name="username"
+                            label="{{ __('Email / Ecode') }}" v-model="loginEmail" :rules="loginEmailrules" autofocus
+                            @error('username') value="{{ old('username') }}" error
+                        error-messages="{{ old('username') }} do not match in our records" @enderror>
                         </v-text-field>
                         <v-text-field outlined required autocomplete="off" id="password" label="{{ __('Password') }}"
                             type="password" name="password" v-model="loginPassword" :rules="loginPasswordrules"

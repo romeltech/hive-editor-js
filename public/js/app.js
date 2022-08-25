@@ -2171,33 +2171,65 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _ui_navigation_NavigationLeft__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ui/navigation/NavigationLeft */ "./resources/js/components/admin/ui/navigation/NavigationLeft.vue");
-/* harmony import */ var _ui_navigation_NavigationRight__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ui/navigation/NavigationRight */ "./resources/js/components/admin/ui/navigation/NavigationRight.vue");
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.to-string.js */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each_js__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.promise.js */ "./node_modules/core-js/modules/es.promise.js");
+/* harmony import */ var core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.symbol.description.js */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator.js */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator_js__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.iterator.js */ "./node_modules/core-js/modules/es.array.iterator.js");
+/* harmony import */ var core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.string.iterator.js */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator.js */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_symbol_async_iterator_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.symbol.async-iterator.js */ "./node_modules/core-js/modules/es.symbol.async-iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_async_iterator_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_async_iterator_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_symbol_to_string_tag_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.symbol.to-string-tag.js */ "./node_modules/core-js/modules/es.symbol.to-string-tag.js");
+/* harmony import */ var core_js_modules_es_symbol_to_string_tag_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_to_string_tag_js__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_json_to_string_tag_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.json.to-string-tag.js */ "./node_modules/core-js/modules/es.json.to-string-tag.js");
+/* harmony import */ var core_js_modules_es_json_to_string_tag_js__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_json_to_string_tag_js__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_es_math_to_string_tag_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/es.math.to-string-tag.js */ "./node_modules/core-js/modules/es.math.to-string-tag.js");
+/* harmony import */ var core_js_modules_es_math_to_string_tag_js__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_math_to_string_tag_js__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_object_get_prototype_of_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/es.object.get-prototype-of.js */ "./node_modules/core-js/modules/es.object.get-prototype-of.js");
+/* harmony import */ var core_js_modules_es_object_get_prototype_of_js__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_get_prototype_of_js__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! core-js/modules/es.function.name.js */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name_js__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! core-js/modules/es.array.slice.js */ "./node_modules/core-js/modules/es.array.slice.js");
+/* harmony import */ var core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_slice_js__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _ui_navigation_NavigationLeft__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ui/navigation/NavigationLeft */ "./resources/js/components/admin/ui/navigation/NavigationLeft.vue");
+/* harmony import */ var _ui_navigation_NavigationRight__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./ui/navigation/NavigationRight */ "./resources/js/components/admin/ui/navigation/NavigationRight.vue");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return exports; }; var exports = {}, Op = Object.prototype, hasOwn = Op.hasOwnProperty, $Symbol = "function" == typeof Symbol ? Symbol : {}, iteratorSymbol = $Symbol.iterator || "@@iterator", asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator", toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag"; function define(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: !0, configurable: !0, writable: !0 }), obj[key]; } try { define({}, ""); } catch (err) { define = function define(obj, key, value) { return obj[key] = value; }; } function wrap(innerFn, outerFn, self, tryLocsList) { var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator, generator = Object.create(protoGenerator.prototype), context = new Context(tryLocsList || []); return generator._invoke = function (innerFn, self, context) { var state = "suspendedStart"; return function (method, arg) { if ("executing" === state) throw new Error("Generator is already running"); if ("completed" === state) { if ("throw" === method) throw arg; return doneResult(); } for (context.method = method, context.arg = arg;;) { var delegate = context.delegate; if (delegate) { var delegateResult = maybeInvokeDelegate(delegate, context); if (delegateResult) { if (delegateResult === ContinueSentinel) continue; return delegateResult; } } if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) { if ("suspendedStart" === state) throw state = "completed", context.arg; context.dispatchException(context.arg); } else "return" === context.method && context.abrupt("return", context.arg); state = "executing"; var record = tryCatch(innerFn, self, context); if ("normal" === record.type) { if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue; return { value: record.arg, done: context.done }; } "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg); } }; }(innerFn, self, context), generator; } function tryCatch(fn, obj, arg) { try { return { type: "normal", arg: fn.call(obj, arg) }; } catch (err) { return { type: "throw", arg: err }; } } exports.wrap = wrap; var ContinueSentinel = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var IteratorPrototype = {}; define(IteratorPrototype, iteratorSymbol, function () { return this; }); var getProto = Object.getPrototypeOf, NativeIteratorPrototype = getProto && getProto(getProto(values([]))); NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype); var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype); function defineIteratorMethods(prototype) { ["next", "throw", "return"].forEach(function (method) { define(prototype, method, function (arg) { return this._invoke(method, arg); }); }); } function AsyncIterator(generator, PromiseImpl) { function invoke(method, arg, resolve, reject) { var record = tryCatch(generator[method], generator, arg); if ("throw" !== record.type) { var result = record.arg, value = result.value; return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) { invoke("next", value, resolve, reject); }, function (err) { invoke("throw", err, resolve, reject); }) : PromiseImpl.resolve(value).then(function (unwrapped) { result.value = unwrapped, resolve(result); }, function (error) { return invoke("throw", error, resolve, reject); }); } reject(record.arg); } var previousPromise; this._invoke = function (method, arg) { function callInvokeWithMethodAndArg() { return new PromiseImpl(function (resolve, reject) { invoke(method, arg, resolve, reject); }); } return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); }; } function maybeInvokeDelegate(delegate, context) { var method = delegate.iterator[context.method]; if (undefined === method) { if (context.delegate = null, "throw" === context.method) { if (delegate.iterator.return && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel; context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method"); } return ContinueSentinel; } var record = tryCatch(method, delegate.iterator, context.arg); if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel; var info = record.arg; return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel); } function pushTryEntry(locs) { var entry = { tryLoc: locs[0] }; 1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry); } function resetTryEntry(entry) { var record = entry.completion || {}; record.type = "normal", delete record.arg, entry.completion = record; } function Context(tryLocsList) { this.tryEntries = [{ tryLoc: "root" }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0); } function values(iterable) { if (iterable) { var iteratorMethod = iterable[iteratorSymbol]; if (iteratorMethod) return iteratorMethod.call(iterable); if ("function" == typeof iterable.next) return iterable; if (!isNaN(iterable.length)) { var i = -1, next = function next() { for (; ++i < iterable.length;) { if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next; } return next.value = undefined, next.done = !0, next; }; return next.next = next; } } return { next: doneResult }; } function doneResult() { return { value: undefined, done: !0 }; } return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) { var ctor = "function" == typeof genFun && genFun.constructor; return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name)); }, exports.mark = function (genFun) { return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun; }, exports.awrap = function (arg) { return { __await: arg }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () { return this; }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) { void 0 === PromiseImpl && (PromiseImpl = Promise); var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl); return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) { return result.done ? result.value : iter.next(); }); }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () { return this; }), define(Gp, "toString", function () { return "[object Generator]"; }), exports.keys = function (object) { var keys = []; for (var key in object) { keys.push(key); } return keys.reverse(), function next() { for (; keys.length;) { var key = keys.pop(); if (key in object) return next.value = key, next.done = !1, next; } return next.done = !0, next; }; }, exports.values = values, Context.prototype = { constructor: Context, reset: function reset(skipTempReset) { if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) { "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined); } }, stop: function stop() { this.done = !0; var rootRecord = this.tryEntries[0].completion; if ("throw" === rootRecord.type) throw rootRecord.arg; return this.rval; }, dispatchException: function dispatchException(exception) { if (this.done) throw exception; var context = this; function handle(loc, caught) { return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught; } for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i], record = entry.completion; if ("root" === entry.tryLoc) return handle("end"); if (entry.tryLoc <= this.prev) { var hasCatch = hasOwn.call(entry, "catchLoc"), hasFinally = hasOwn.call(entry, "finallyLoc"); if (hasCatch && hasFinally) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } else if (hasCatch) { if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0); } else { if (!hasFinally) throw new Error("try statement without catch or finally"); if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc); } } } }, abrupt: function abrupt(type, arg) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) { var finallyEntry = entry; break; } } finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null); var record = finallyEntry ? finallyEntry.completion : {}; return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record); }, complete: function complete(record, afterLoc) { if ("throw" === record.type) throw record.arg; return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel; }, finish: function finish(finallyLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel; } }, catch: function _catch(tryLoc) { for (var i = this.tryEntries.length - 1; i >= 0; --i) { var entry = this.tryEntries[i]; if (entry.tryLoc === tryLoc) { var record = entry.completion; if ("throw" === record.type) { var thrown = record.arg; resetTryEntry(entry); } return thrown; } } throw new Error("illegal catch attempt"); }, delegateYield: function delegateYield(iterable, resultName, nextLoc) { return this.delegate = { iterator: values(iterable), resultName: resultName, nextLoc: nextLoc }, "next" === this.method && (this.arg = undefined), ContinueSentinel; } }, exports; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -2292,22 +2324,69 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    NavigationLeft: _ui_navigation_NavigationLeft__WEBPACK_IMPORTED_MODULE_0__["default"],
-    NavigationRight: _ui_navigation_NavigationRight__WEBPACK_IMPORTED_MODULE_1__["default"]
+    NavigationLeft: _ui_navigation_NavigationLeft__WEBPACK_IMPORTED_MODULE_16__["default"],
+    NavigationRight: _ui_navigation_NavigationRight__WEBPACK_IMPORTED_MODULE_17__["default"]
   },
   data: function data() {
     return {
-      message: ''
+      message: '',
+      pageLoading: true,
+      page: 1,
+      showPerPage: 3,
+      items: []
     };
   },
   methods: {
     sendMessage: function sendMessage() {
-      this.resetIcon();
       this.clearMessage();
+      this.resetIcon();
     },
     clearMessage: function clearMessage() {
       this.message = '';
+    },
+    getAllData: function getAllData() {
+      var _this = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var response, sort;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                response = "";
+                sort = "-";
+                _context.next = 4;
+                return axios.get("/d/admin/posts-fetch/" + _this.showPerPage + "/-/" + sort + "/?page=" + _this.page);
+
+              case 4:
+                response = _context.sent;
+
+                if (response.data) {
+                  response.data.data.forEach(function (i) {
+                    return _this.items.push(i);
+                  });
+                }
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    loadMoreImage: function loadMoreImage() {
+      this.page++;
+      this.showPerPage = 5;
+      this.getAllData();
     }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    this.getAllData().then(function () {
+      _this2.pageLoading = false;
+    });
   }
 });
 
@@ -2352,7 +2431,7 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData() {
       var _this = this;
 
-      axios.get("/d/car/get/" + this.$route.params.id).then(function (response) {
+      axios.get("/d/admin/media/get/" + this.$route.params.id).then(function (response) {
         _this.objectData = Object.assign({}, response.data);
       }).catch(function (err) {});
     },
@@ -2401,6 +2480,24 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2680,6 +2777,8 @@ var UploadAdapter = /*#__PURE__*/function () {
         if (val != oldVal) {
           this.formObj = Object.assign({}, val);
           this.statusSwitch = val.status == "active" ? true : false;
+          this.editorData = this.formObj.content;
+          this.selectedImage = this.formObj.images[0];
         }
 
         this.loading = false;
@@ -2688,6 +2787,11 @@ var UploadAdapter = /*#__PURE__*/function () {
     }
   },
   methods: {
+    newPost: function newPost() {
+      this.$router.push({
+        name: "NewMedia"
+      });
+    },
     studioResponse: function studioResponse(v) {
       this.studioSettings.dialog = v.dialog;
       this.selectedImage = v.images != null ? Object.assign({}, v.images[0]) : {};
@@ -2717,12 +2821,17 @@ var UploadAdapter = /*#__PURE__*/function () {
       };
 
       if (this.formObj.id) {
+        var postID = this.formObj.id;
         var bdata = this.formObj;
         delete bdata["created_at"];
         delete bdata["updated_at"];
+        delete bdata["images"];
+        delete bdata["id"];
+        delete bdata["user_id"];
         dataForm = {
           data: bdata,
-          image: images
+          image: images,
+          id: postID
         };
       } // Send data to save
 
@@ -3021,6 +3130,38 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3046,9 +3187,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       this.orderBy[0] = v;
 
       if (this.orderByCount % 2) {
-        this.orderBy[1] = 'DESC';
+        this.orderBy[1] = "DESC";
       } else {
-        this.orderBy[1] = 'ASC';
+        this.orderBy[1] = "ASC";
       }
 
       this.orderByCount++;
@@ -4182,18 +4323,6 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         name: "Steve Ayala 5",
         icon: "mdi-cake"
-      }, {
-        name: "Steve Ayala 2",
-        icon: "mdi-cake"
-      }, {
-        name: "Steve Ayala 3",
-        icon: "mdi-cake"
-      }, {
-        name: "Steve Ayala 4",
-        icon: "mdi-cake"
-      }, {
-        name: "Steve Ayala 5",
-        icon: "mdi-cake"
       }],
       joiners: [{
         name: "Steve Ayala",
@@ -4201,30 +4330,6 @@ __webpack_require__.r(__webpack_exports__);
         position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
       }, {
         name: "Steve Ayala 1",
-        icon: "mdi-account-check",
-        position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-      }, {
-        name: "Steve Ayala 2",
-        icon: "mdi-account-check",
-        position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-      }, {
-        name: "Steve Ayala 3",
-        icon: "mdi-account-check",
-        position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-      }, {
-        name: "Steve Ayala 4",
-        icon: "mdi-account-check",
-        position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-      }, {
-        name: "Steve Ayala 5",
-        icon: "mdi-account-check",
-        position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-      }, {
-        name: "Steve Ayala 6",
-        icon: "mdi-account-check",
-        position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
-      }, {
-        name: "Steve Ayala 7",
         icon: "mdi-account-check",
         position: "GHASSAN ABOUD GROUP FZE - MANAGER - GOVERNMENT RELATIONS AD HUBS"
       }, {
@@ -5493,17 +5598,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.regexp.exec.js */ "./node_modules/core-js/modules/es.regexp.exec.js");
-/* harmony import */ var core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var _ckeditor_ckeditor5_vue2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @ckeditor/ckeditor5-vue2 */ "./node_modules/@ckeditor/ckeditor5-vue2/dist/ckeditor.js");
-/* harmony import */ var _ckeditor_ckeditor5_vue2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_vue2__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
-/* harmony import */ var _plugins_routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/routes */ "./resources/js/plugins/routes.js");
-/* harmony import */ var _plugins_vuetify__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./plugins/vuetify */ "./resources/js/plugins/vuetify.js");
-
-
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var _ckeditor_ckeditor5_vue2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @ckeditor/ckeditor5-vue2 */ "./node_modules/@ckeditor/ckeditor5-vue2/dist/ckeditor.js");
+/* harmony import */ var _ckeditor_ckeditor5_vue2__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_ckeditor_ckeditor5_vue2__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store/index.js");
+/* harmony import */ var _plugins_routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./plugins/routes */ "./resources/js/plugins/routes.js");
+/* harmony import */ var _plugins_vuetify__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./plugins/vuetify */ "./resources/js/plugins/vuetify.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -5518,10 +5619,10 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // window
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_5__["default"].use((_ckeditor_ckeditor5_vue2__WEBPACK_IMPORTED_MODULE_1___default()));
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_6__["default"]({
-  routes: _plugins_routes__WEBPACK_IMPORTED_MODULE_3__.routes,
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].use((_ckeditor_ckeditor5_vue2__WEBPACK_IMPORTED_MODULE_0___default()));
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_5__["default"]({
+  routes: _plugins_routes__WEBPACK_IMPORTED_MODULE_2__.routes,
   mode: "history"
 });
 var helpers_plugin = {
@@ -5557,7 +5658,7 @@ var helpers_plugin = {
     Vue.prototype.$baseUrl = window.location.origin;
   }
 };
-vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(helpers_plugin);
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].use(helpers_plugin);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -5572,21 +5673,21 @@ vue__WEBPACK_IMPORTED_MODULE_5__["default"].use(helpers_plugin);
  * Global Components
  */
 
-vue__WEBPACK_IMPORTED_MODULE_5__["default"].component("navigation-main", (__webpack_require__(/*! ./components/admin/ui/navigation/NavigationMain.vue */ "./resources/js/components/admin/ui/navigation/NavigationMain.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_5__["default"].component("navigation-admin", (__webpack_require__(/*! ./components/admin/ui/admin/Navigation.vue */ "./resources/js/components/admin/ui/admin/Navigation.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_5__["default"].component("snack-bar", (__webpack_require__(/*! ./components/common/SnackBar.vue */ "./resources/js/components/common/SnackBar.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_5__["default"].component("dialog-loader", (__webpack_require__(/*! ./components/common/DialogLoader.vue */ "./resources/js/components/common/DialogLoader.vue")["default"]));
-vue__WEBPACK_IMPORTED_MODULE_5__["default"].component("confirmation-dialog", (__webpack_require__(/*! ./components/common/ConfirmationDialog.vue */ "./resources/js/components/common/ConfirmationDialog.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].component("navigation-main", (__webpack_require__(/*! ./components/admin/ui/navigation/NavigationMain.vue */ "./resources/js/components/admin/ui/navigation/NavigationMain.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].component("navigation-admin", (__webpack_require__(/*! ./components/admin/ui/admin/Navigation.vue */ "./resources/js/components/admin/ui/admin/Navigation.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].component("snack-bar", (__webpack_require__(/*! ./components/common/SnackBar.vue */ "./resources/js/components/common/SnackBar.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].component("dialog-loader", (__webpack_require__(/*! ./components/common/DialogLoader.vue */ "./resources/js/components/common/DialogLoader.vue")["default"]));
+vue__WEBPACK_IMPORTED_MODULE_4__["default"].component("confirmation-dialog", (__webpack_require__(/*! ./components/common/ConfirmationDialog.vue */ "./resources/js/components/common/ConfirmationDialog.vue")["default"]));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-_store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch("fetchAuthUser").then(function () {
-  var app = new vue__WEBPACK_IMPORTED_MODULE_5__["default"]({
-    vuetify: _plugins_vuetify__WEBPACK_IMPORTED_MODULE_4__["default"],
-    store: _store__WEBPACK_IMPORTED_MODULE_2__["default"],
+_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch("fetchAuthUser").then(function () {
+  var app = new vue__WEBPACK_IMPORTED_MODULE_4__["default"]({
+    vuetify: _plugins_vuetify__WEBPACK_IMPORTED_MODULE_3__["default"],
+    store: _store__WEBPACK_IMPORTED_MODULE_1__["default"],
     router: router,
     data: function data() {
       return {
@@ -5596,14 +5697,10 @@ _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch("fetchAuthUser").then(fu
         loginEmail: "",
         loginEmailrules: [function (value) {
           return !!value || "Required";
-        }, function (value) {
-          return /.+@.+\..+/.test(value) || "E-mail must be valid";
         }],
         loginPassword: "",
         loginPasswordrules: [function (value) {
           return !!value || "Required";
-        }, function (value) {
-          return value && value.length > 8 || "Password must be atleast 8 characters";
         }]
       };
     },
@@ -5656,7 +5753,10 @@ _store__WEBPACK_IMPORTED_MODULE_2__["default"].dispatch("fetchAuthUser").then(fu
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+};
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -5779,6 +5879,15 @@ var routes = [
   path: "/d/admin/medias",
   component: _components_admin_medias_Medias__WEBPACK_IMPORTED_MODULE_8__["default"],
   name: "medias",
+  beforeEnter: function beforeEnter(to, from, next) {
+    adminOnly.includes(auth.userObject.role) == true && auth.userObject.status == 'active' ? next() : next({
+      name: "ForbiddenPage"
+    });
+  }
+}, {
+  path: "/d/admin/medias/edit/:id",
+  component: _components_admin_medias_EditMedia__WEBPACK_IMPORTED_MODULE_9__["default"],
+  name: "EditMedia",
   beforeEnter: function beforeEnter(to, from, next) {
     adminOnly.includes(auth.userObject.role) == true && auth.userObject.status == 'active' ? next() : next({
       name: "ForbiddenPage"
@@ -5999,11 +6108,9 @@ var actions = {
 
             case 3:
               response = _context.sent;
-              // console.log(response.data.user_access);
-              commit("setAuthUserAccess", response.data.user_access);
               commit("setAuthenticatedUser", response.data.user);
 
-            case 6:
+            case 5:
             case "end":
               return _context.stop();
           }
@@ -17292,130 +17399,52 @@ var render = function () {
     "v-main",
     { staticClass: "grey lighten-3 mt-5 px-3" },
     [
-      _c(
-        "v-container",
-        {
-          staticClass: "mx-auto",
-          staticStyle: { width: "100%", "max-width": "1366px" },
-        },
-        [
-          _c(
-            "v-row",
+      _vm.pageLoading == true
+        ? _c(
+            "v-container",
+            { staticClass: "py-8" },
             [
               _c(
-                "v-col",
-                { attrs: { cols: "12", sm: "12", md: "3" } },
+                "v-row",
                 [
                   _c(
-                    "v-sheet",
-                    { attrs: { rounded: "lg", "min-height": "268" } },
-                    [_c("navigation-left")],
+                    "v-col",
+                    { attrs: { cols: "12" } },
+                    [
+                      _c("v-skeleton-loader", {
+                        staticClass: "mx-auto",
+                        attrs: {
+                          "max-width": "100%",
+                          type: "list-item-avatar-three-line, image, article",
+                        },
+                      }),
+                    ],
                     1
                   ),
                 ],
                 1
               ),
-              _vm._v(" "),
+            ],
+            1
+          )
+        : _c(
+            "v-container",
+            {
+              staticClass: "mx-auto",
+              staticStyle: { width: "100%", "max-width": "1366px" },
+            },
+            [
               _c(
-                "v-col",
-                { attrs: { cols: "12", md: "6", sm: "12" } },
+                "v-row",
                 [
                   _c(
-                    "v-sheet",
-                    {
-                      staticClass: "mx-auto pt-10 px-10 pb-2 main-content",
-                      attrs: { rounded: "lg" },
-                    },
+                    "v-col",
+                    { attrs: { cols: "12", sm: "12", md: "3" } },
                     [
-                      _c("div", { staticClass: "feature-image" }, [
-                        _c("img", {
-                          attrs: { src: "/images/gag-connect-hive2.jpg" },
-                        }),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "content-title text-h6" }, [
-                        _vm._v("\n            Welcome to Hive "),
-                        _c("small", [_vm._v("News & Articales")]),
-                      ]),
-                      _vm._v(" "),
                       _c(
-                        "div",
-                        { staticClass: "section-content text-caption" },
-                        [
-                          _vm._v(
-                            "\n            Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n            Pellentesque turpis risus, fermentum id nibh non, aliquet pharetra\n            ipsum. Nunc placerat in risus id facilisis. In rutrum faucibus\n            dapibus. Aenean sodales est dui, quis varius mi egestas eget. Duis\n            commodo nisi eu lorem fringilla sagittis. Nam ac arcu sit amet\n            erat accumsan porttitor eget semper nibh. Proin elit erat,\n            volutpat eu sapien sit amet, fringilla faucibus ligula. Proin\n            elementum eget ex ut volutpat.\n          "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("v-divider"),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "section-like d-flex" },
-                        [
-                          _c(
-                            "div",
-                            [
-                              _c(
-                                "v-btn",
-                                { attrs: { small: "", text: "" } },
-                                [
-                                  _c("v-icon", { attrs: { small: "" } }, [
-                                    _vm._v("mdi-thumb-up-outline"),
-                                  ]),
-                                ],
-                                1
-                              ),
-                              _vm._v("\n              | "),
-                              _c("v-btn", { attrs: { small: "", text: "" } }, [
-                                _vm._v("comment(0)"),
-                              ]),
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-spacer"),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "post-datetime" }, [
-                            _vm._v("August 5, 2022"),
-                          ]),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-divider"),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "section-comment" },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              "append-outer-icon": _vm.message
-                                ? "mdi-send"
-                                : "",
-                              "prepend-icon": _vm.icon,
-                              outlined: "",
-                              "clear-icon": "mdi-close-circle",
-                              clearable: "",
-                              dense: "",
-                              label: "Enter your comment...",
-                              type: "text",
-                            },
-                            on: {
-                              "click:append-outer": _vm.sendMessage,
-                              "click:clear": _vm.clearMessage,
-                            },
-                            model: {
-                              value: _vm.message,
-                              callback: function ($$v) {
-                                _vm.message = $$v
-                              },
-                              expression: "message",
-                            },
-                          }),
-                        ],
+                        "v-sheet",
+                        { attrs: { rounded: "lg", "min-height": "268" } },
+                        [_c("navigation-left")],
                         1
                       ),
                     ],
@@ -17423,114 +17452,172 @@ var render = function () {
                   ),
                   _vm._v(" "),
                   _c(
-                    "v-sheet",
-                    {
-                      staticClass: "mx-auto pt-10 px-10 pb-2 main-content",
-                      attrs: { rounded: "lg" },
-                    },
+                    "v-col",
+                    { attrs: { cols: "12", md: "6", sm: "12" } },
                     [
-                      _c("div", { staticClass: "feature-image" }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "content-title text-h6" }, [
-                        _vm._v("\n            Welcome to Hive "),
-                        _c("small", [_vm._v("News & Articales")]),
-                      ]),
+                      _vm._l(_vm.items, function (item) {
+                        return _c(
+                          "v-sheet",
+                          {
+                            key: item.id,
+                            staticClass:
+                              "mx-auto pt-10 px-10 pb-2 main-content",
+                            attrs: { rounded: "lg" },
+                          },
+                          [
+                            _c("div", { staticClass: "feature-image" }, [
+                              _c("img", {
+                                attrs: { src: "/images/gag-connect-hive2.jpg" },
+                              }),
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "content-title text-h6" },
+                              [
+                                _vm._v(
+                                  "\n              " + _vm._s(item.title) + " "
+                                ),
+                                _c("small", [
+                                  _vm._v(
+                                    _vm._s(
+                                      item.type == "post"
+                                        ? "News & Articles"
+                                        : ""
+                                    )
+                                  ),
+                                ]),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "section-content text-caption" },
+                              [
+                                _c("div", {
+                                  staticClass: "pa-4",
+                                  staticStyle: { border: "1px solid #ccc" },
+                                  domProps: { innerHTML: _vm._s(item.content) },
+                                }),
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("v-divider"),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "section-like d-flex" },
+                              [
+                                _c(
+                                  "div",
+                                  [
+                                    _c(
+                                      "v-btn",
+                                      { attrs: { small: "", text: "" } },
+                                      [
+                                        _c("v-icon", { attrs: { small: "" } }, [
+                                          _vm._v("mdi-thumb-up-outline"),
+                                        ]),
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v("\n              | "),
+                                    _c(
+                                      "v-btn",
+                                      { attrs: { small: "", text: "" } },
+                                      [_vm._v("comment(0)")]
+                                    ),
+                                  ],
+                                  1
+                                ),
+                                _vm._v(" "),
+                                _c("v-spacer"),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "post-datetime" }, [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.formatDateHelper(item.created_at)
+                                    )
+                                  ),
+                                ]),
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("v-divider"),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "section-comment" },
+                              [
+                                _c("v-text-field", {
+                                  attrs: {
+                                    "append-outer-icon": _vm.message
+                                      ? "mdi-send"
+                                      : "",
+                                    outlined: "",
+                                    "clear-icon": "mdi-close-circle",
+                                    clearable: "",
+                                    dense: "",
+                                    label: "Enter your comment...",
+                                    type: "text",
+                                  },
+                                  on: {
+                                    "click:append-outer": _vm.sendMessage,
+                                    "click:clear": _vm.clearMessage,
+                                  },
+                                  model: {
+                                    value: _vm.message,
+                                    callback: function ($$v) {
+                                      _vm.message = $$v
+                                    },
+                                    expression: "message",
+                                  },
+                                }),
+                              ],
+                              1
+                            ),
+                          ],
+                          1
+                        )
+                      }),
                       _vm._v(" "),
                       _c(
-                        "div",
-                        { staticClass: "section-content text-caption" },
-                        [
-                          _vm._v(
-                            "\n            Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n            Pellentesque turpis risus, fermentum id nibh non, aliquet pharetra\n            ipsum. Nunc placerat in risus id facilisis. In rutrum faucibus\n            dapibus. Aenean sodales est dui, quis varius mi egestas eget. Duis\n            commodo nisi eu lorem fringilla sagittis. Nam ac arcu sit amet\n            erat accumsan porttitor eget semper nibh. Proin elit erat,\n            volutpat eu sapien sit amet, fringilla faucibus ligula. Proin\n            elementum eget ex ut volutpat.\n          "
-                          ),
-                        ]
-                      ),
-                      _vm._v(" "),
-                      _c("v-divider"),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "section-like d-flex" },
+                        "v-row",
                         [
                           _c(
-                            "div",
+                            "v-col",
+                            { staticClass: "text-center" },
                             [
                               _c(
                                 "v-btn",
-                                { attrs: { small: "", text: "" } },
-                                [
-                                  _c("v-icon", { attrs: { small: "" } }, [
-                                    _vm._v("mdi-thumb-up-outline"),
-                                  ]),
-                                ],
-                                1
+                                {
+                                  attrs: { color: "primary overlined" },
+                                  on: { click: _vm.loadMoreImage },
+                                },
+                                [_vm._v("Load More")]
                               ),
-                              _vm._v("\n              | "),
-                              _c("v-btn", { attrs: { small: "", text: "" } }, [
-                                _vm._v("comment(0)"),
-                              ]),
                             ],
                             1
                           ),
-                          _vm._v(" "),
-                          _c("v-spacer"),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "post-datetime" }, [
-                            _vm._v("August 5, 2022"),
-                          ]),
-                        ],
-                        1
-                      ),
-                      _vm._v(" "),
-                      _c("v-divider"),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "section-comment" },
-                        [
-                          _c("v-text-field", {
-                            attrs: {
-                              "append-outer-icon": _vm.message
-                                ? "mdi-send"
-                                : "",
-                              "prepend-icon": _vm.icon,
-                              outlined: "",
-                              "clear-icon": "mdi-close-circle",
-                              clearable: "",
-                              dense: "",
-                              label: "Enter your comment...",
-                              type: "text",
-                            },
-                            on: {
-                              "click:append-outer": _vm.sendMessage,
-                              "click:clear": _vm.clearMessage,
-                            },
-                            model: {
-                              value: _vm.message,
-                              callback: function ($$v) {
-                                _vm.message = $$v
-                              },
-                              expression: "message",
-                            },
-                          }),
                         ],
                         1
                       ),
                     ],
-                    1
+                    2
                   ),
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-col",
-                { attrs: { cols: "12", sm: "12", md: "3" } },
-                [
+                  _vm._v(" "),
                   _c(
-                    "v-sheet",
-                    { attrs: { rounded: "lg", "min-height": "268" } },
-                    [_c("navigation-right")],
+                    "v-col",
+                    { attrs: { cols: "12", sm: "12", md: "3" } },
+                    [
+                      _c(
+                        "v-sheet",
+                        { attrs: { rounded: "lg", "min-height": "268" } },
+                        [_c("navigation-right")],
+                        1
+                      ),
+                    ],
                     1
                   ),
                 ],
@@ -17539,9 +17626,6 @@ var render = function () {
             ],
             1
           ),
-        ],
-        1
-      ),
     ],
     1
   )
@@ -17572,7 +17656,7 @@ var render = function () {
   return _c(
     "div",
     [
-      _c("car-form", {
+      _c("media-form", {
         attrs: { objectdata: _vm.objectData, pagetitle: "edit" },
         on: { saved: _vm.savedResponse },
       }),
@@ -17625,11 +17709,27 @@ var render = function () {
             "v-card",
             { attrs: { flat: "" } },
             [
-              _vm.pagetitle !== "edit"
-                ? _c("v-card-title", [
-                    _c("h4", [_vm._v(_vm._s(_vm.cardTitle))]),
-                  ])
-                : _vm._e(),
+              _c(
+                "v-card-title",
+                [
+                  _c("h4", [_vm._v(_vm._s(_vm.cardTitle))]),
+                  _vm._v(" "),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _vm.pagetitle == "edit"
+                    ? _c(
+                        "v-btn",
+                        {
+                          attrs: { fab: "", "x-small": "" },
+                          on: { click: _vm.newPost },
+                        },
+                        [_c("v-icon", [_vm._v("mdi-plus-box")])],
+                        1
+                      )
+                    : _vm._e(),
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
                 "v-card-text",
@@ -17843,43 +17943,61 @@ var render = function () {
                                                         },
                                                       }),
                                                       _vm._v(" "),
-                                                      _vm.pagetitle == "edit"
-                                                        ? _c(
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass: "d-flex",
+                                                        },
+                                                        [
+                                                          _vm.pagetitle ==
+                                                          "edit"
+                                                            ? _c(
+                                                                "v-btn",
+                                                                {
+                                                                  attrs: {
+                                                                    text: "",
+                                                                    color:
+                                                                      "error",
+                                                                    small: "",
+                                                                  },
+                                                                  on: {
+                                                                    click:
+                                                                      function (
+                                                                        $event
+                                                                      ) {
+                                                                        return _vm.deleteData()
+                                                                      },
+                                                                  },
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    "delete"
+                                                                  ),
+                                                                ]
+                                                              )
+                                                            : _vm._e(),
+                                                          _vm._v(" "),
+                                                          _c("v-spacer"),
+                                                          _vm._v(" "),
+                                                          _c(
                                                             "v-btn",
                                                             {
+                                                              staticClass:
+                                                                "primary",
                                                               attrs: {
-                                                                text: "",
-                                                                color: "error",
+                                                                disabled:
+                                                                  !valid,
+                                                                small: "",
                                                               },
                                                               on: {
                                                                 click:
-                                                                  function (
-                                                                    $event
-                                                                  ) {
-                                                                    return _vm.deleteData()
-                                                                  },
+                                                                  _vm.submit,
                                                               },
                                                             },
-                                                            [_vm._v("delete")]
-                                                          )
-                                                        : _vm._e(),
-                                                      _vm._v(" "),
-                                                      _c("v-spacer"),
-                                                      _vm._v(" "),
-                                                      _c(
-                                                        "v-btn",
-                                                        {
-                                                          staticClass:
-                                                            "primary",
-                                                          attrs: {
-                                                            disabled: !valid,
-                                                            small: "",
-                                                          },
-                                                          on: {
-                                                            click: _vm.submit,
-                                                          },
-                                                        },
-                                                        [_vm._v("Save")]
+                                                            [_vm._v("Save")]
+                                                          ),
+                                                        ],
+                                                        1
                                                       ),
                                                     ],
                                                     1
@@ -17896,6 +18014,12 @@ var render = function () {
                                                   _c(
                                                     "v-card-text",
                                                     [
+                                                      _c("small", [
+                                                        _vm._v(
+                                                          "Featured Image"
+                                                        ),
+                                                      ]),
+                                                      _vm._v(" "),
                                                       _c("v-img", {
                                                         staticStyle: {
                                                           "border-radius":
@@ -17911,7 +18035,8 @@ var render = function () {
                                                           "aspect-ratio": 1,
                                                           src:
                                                             "" +
-                                                            (_vm.selectedImage.hasOwnProperty(
+                                                            (_vm.selectedImage &&
+                                                            _vm.selectedImage.hasOwnProperty(
                                                               "id"
                                                             )
                                                               ? _vm.$baseUrl +
@@ -17992,13 +18117,14 @@ var render = function () {
                                                                   rawName:
                                                                     "v-show",
                                                                   value:
+                                                                    _vm.selectedImage &&
                                                                     _vm.selectedImage.hasOwnProperty(
                                                                       "id"
                                                                     )
                                                                       ? true
                                                                       : false,
                                                                   expression:
-                                                                    "\n                              selectedImage.hasOwnProperty('id')\n                                ? true\n                                : false\n                            ",
+                                                                    "\n                             selectedImage && selectedImage.hasOwnProperty('id')\n                                ? true\n                                : false\n                            ",
                                                                 },
                                                               ],
                                                               staticClass:
@@ -18046,9 +18172,10 @@ var render = function () {
                                                             [
                                                               _vm._v(
                                                                 _vm._s(
-                                                                  _vm.selectedImage.hasOwnProperty(
-                                                                    "id"
-                                                                  )
+                                                                  _vm.selectedImage &&
+                                                                    _vm.selectedImage.hasOwnProperty(
+                                                                      "id"
+                                                                    )
                                                                     ? "Replace"
                                                                     : "Upload"
                                                                 )
@@ -18088,6 +18215,38 @@ var render = function () {
             ],
             1
           ),
+          _vm._v(" "),
+          _vm.pagetitle == "edit"
+            ? _c(
+                "v-row",
+                { staticClass: "mt-1" },
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "col-9" },
+                    [
+                      _c(
+                        "v-card",
+                        [
+                          _c(
+                            "v-card-text",
+                            [
+                              _c("h5", [_vm._v("Comment(s)")]),
+                              _vm._v(" "),
+                              _c("v-divider"),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              )
+            : _vm._e(),
         ],
         1
       ),
@@ -18216,7 +18375,7 @@ var render = function () {
                           staticClass: "secondary mb-5",
                           attrs: { to: "/d/admin/media/new" },
                         },
-                        [_vm._v("New News & Article")]
+                        [_vm._v("Create News & Article")]
                       ),
                     ],
                     1
@@ -18350,11 +18509,33 @@ var render = function () {
                                               "text-left cursor-pointer",
                                             on: {
                                               click: function ($event) {
+                                                return _vm.OrderByField("id")
+                                              },
+                                            },
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                    ID\n                  "
+                                            ),
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "th",
+                                          {
+                                            staticClass:
+                                              "text-left cursor-pointer",
+                                            on: {
+                                              click: function ($event) {
                                                 return _vm.OrderByField("title")
                                               },
                                             },
                                           },
-                                          [_vm._v("Title")]
+                                          [
+                                            _vm._v(
+                                              "\n                    Title\n                  "
+                                            ),
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c(
@@ -18370,7 +18551,11 @@ var render = function () {
                                               },
                                             },
                                           },
-                                          [_vm._v("Author")]
+                                          [
+                                            _vm._v(
+                                              "\n                    Author\n                  "
+                                            ),
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c(
@@ -18386,7 +18571,11 @@ var render = function () {
                                               },
                                             },
                                           },
-                                          [_vm._v("Published Date")]
+                                          [
+                                            _vm._v(
+                                              "\n                    Published Date\n                  "
+                                            ),
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c(
@@ -18402,7 +18591,11 @@ var render = function () {
                                               },
                                             },
                                           },
-                                          [_vm._v("Status")]
+                                          [
+                                            _vm._v(
+                                              "\n                    Status\n                  "
+                                            ),
+                                          ]
                                         ),
                                         _vm._v(" "),
                                         _c("th", [_vm._v("Action")]),
@@ -18418,17 +18611,23 @@ var render = function () {
                                             function (item, index) {
                                               return _c("tr", { key: index }, [
                                                 _c("td", [
+                                                  _vm._v(_vm._s(item.id)),
+                                                ]),
+                                                _vm._v(" "),
+                                                _c("td", [
                                                   _vm._v(_vm._s(item.title)),
                                                 ]),
                                                 _vm._v(" "),
                                                 _c("td", [
                                                   _vm._v(
-                                                    _vm._s(
-                                                      item.user_id
-                                                        ? item.users.profile
-                                                            .fullname
-                                                        : ""
-                                                    )
+                                                    "\n                    " +
+                                                      _vm._s(
+                                                        item.user_id
+                                                          ? item.users.profile
+                                                              .fullname
+                                                          : ""
+                                                      ) +
+                                                      "\n                  "
                                                   ),
                                                 ]),
                                                 _vm._v(" "),

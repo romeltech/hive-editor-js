@@ -41,13 +41,17 @@ footer{
 .content-title small{ font-size: 10px; float:right;}
 .fixed-position{ position: fixed;  }
 .section-content, .section-like{ padding: 10px 0;}
+.section-content{ max-height:300px; overflow:hidden;}
 .section-comment{ margin-top:10px;}
 .v-list .v-list-item--active, .v-list .v-list-item--active .v-icon{ color: #fff;}
 .ck-editor__editable {
     min-height: 250px;
+    max-height: 500px;
    }
 .speak-up .v-image{ margin: 0 auto;}
 .header-joiner, .header-birthday { text-align:center;}
+.bordered-file.selected-file{     box-shadow:0 3px 1px -2px rgb(17 94 161), 0 2px 2px 0 rgb(17 94 161), 0 1px 5px 0 rgb(17 94 161) !important;
+}
 @media only screen and (max-width: 900px) {
     .main-content{ width: 100%;}
     .content-title small{ float:none;}
