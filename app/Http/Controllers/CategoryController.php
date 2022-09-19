@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\category;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -17,69 +17,36 @@ class CategoryController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function fetch($perPage, $search, $orderBy=null)
     {
-        //
+        $field = 'title';
+        $sort = "asc";
+      
+        if($orderBy !== '-'){
+            $orderBy = explode(",", $orderBy);
+            $field = $orderBy[0];
+            $sort = $orderBy[1];
+        }
+        
+        if($search != '-'){
+            $data = Category::where('title', 'LIKE', '%'.$search.'%')
+            ->orderBy($field, $sort)->paginate($perPage);
+        }else{ 
+            $data = Category::orderBy($field, $sort)->paginate($perPage);
+        }
+        return response()->json($data, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function fetchNonpaginate()
+    { 
+        $data = Category::orderBy('title', 'asc')->get();
+         
+        return response()->json($data, 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(category $category)
+    public function edit($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(category $category)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, category $category)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(category $category)
-    {
-        //
+        $data = Category::where('id', $id)->firstOrFail();
+        return response()->json($data, 200);
     }
 }

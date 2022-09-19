@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Post;
+use App\Models\Access;
 use App\Models\Profile;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -47,6 +49,29 @@ class User extends Authenticatable
     public function profile()
     {
         return $this->hasOne(Profile::class);
-    }  
+    }
+
+    public function access()
+    {
+        return $this->hasMany(Access::class);
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function images()
+    { 
+        return $this->morphToMany(
+            Image::class,
+            'imageable',
+            'imageables',
+            'imageable_id',
+            'image_id',
+            '',
+            'id'
+        );
+    }
     
 }

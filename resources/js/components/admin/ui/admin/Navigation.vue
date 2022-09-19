@@ -50,6 +50,7 @@
         >
       </v-toolbar-title>
       <v-spacer></v-spacer>
+      
       <v-menu
         v-model="menu"
         :close-on-content-click="false"
@@ -60,7 +61,7 @@
       >
         <template v-slot:activator="{ on }">
           <v-btn text icon v-on="on">
-            <v-avatar size="30">
+            <v-avatar size="30" color="blue-grey lighten-4">
               <img :src="profileImagePath" />
             </v-avatar>
           </v-btn>
@@ -68,7 +69,7 @@
         <v-card>
           <v-list>
             <v-list-item>
-              <v-list-item-avatar>
+              <v-list-item-avatar color="blue-grey lighten-4">
                 <img :src="profileImagePath" />
               </v-list-item-avatar>
               <v-list-item-content>
@@ -100,10 +101,10 @@ export default {
   data() {
     return {
       authenticated_user: this.$store.state.authUser.userObject,
-      profileImagePath: this.$store.state.authUser.userObject.profile_image
+      profileImagePath: this.$store.state.authUser.userObject.images.length > 0
         ? window.location.origin +
           "/file/" +
-          this.$store.state.authUser.userObject.profile_image.path
+          this.$store.state.authUser.userObject.images[0].path
         : window.location.origin + "/images/placeholder-user.png",
       drawer: true,
       menu: false,
@@ -112,56 +113,79 @@ export default {
           title: "Home",
           icon: "mdi-home-outline",
           location: "/d/frontend",
+          slug: 'home'
         },
         {
           title: "News & Articles",
           icon: "mdi-file-document-multiple-outline",
-          location: "/d/admin/medias"
+          location: "/d/admin/medias",
+          slug: 'medias'
         },
         {
           title: "Events",
           icon: "mdi-file-document-multiple",
-          location: "/d/admin/events"
+          location: "/d/admin/events",
+          slug: 'events'
         },
         {
           title: "Polls",
           icon: "mdi-file-document-multiple",
-          location: "/d/admin/polls"
+          location: "/d/admin/polls",
+          slug: 'polls'
         },
          {
           title: "Employees",
           icon: "mdi-file-document-multiple",
-          location: "/d/admin/employees"
+          location: "/d/admin/users",
+          slug: 'users'
         },
          {
           title: "Trainings",
           icon: "mdi-file-document-multiple",
-          location: "/d/admin/trainings"
+          location: "/d/admin/trainings",
+          slug: 'trainings'
         },
         {
           title: "Careers",
           icon: "mdi-file-document-multiple",
-          location: "/d/admin/careers"
+          location: "/d/admin/careers",
+          slug: 'careers'
         },
         {
           title: "Package Ads",
           icon: "mdi-file-document-multiple",
-          location: "/d/admin/package_ads"
+          location: "/d/admin/package_ads",
+          slug: 'package_ads'
         },
         {
           title: "Cashless",
           icon: "mdi-file-document-multiple",
-          location: "/d/admin/cashless"
+          location: "/d/admin/cashless",
+          slug: 'cashless'
         },
         {
           title: "Marketplace",
           icon: "mdi-file-document-multiple",
-          location: "/d/admin/marketplace"
+          location: "/d/admin/marketplace",
+          slug: 'marketplace'
         },
         {
           title: "Suggestions",
           icon: "mdi-file-document-multiple",
-          location: "/d/admin/suggestions"
+          location: "/d/admin/suggestions",
+          slug: 'suggestions'
+        },
+        {
+          title: "Companies",
+          icon: "mdi-file-document-multiple",
+          location: "/d/admin/companies",
+          slug: 'companies'
+        },
+        {
+          title: "Departments",
+          icon: "mdi-file-document-multiple",
+          location: "/d/admin/departments",
+          slug: 'departments'
         },
         
       ],

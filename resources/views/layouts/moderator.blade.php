@@ -39,7 +39,9 @@
                 <v-main class="pt-1">
                     <router-view></router-view>
                 </v-main>
-                
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
         </v-app>
     </div>

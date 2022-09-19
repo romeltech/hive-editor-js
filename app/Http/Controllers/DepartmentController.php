@@ -17,14 +17,31 @@ class DepartmentController extends Controller
         //
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function fetch($perPage, $search, $orderBy=null)
     {
-        //
+        $field = 'title';
+        $sort = "asc";
+      
+        if($orderBy !== '-'){
+            $orderBy = explode(",", $orderBy);
+            $field = $orderBy[0];
+            $sort = $orderBy[1];
+        }
+        
+        if($search != '-'){
+            $data = Department::where('title', 'LIKE', '%'.$search.'%')
+            ->orderBy($field, $sort)->paginate($perPage);
+        }else{ 
+            $data = Department::orderBy($field, $sort)->paginate($perPage);
+        }
+        return response()->json($data, 200);
+    }
+
+    public function fetchNonpaginate()
+    { 
+        $data = Department::orderBy('title', 'asc')->get();
+         
+        return response()->json($data, 200);
     }
 
     /**

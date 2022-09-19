@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\image;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -32,15 +33,15 @@ class ImageController extends Controller
     {
         $fileArray = array();
         $uploadKey = Carbon::now()->format('YmdHis');
-
+        
         $files = Collection::wrap(request()->file('file'));
          
         $userStorage = '/uploads';
         if (!Storage::exists($userStorage)) {
             Storage::makeDirectory($userStorage, 0755, true);
         }
-
-        $files->each(function ($file, $key) use (&$userStorage, &$fileArray, &$uploadKey) {
+        
+        $files->each(function ($file, $key) use (&$userStorage, &$fileArray, &$uploadKey, &$request) {
 
             $userStorageDir = storage_path() . '/app' . $userStorage;
             $fileName = $file->getClientOriginalName();
@@ -63,7 +64,8 @@ class ImageController extends Controller
                     'disk' => 'local',
                     'path' => $path, 
                     'mime' => $mime,
-                    'user_id' => auth()->id(),
+                    'type' => $request['type'],
+                    'user_id' => $request['user_id'] ? $request['user_id'] : auth()->id(),
                     'created_at' => Carbon::now(),
             ));
         });
@@ -85,10 +87,16 @@ class ImageController extends Controller
      */
     public function getMediaFiles(Request $request)
     {
-        $files = Image::latest()->paginate(12);
+        $files = Image::where('type', '=' ,'post')->latest()->paginate(12);
         
         return response()->json($files, 200);
     }
+
+    public function getMediaFilesByUser(Request $request)
+    {
+        $files = Image::where(['type' => 'employee', 'user_id' => $request['id']])->latest()->paginate(12);
+        return response()->json($files, 200);
+    }  
 
     /**
      * Show the form for editing the specified resource.

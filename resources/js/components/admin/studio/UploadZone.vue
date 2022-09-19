@@ -168,19 +168,16 @@ export default {
       // console.log(formData);
     },
     sendingFunction(file, xhr, formData) {
-      //   if (
-      //     this.uploadzoneOptions &&
-      //     Object.keys(this.uploadzoneOptions).length > 0
-      //   ) {
-      //     formData.append("model_id", this.uploadzoneOptions.model_id);
-      //     formData.append("model", this.uploadzoneOptions.model);
-      //   } else {
-      //     formData.append("model_id", this.$route.params.id);
-      //     formData.append("model", this.$route.params.model);
-      //   }
-      //   console.log("formData", formData);
+        if ( 
+          this.$route.name === 'NewUser' || this.$route.name === 'EditUser'
+        ) {
+          formData.append("type", 'employee'); 
+          formData.append("user_id", this.$route.params.id); 
+        } else {
+            formData.append("type", 'post'); 
+        } 
     },
-    uploadSuccessFuntion(files, response) {
+    uploadSuccessFuntion(files, response) { 
       this.sbOptions = {
         status: true,
         type: "success",

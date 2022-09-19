@@ -20,7 +20,7 @@
       <!-- content here -->
       <v-row class="mt-2"> 
           <v-col cols="12" class="py-0">
-          <v-btn to="/d/user/new" class="secondary mb-5">New User</v-btn>
+          <v-btn to="/d/admin/user/new" class="secondary mb-5">New User</v-btn>
         </v-col>
         <v-col class="col-md-12 mt-1 col-sm-12">
           <v-card class="px-5">
@@ -67,21 +67,25 @@
               <template v-slot:default>
                 <thead>
                   <tr>
-                    <th class="text-left">Full Name</th> 
-                    <th class="text-left">Email</th> 
-                    <th class="text-left">Phone</th> 
-                    <th class="text-left">Role</th> 
-                    <th class="text-left">Status</th> 
+                    <th class="text-left cursor-pointer" @click="OrderByField('ecode')">eCode</th> 
+                    <th class="text-left cursor-pointer" @click="OrderByField('fullname')">Full Name</th> 
+                    <th class="text-left cursor-pointer" @click="OrderByField('email')">Email</th> 
+                    <th class="text-left cursor-pointer" @click="OrderByField('company')">Company</th> 
+                    <th class="text-left cursor-pointer" @click="OrderByField('department')">Department</th> 
+                    <th class="text-left cursor-pointer" @click="OrderByField('position')">Position</th> 
+                    <th class="text-left cursor-pointer" @click="OrderByField('status')">Status</th> 
                     <th> Action </th>
                   </tr>
                 </thead>
                 <tbody v-if="Object.keys(items).length > 0">
                   <tr v-for="(item, index) in items" :key="index">
-                    <td>  {{ item.full_name }} </td>
-                    <td>{{ item.email }}</td> 
-                    <td>{{ item.phone }}</td> 
-                    <td>{{ item.role }}</td> 
-                    <td>
+                    <td >{{ item.ecode ? item.ecode : item.profile ? item.profile.ecode : '' }}</td>
+                    <td >{{ item.fullname ? item.fullname : item.profile ? item.profile.fullname : '' }}</td>
+                    <td >{{ item.email }}</td> 
+                    <td >{{ item.company ? item.company : item.profile && item.profile.company ? item.profile.company.title : '' }} </td> 
+                    <td >{{ item.department ? item.department : item.profile  && item.profile.department ? item.profile.department.title : '' }}</td> 
+                    <td >{{ item.position ? item.position : item.profile ? item.profile.position: '' }}</td> 
+                    <td >
                     <v-chip
                   :class="`${ item.status == 'active' ? 'success' : item.status == 'disabled' ? 'error' : 'grey' }`"
                   >{{ item.status == 'active' ? 'Active' : item.status == 'disabled' ? 'Disabled' : 'Trashed' }}</v-chip
@@ -146,26 +150,59 @@ export default {
       showPerPage: 10,
       origCnt: 0,
       search: "",
-   
+      orderBy: [],
+      orderByCount: 0,
       items: [],
     };
   },
   methods: {
-    async getAllData(page) {
+    OrderByField: function (v) {
+      this.orderBy[0] = v;
+      if (this.orderByCount % 2) {
+        this.orderBy[1] = "DESC";
+      } else {
+        this.orderBy[1] = "ASC";
+      }
+      this.orderByCount++;
+
+      this.getAllData(this.page, this.orderBy);
+    },
+    async getAllData(page, orderby = null) {
       let response = "";
-      if(this.search){
-          response = await axios.get("/d/users/fetch/"+this.showPerPage +"/"+this.search+ "/?page=" +page);
-      }else{ 
-          response = await axios.get("/d/users/fetch/"+this.showPerPage +"/-/?page=" +page);
+      let sort = "-";
+      if (orderby && orderby.length > 0) {
+        sort = orderby.toString();
+      }
+
+       if (this.search) {
+        response = await axios.get(
+          "/d/admin/users/fetch/" +
+            this.showPerPage +
+            "/" +
+            this.search +
+            "/" +
+            sort +
+            "/?page=" +
+            page
+        );
+      } else {
+        response = await axios.get(
+          "/d/admin/users/fetch/" +
+            this.showPerPage +
+            "/-/" +
+            sort +
+            "/?page=" +
+            page
+        );
       }
      
       if(response.data){ 
         this.items = Object.assign([], response.data.data);
+         console.log(this.items);
         this.page = response.data.current_page;
         this.pageCount = response.data.last_page;
         this.totalData = response.data.total;
-      }
-       console.log(this.totalData);
+      } 
     },
 
     searchData: async function () {
@@ -180,13 +217,23 @@ export default {
       if (
         (this.search && this.search.length > 2)  
       ) {
-        await axios
+         let sort = "-";
+        console.log(this.orderBy);
+        if (this.orderBy && this.orderBy.length > 0) {
+          sort = this.orderBy.toString();
+        }
+        await axios 
           .get(
-            "/d/users/fetch/" + this.showPerPage + "/" + this.search
+            "/d/admin/users/fetch/" +
+              this.showPerPage +
+              "/" +
+              this.search +
+              "/" +
+              sort
           )
           .then((res) => {
-            this.items = res.data.data;
-          
+           
+            this.items = res.data.data; 
             this.page = res.data.current_page;
             this.pageCount = res.data.last_page;
             this.totalData = res.data.total;
@@ -207,7 +254,7 @@ export default {
      onPageChange: function () {
       this.$router
         .push(
-          "/d/users/page/" + this.page
+          "/d/admin/users/page/" + this.page
         )
         .catch((err) => {});
     },
@@ -234,9 +281,10 @@ export default {
      
     },
     editData(obj) {
+      console.log(obj);
       this.$router.push({
         name: "EditUser",
-        params: { id: obj.id },
+        params: { id: obj.user_id },
       });
     },
   },

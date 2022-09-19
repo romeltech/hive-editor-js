@@ -1,6 +1,11 @@
 <template>
   <div>
-    <media-form></media-form>
+    <media-form
+      :posttype="'post'"
+      :redirectedit="'EditMedia'"
+      :newurl="'/d/admin/media/save'"
+      :headertitle="'News & Articles'"
+    ></media-form>
   </div>
 </template>
 

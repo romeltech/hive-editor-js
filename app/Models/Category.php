@@ -2,11 +2,25 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Category extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    public function posts()
+    {
+        
+        return $this->morphedByMany(
+            Post::class,
+            'categoriable',
+            'categoriables',
+            'image_id',
+            'categoriable_id',
+            'id', 
+        );
+    }
 }

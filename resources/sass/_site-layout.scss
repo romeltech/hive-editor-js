@@ -36,12 +36,15 @@ footer{
 .post-datetime{ font-size: 10px;}
 .job-position{ font-size: 10px; line-height: 12px; color: #797979;}
 .feature-image{ text-align:center;}
-.feature-image img{ max-width:400px; margin: 0 auto;}
-.content-title{ padding-top: 10px; }
+.feature-image img{ max-width:100%; margin: 0 auto;}
+.content-title{ padding-top: 10px; position: relative; }
 .content-title small{ font-size: 10px; float:right;}
+.content-title small.date-event{ position:absolute; right:0; bottom: -20px;}
 .fixed-position{ position: fixed;  }
 .section-content, .section-like{ padding: 10px 0;}
-.section-content{ max-height:300px; overflow:hidden;}
+.view-more-message .v-icon{ position: absolute; margin-left:3px; cursor:pointer; bottom: 10px; right:0;}
+.section-content.text-caption{ width: 100%;}
+.view-more-message{ position: relative;}
 .section-comment{ margin-top:10px;}
 .v-list .v-list-item--active, .v-list .v-list-item--active .v-icon{ color: #fff;}
 .ck-editor__editable {
@@ -50,8 +53,13 @@ footer{
    }
 .speak-up .v-image{ margin: 0 auto;}
 .header-joiner, .header-birthday { text-align:center;}
-.bordered-file.selected-file{     box-shadow:0 3px 1px -2px rgb(17 94 161), 0 2px 2px 0 rgb(17 94 161), 0 1px 5px 0 rgb(17 94 161) !important;
+.bordered-file.selected-file{box-shadow:0 3px 1px -2px rgb(17 94 161), 0 2px 2px 0 rgb(17 94 161), 0 1px 5px 0 rgb(17 94 161) !important;
 }
+.poll-answer-textbox label, .poll-answer-textbox input{ font-size:12px; line-height: 10px !important;}
+.poll-answer-textbox .v-input__slot{ min-height:30px !important;}
+.post-comment-section{ min-height:45px;}
+.post-comment-section .comment-status-change{ display: none;}
+.post-comment-section:hover .comment-status-change{ display: block;}
 @media only screen and (max-width: 900px) {
     .main-content{ width: 100%;}
     .content-title small{ float:none;}

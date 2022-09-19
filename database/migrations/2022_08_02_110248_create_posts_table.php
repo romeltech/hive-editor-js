@@ -19,8 +19,8 @@ class CreatePostsTable extends Migration
             $table->text('content')->nullable();
             $table->string('type', 20)->nullable();
             $table->string('status', 20)->default('active')->nullable();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('category_id')->nullable();
+            $table->unsignedTinyInteger('poll_textbox_enabled')->default(0);
+            $table->unsignedBigInteger('user_id')->nullable(); 
             $table->timestamps();
         });
     }

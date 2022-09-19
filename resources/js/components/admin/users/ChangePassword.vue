@@ -112,20 +112,20 @@ export default {
         password_confirmation: this.userPassword.password_confirmation,
       };
       axios
-        .post("/d/user/changepassword", data)
+        .post("/d/admin/user/changepassword", data)
         .then((response) => {
-          this.$nextTick(() => {
-            this.sbOptions = {
+          this.sbOptions = {
               status: true,
               type: "success",
               text: response.data.message,
             };
+          this.$nextTick(() => { 
             this.userPassword = {};
             this.$refs.change_password_observer.reset();
             setTimeout(() => {
               this.loading = false;
               this.dialog = false;
-            }, 300);
+            }, 500);
           });
         })
         .catch((err) => {
@@ -141,6 +141,4 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
+  

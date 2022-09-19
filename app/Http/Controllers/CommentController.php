@@ -15,71 +15,24 @@ class CommentController extends Controller
     public function index()
     {
         //
-    }
+    } 
+    
+    public function submitComment(Request $request){
+        $user_id = auth()->id(); 
+        $newData = $request['data']; 
+        
+        $nData = ['post_id' => $newData['post_id'], 'user_id' => $user_id, 'content' => $newData['content']];
+         
+        Comment::create($nData);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json([ 
+            'message' => 'Comment has been submitted'
+        ], 200 );
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    
+    public function update(Request $request)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(comment $comment)
-    {
-        //
-    }
+        $data = Comment::find($request['comment']['id']);
+        $data->update(array('status' =>$request['status']));
+    } 
 }

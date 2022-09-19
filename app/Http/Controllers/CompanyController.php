@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\company;
+use App\Models\Company;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -15,71 +15,35 @@ class CompanyController extends Controller
     public function index()
     {
         //
+    } 
+    
+    public function fetch($perPage, $search, $orderBy=null)
+    {
+        $field = 'title';
+        $sort = "asc";
+      
+        if($orderBy !== '-'){
+            $orderBy = explode(",", $orderBy);
+            $field = $orderBy[0];
+            $sort = $orderBy[1];
+        }
+        
+        if($search != '-'){
+            $data = Company::where('title', 'LIKE', '%'.$search.'%')
+            ->orderBy($field, $sort)->paginate($perPage);
+        }else{ 
+            $data = Company::orderBy($field, $sort)->paginate($perPage);
+        }
+        return response()->json($data, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function fetchNonpaginate()
+    { 
+        $data = Company::orderBy('title', 'asc')->get();
+         
+        return response()->json($data, 200);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function show(company $company)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(company $company)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, company $company)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\company  $company
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(company $company)
-    {
-        //
-    }
+     
+ 
 }

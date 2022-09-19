@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Access;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,7 @@ class UserController extends Controller
         if(Auth::guest()){
             $access = "guest";
         }else{
-            $user = auth()->user()->load(['profile']);
+            $user = auth()->user()->load(['profile','images','access']);
 
             if(isset($user)){ 
                 $access = $user->role; 
@@ -26,27 +27,46 @@ class UserController extends Controller
             'user' => isset($user) ? $user : null,
             'user_access' => $access,
         ], 200);
-    }
-
-    public function getAllUsers($perPage, $search)
+    }  
+   
+    public function fetch($perPage, $search, $orderBy=null)
     {
         // Fetch All Users 
-        
+       
+        $field = 'users.id';
+        $sort = "desc";
+      
+        if($orderBy !== '-'){
+            $orderBy = explode(",", $orderBy);
+            $field = $orderBy[0];
+            $sort = $orderBy[1];
+        }
         if($search != '-'){
-            $data = User::where('role' , '!=', 'superadmin')->where('full_name', 'LIKE', '%'.$search.'%')->
-                    orWhere('phone', 'LIKE', '%'.$search.'%')->
-                    orWhere('email', 'LIKE', '%'.$search.'%')->
-                    orWhere('role', 'LIKE', '%'.$search.'%')
-                    ->orderBy('full_name', 'asc')->paginate($perPage);
-        }else{ 
-            $data = User::where('role' , '!=', 'superadmin')->orderBy('role', 'asc')->paginate($perPage);
+            $data = User::whereHas('profile', function ($q) use ($search) { 
+                                $q->where('fullname', 'LIKE', '%'.$search.'%')->
+                                orWhere('position', 'LIKE', '%'.$search.'%')->
+                                orWhere('ecode', 'LIKE', '%'.$search.'%');
+                        })->where('role' , '!=', 'superadmin')->
+                        orWhere('email', 'LIKE', '%'.$search.'%')->
+                        orWhere('username', 'LIKE', '%'.$search.'%')-> 
+                        orWhere('role', 'LIKE', '%'.$search.'%')
+                        ->with('profile.company', 'profile.department')
+                        ->paginate($perPage);
+        }else{  
+                 
+             $data=   User::select('users.*', 'companies.title AS company', 'departments.title AS department', 'profiles.*')
+                ->join('profiles', 'profiles.user_id', '=', 'users.id')
+                ->join('companies', 'companies.id', '=', 'profiles.company_id')
+                ->join('departments', 'departments.id', '=', 'profiles.department_id')
+                ->orderBy($field, $sort)
+                ->paginate($perPage);
         }
         return response()->json($data, 200);
     }
 
-    public function getSingleUser($id)
-    {
-        $user = User::where('id', $id)->firstOrFail();
+    public function getSingleUser($id){ 
+        $user = User::where('id','=', $id)->with('profile', 'images', 'access')->firstOrFail();
+        
         return response()->json($user, 200);
     }
 
@@ -54,44 +74,58 @@ class UserController extends Controller
     {
         $user = User::where('id', $request['id'])->update(['status' => $request['status']]);
         return response()->json($user, 200);
-    }
+    } 
 
     public function saveUserData(Request $request)
     {
         $resStatus = 200;
-        $arrDetail = array();
+        $userData = array();
+        $profileData = array();
+        
         if(isset($request['id'])){
-            if(isset($request['email'])){
-                $arrDetail = array(
-                    'email' => $request['email'],
-                    'full_name' => $request['full_name'],
-                    'phone' => $request['phone'],
-                    'role' => $request['role'],
-                    'status' => $request['status']
-                );
-            }else{
-                $arrDetail = array(
-                    'full_name' => $request['full_name'],
-                    'phone' => $request['phone'],
-                    'role' => $request['role'],
-                    'status' => $request['status'],
+            $user = User::where('id', $request['id'])->first();             
+            $user->update($request['nUser']);
+            $user->profile()->update($request['nProfile']);
+            
+            $msg = "User has been updated";
+        }else{            
+            $newData = array('password' => Hash::make('gag'));
+            $newData = array_merge($newData, $request['nUser']);           
+            $user = User::create($newData);
+
+            $userID = array('user_id' => $user['id']);
+            $profile = array_merge($request['nProfile'], $userID);
+            
+            $user->profile()->insert($profile);        
+            $msg = "User has been added";
+        }
+
+        if($request['access']){
+            $acc = Access::where('user_id','=',$user['id'] );
+            if($acc){
+                $acc->delete();
+            }
+
+            $newSlug = array();
+            foreach($request['access'] AS $k => $v){
+                $newSlug[] = array(
+                    'user_id' => $user['id'],
+                    'slug' => $v
                 );
             }
-            $user = User::where('id', $request['id'])->first();
-            $user->update($arrDetail);
-            $msg = "User has been updated";
+          
+            Access::insert($newSlug);
         }else{
-            $password = Hash::make($request['password']);
-            $arrDetail = array(
-                'email' => $request['email'],
-                'full_name' => $request['full_name'],
-                'password' => $password,
-                'phone' => $request['phone'],
-                'role' => $request['role'],
-                'status' => 'active',
-            );
-            $users = User::create($arrDetail);
-            $msg = "User has been added";
+            $acc = Access::where('user_id','=',$user['id'] );
+            if($acc){
+                $acc->delete();
+            }
+        }
+
+        if(@$request['image']){
+            $user->images()->sync([$request['image']]);
+        }else{
+            $user->images()->detach();
         }
         return response()->json([
             'message' => $msg
@@ -100,7 +134,13 @@ class UserController extends Controller
 
     public function checkEmail(Request $request)
     {
-        $user = User::where('email', $request['email'])->first();
+        if($request['origEmail'] == $request['email'] && $request['origEcode'] == $request['ecode']){
+            return response()->json([ 
+                'email_existed' => false
+            ], 200);
+        }
+        $user = User::where(['email' => $request['email'], 'username' => $request['ecode']])->first();
+         
         return response()->json([
             'type' => gettype($user),
             'email_existed' => isset($user->email) ? true : false

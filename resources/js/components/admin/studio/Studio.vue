@@ -66,7 +66,7 @@
                       height="100%"
                     ></v-img>
                   </div>
-                </v-card>
+                </v-card>z
                 <div class="caption">{{ file.title.substring(0, 18) }}</div>
               </v-col>
             </v-row>
@@ -161,9 +161,15 @@ export default {
       if (this.files.length != 0) {
         return false;
       }
+      console.log(this.$route.name);
+      console.log(this.$route.params);
       this.loading = true;
+      let controller = '/d/admin/fetch/all/images';
+      if(this.$route.name == 'EditUser'){
+        controller = '/d/admin/fetch/by-user/images/'+this.$route.params.id
+      }
       axios
-        .get("/d/admin/fetch/all/images?page=" + this.page)
+        .get(controller+"?page=" + this.page)
         .then((response) => {
           console.log(response);
           response.data.data.forEach((i) => this.files.push(i));

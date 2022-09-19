@@ -32,6 +32,20 @@ const helpers_plugin = {
             });
         };
 
+        Vue.prototype.dateTimeFormatter = date => {
+            return new Date(date).toLocaleString("en-US", { 
+                minute: 'numeric',
+                hour: 'numeric',
+                day: "2-digit",
+                year: "numeric",
+                month: "short",
+            });
+        };
+
+        Vue.prototype.timestampConvert = date => {
+            return new Date(date).getTime();
+        };
+
         Vue.prototype.isExpired = (date) => {
             let ndate = new Date(date).toLocaleString();
             ndate = new Date(ndate).getTime();

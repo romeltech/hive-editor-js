@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'username' => 'admin',
             'email'      => 'admin@admin.com',
             'password'   => bcrypt('gag@112211'),
-            'role'      => 'admin',
+            'role'      => 'gaadmin',
             'status'     => 'active', // active, draft, trashed 
         ]);
         $user->save();

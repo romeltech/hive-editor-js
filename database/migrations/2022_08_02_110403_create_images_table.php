@@ -19,6 +19,7 @@ class CreateImagesTable extends Migration
             $table->string('title', 150)->nullable();
             $table->string('disk', 150)->nullable();
             $table->string('path', 150)->nullable();
+            $table->string('type', 50)->nullable();
             $table->string('mime', 80)->nullable();
             $table->unsignedBigInteger('user_id'); 
             $table->timestamps();

@@ -19,7 +19,7 @@
       <!-- content here -->
       <v-row class="mt-2">
         <v-col cols="12" class="py-0">
-          <v-btn to="/d/admin/media/new" class="secondary mb-5"
+          <v-btn to="/d/admin/medias/new" class="secondary mb-5"
             >Create News &amp; Article</v-btn
           >
         </v-col>
@@ -125,7 +125,7 @@
                             ? "Active"
                             : item.status == "disabled"
                             ? "Disabled"
-                            : "Trashed"
+                            : "Draft"
                         }}</v-chip
                       >
                     </td>
@@ -214,7 +214,7 @@ export default {
 
       if (this.search) {
         response = await axios.get(
-          "/d/admin/posts-fetch/" +
+          "/d/admin/posts-fetch/post/" +
             this.showPerPage +
             "/" +
             this.search +
@@ -225,7 +225,7 @@ export default {
         );
       } else {
         response = await axios.get(
-          "/d/admin/posts-fetch/" +
+          "/d/admin/posts-fetch/post/" +
             this.showPerPage +
             "/-/" +
             sort +
@@ -260,7 +260,7 @@ export default {
 
         await axios
           .get(
-            "/d/admin/posts-fetch/" +
+            "/d/admin/posts-fetch/post/" +
               this.showPerPage +
               "/" +
               this.search +

@@ -13,16 +13,26 @@ class image extends Model
     protected $guarded = [];
 
     public function posts()
-    {
-        
+    { 
         return $this->morphedByMany(
             Post::class,
             'imageable',
             'imageables',
             'image_id',
             'imageable_id',
-            'id',
-            'section_id',
+            'id', 
+        );
+    }
+
+    public function users()
+    { 
+        return $this->morphedByMany(
+            User::class,
+            'imageable',
+            'imageables',
+            'image_id',
+            'imageable_id',
+            'id', 
         );
     }
 

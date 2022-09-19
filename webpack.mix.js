@@ -60,6 +60,8 @@ if (mix.inProduction()) {
             enabled: true,
             useBuiltIns: "usage",
             targets: { firefox: "50", ie: 11 }
-        });
-        mix.version();
+        }).version();
+        
+     //    mix.browserSync({ watch: true, port: 8084,  proxy: 'http://127.0.0.1:8084'});
+      
 }

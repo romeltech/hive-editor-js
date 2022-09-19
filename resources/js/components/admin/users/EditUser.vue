@@ -21,7 +21,7 @@ export default {
   methods: {
     getUser() {
       axios
-        .get("/d/user/get/" + this.$route.params.id)
+        .get("/d/admin/user/get/" + this.$route.params.id)
         .then((response) => {
           this.userData = Object.assign({}, response.data);
         })

@@ -14,7 +14,7 @@
         </v-list-item-content>
       </template>
       <div v-for="sub in item.subs" :key="sub.title">
-        <v-list-item :to="sub.location" class="pl-10" active-class="secondary">
+        <v-list-item v-if="returnAccess(sub.slug)" :to="sub.location" class="pl-10" active-class="secondary">
           <v-list-item-action class="mr-3">
             <v-icon small color="white">{{ sub.icon }}</v-icon>
           </v-list-item-action>
@@ -25,7 +25,7 @@
         </v-list-item>
       </div>
     </v-list-group>
-    <v-list-item v-else link :to="item.location" active-class="secondary">
+    <v-list-item v-else-if="returnAccess(item.slug)" link :to="item.location" active-class="secondary">
       <v-list-item-action>
         <v-icon>{{ item.icon }}</v-icon>
       </v-list-item-action>
@@ -46,14 +46,26 @@ export default {
   },
   data() {
     return {
+      auth: this.$store.state.authUser.userObject,
       item: this.nav,
     };
+  },
+  methods:{
+     returnAccess: function (slug) {
+      let hasAccess = false;
+      if(this.auth.role == 'superadmin'){
+        return true;
+      }
+      this.auth.access.map((o, i) => {
+        if (slug == 'home' || slug == 'companies' || slug == 'departments' || slug == o.slug) {
+          hasAccess = true;
+        }
+      });
+      return hasAccess;
+    },
   },
   created() {
     // console.log(this.item);
   },
 };
-</script>
-
-<style>
-</style>
+</script> 

@@ -2,7 +2,14 @@
   <div>
     <media-form
       :objectdata="objectData"
-      :pagetitle="'edit'"
+      :newurl="'/d/admin/media/save'"
+      :pagetitle="'edit'" 
+      :deleteurl="'/d/admin/media/delete/'"
+      :redirectname="'medias'"
+      :redirectedit="'EditMedia'"
+      :redirectnew="'NewMedia'"
+      :headertitle="'News & Articles'"
+      :posttype="'post'"
       @saved="savedResponse"
     ></media-form>
   </div>
@@ -36,6 +43,3 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
