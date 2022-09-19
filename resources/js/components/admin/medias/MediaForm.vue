@@ -102,11 +102,12 @@
                               </ValidationProvider>
                             </v-col>
                             <v-col md="12">
-                              <ckeditor
+                              <ContentEditor />
+                              <!-- <ckeditor
                                 :editor="editor"
                                 v-model="editorData"
                                 :config="editorConfig"
-                              ></ckeditor>
+                              ></ckeditor> -->
                             </v-col>
                           </v-row>
                         </v-card-text>
@@ -115,34 +116,44 @@
                         <v-card-text>
                           <h5>Enter choices here</h5>
                           <v-divider></v-divider>
-                            <v-row class="my-2">
-                              <v-col md="12" class="py-1" v-for="(item, index) in newChoices" :key="index">
-                                <v-text-field
-                                    v-model="newChoices[index].content" 
-                                    append-outer-icon="mdi-trash-can-outline" 
-                                    outlined
-                                    clear-icon="mdi-close-circle"
-                                    clearable
-                                    dense
-                                    label="Enter choice"
-                                    type="text" 
-                                    hide-details
-                                    @click:append-outer="deleteChoice(index)"  
-                                    @click:clear="clearChoice(index)"
-                              ></v-text-field> 
-                              </v-col>
-                              <v-col md="12">
-                                <v-switch
-                                  v-model="choiceTextBox"
-                                   color="success"
-                                   class="mt-0"
-                                   hide-details
-                                   dense
-                                  label="enable if you want to have textbox as a choice"
-                                ></v-switch>
-                                <v-btn @click='addNewChoice' small class="primary my-2">Add New Choice</v-btn>
-                              </v-col>
-                            </v-row> 
+                          <v-row class="my-2">
+                            <v-col
+                              md="12"
+                              class="py-1"
+                              v-for="(item, index) in newChoices"
+                              :key="index"
+                            >
+                              <v-text-field
+                                v-model="newChoices[index].content"
+                                append-outer-icon="mdi-trash-can-outline"
+                                outlined
+                                clear-icon="mdi-close-circle"
+                                clearable
+                                dense
+                                label="Enter choice"
+                                type="text"
+                                hide-details
+                                @click:append-outer="deleteChoice(index)"
+                                @click:clear="clearChoice(index)"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col md="12">
+                              <v-switch
+                                v-model="choiceTextBox"
+                                color="success"
+                                class="mt-0"
+                                hide-details
+                                dense
+                                label="enable if you want to have textbox as a choice"
+                              ></v-switch>
+                              <v-btn
+                                @click="addNewChoice"
+                                small
+                                class="primary my-2"
+                                >Add New Choice</v-btn
+                              >
+                            </v-col>
+                          </v-row>
                         </v-card-text>
                       </v-card>
                     </v-col>
@@ -160,7 +171,7 @@
                             }`"
                           ></v-switch>
                           <div class="d-flex">
-                             <v-btn
+                            <v-btn
                               class="primary"
                               :disabled="!valid"
                               small
@@ -168,7 +179,7 @@
                               >Save</v-btn
                             >
                             <v-spacer></v-spacer>
-                           
+
                             <v-btn
                               v-if="pagetitle == 'edit'"
                               text
@@ -181,28 +192,26 @@
                         </v-card-text>
                       </v-card>
                       <v-divider></v-divider>
-                        <UploadImage :selectedImage="selectedImage" @selected="imageResponse"/>
+                      <UploadImage
+                        :selectedImage="selectedImage"
+                        @selected="imageResponse"
+                      />
                       <v-divider></v-divider>
                       <v-card :loading="loading">
                         <v-card-text>
                           <small>Categories</small>
                           <v-row>
-                             <v-col
-                            cols="12"
-                            sm="12"
-                            md="12"
-                           
-                          >
-                          <div  v-for="item in categoryList" :key="item.id">
-                            <v-checkbox
-                                dense
-                                v-model="categories"
-                              :label="item.title" 
-                              :value="item.id"
-                              hide-details
-                            ></v-checkbox>
-                            </div>
-                          </v-col>
+                            <v-col cols="12" sm="12" md="12">
+                              <div v-for="item in categoryList" :key="item.id">
+                                <v-checkbox
+                                  dense
+                                  v-model="categories"
+                                  :label="item.title"
+                                  :value="item.id"
+                                  hide-details
+                                ></v-checkbox>
+                              </div>
+                            </v-col>
                           </v-row>
                         </v-card-text>
                       </v-card>
@@ -215,32 +224,86 @@
         </v-card-text>
       </v-card>
       <v-row class="mt-1" v-if="pagetitle == 'edit'">
-        <v-col sm="12" xs="12" :class="`${posttype == 'poll' ? 'col-md-6' :'col-md-9'}`">
+        <v-col
+          sm="12"
+          xs="12"
+          :class="`${posttype == 'poll' ? 'col-md-6' : 'col-md-9'}`"
+        >
           <v-card>
             <v-card-text>
-              <h5>Comments ( {{formObj.comments && formObj.comments.length}} )</h5>
+              <h5>
+                Comments ( {{ formObj.comments && formObj.comments.length }} )
+              </h5>
               <v-divider></v-divider>
-              <div class="my-2" v-if="formObj.comments && formObj.comments.length > 0">
-                <div v-for="(itz) in formObj.comments" :key="itz.id" class="post-comment-section">
-                    <div :class="`${itz.status =='active' ? 'primary--text' : 'warning--text'} `">{{itz.profile.fullname}} - {{ itz.content ? itz.content : ''}} <span class="float-right">{{dateTimeFormatter(itz.created_at)}}</span></div>
-                     
-                    <div class="comment-status-change">
-                    <v-btn v-if="itz.status =='active'" x-small class="warning" @click="handleCommentStatus(itz,'draft')">Draft</v-btn>
-                    <v-btn v-else x-small color="info" @click="handleCommentStatus(itz,'active')">Approve</v-btn>
-                    </div>
+              <div
+                class="my-2"
+                v-if="formObj.comments && formObj.comments.length > 0"
+              >
+                <div
+                  v-for="itz in formObj.comments"
+                  :key="itz.id"
+                  class="post-comment-section"
+                >
+                  <div
+                    :class="`${
+                      itz.status == 'active' ? 'primary--text' : 'warning--text'
+                    } `"
+                  >
+                    {{ itz.profile.fullname }} -
+                    {{ itz.content ? itz.content : "" }}
+                    <span class="float-right">{{
+                      dateTimeFormatter(itz.created_at)
+                    }}</span>
+                  </div>
+
+                  <div class="comment-status-change">
+                    <v-btn
+                      v-if="itz.status == 'active'"
+                      x-small
+                      class="warning"
+                      @click="handleCommentStatus(itz, 'draft')"
+                      >Draft</v-btn
+                    >
+                    <v-btn
+                      v-else
+                      x-small
+                      color="info"
+                      @click="handleCommentStatus(itz, 'active')"
+                      >Approve</v-btn
+                    >
+                  </div>
                 </div>
               </div>
             </v-card-text>
           </v-card>
         </v-col>
-        <v-col sm="12" xs="12" v-if="posttype == 'poll'" :class="`${posttype == 'poll' ? 'col-md-6' :'col-md-9'}`"> 
+        <v-col
+          sm="12"
+          xs="12"
+          v-if="posttype == 'poll'"
+          :class="`${posttype == 'poll' ? 'col-md-6' : 'col-md-9'}`"
+        >
           <v-card>
             <v-card-text>
-              <h5>Polls ( {{formObj.poll_answer_count}} )</h5>
+              <h5>Polls ( {{ formObj.poll_answer_count }} )</h5>
               <v-divider></v-divider>
-              <div class="my-2" v-if="formObj.poll_answer && formObj.poll_answer.length > 0">
-                <div v-for="(itz) in formObj.poll_answer" :key="itz.id" class="primary--text">
-                    {{itz.profile.fullname}} - {{ itz.content ? itz.content : itz.choices ? itz.choices.content : '-'}}
+              <div
+                class="my-2"
+                v-if="formObj.poll_answer && formObj.poll_answer.length > 0"
+              >
+                <div
+                  v-for="itz in formObj.poll_answer"
+                  :key="itz.id"
+                  class="primary--text"
+                >
+                  {{ itz.profile.fullname }} -
+                  {{
+                    itz.content
+                      ? itz.content
+                      : itz.choices
+                      ? itz.choices.content
+                      : "-"
+                  }}
                 </div>
               </div>
             </v-card-text>
@@ -253,13 +316,14 @@
     <confirmation-dialog
       :conf-options="confOptions"
       @response="confResponse"
-    ></confirmation-dialog> 
+    ></confirmation-dialog>
   </div>
 </template>
 <script>
- 
+import ContentEditor from "../ui/editor/ContentEditor";
+
 //import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import UploadImage from "../studio/UploadImage";
 import {
   ValidationObserver,
@@ -288,9 +352,9 @@ class UploadAdapter {
         })
           .then((response) => {
             if (response.data.result == "success") {
-              console.log(response.data); 
+              console.log(response.data);
               resolve({
-                default: '/file/'+response.data.filename,
+                default: "/file/" + response.data.filename,
               });
             } else {
               reject(response.data.message);
@@ -309,9 +373,11 @@ export default {
   name: "MediaForm",
   components: {
     ValidationProvider,
-    ValidationObserver,  
-     
+    ValidationObserver,
+
     UploadImage,
+
+    ContentEditor,
   },
   props: {
     objectdata: {
@@ -352,7 +418,7 @@ export default {
     },
   },
   data() {
-    return { 
+    return {
       categories: [],
       categoryList: [],
       statusSwitch: true,
@@ -385,13 +451,13 @@ export default {
       loading: this.objectdata ? true : false,
       editor: ClassicEditor,
       editorData: "",
-      editorConfig: {        
+      editorConfig: {
         extraPlugins: [this.uploader],
       },
       // Poll choices
       newChoices: [],
       choiceTextBox: false,
-      
+
       selectedImage: {},
     };
   },
@@ -401,17 +467,22 @@ export default {
         if (val != oldVal) {
           this.formObj = Object.assign({}, val);
           this.statusSwitch = val.status == "active" ? true : false;
-          this.categories = this.formObj.categories ? this.formObj.categories.map((res) => {
-            return res.id;
-          }) : '';
-          this.editorData = this.formObj.content ? this.formObj.content : '';
-           if (this.formObj.images && this.formObj.images.length > 0) {
+          this.categories = this.formObj.categories
+            ? this.formObj.categories.map((res) => {
+                return res.id;
+              })
+            : "";
+          this.editorData = this.formObj.content ? this.formObj.content : "";
+          if (this.formObj.images && this.formObj.images.length > 0) {
             this.selectedImage = this.formObj.images[0];
           }
           if (this.formObj.events) {
             this.eventDate = this.formObj.events;
           }
-          if(this.formObj.poll_choices && this.formObj.poll_choices.length > 0){
+          if (
+            this.formObj.poll_choices &&
+            this.formObj.poll_choices.length > 0
+          ) {
             this.newChoices = this.formObj.poll_choices;
           }
           this.choiceTextBox = this.formObj.poll_textbox_enabled;
@@ -422,22 +493,21 @@ export default {
     },
   },
   methods: {
-    imageResponse: function(v){  
+    imageResponse: function (v) {
       this.selectedImage = v;
     },
-    handleCommentStatus: function(comment, status){
-      let dataForm = { comment: comment, status: status};
-        axios
-        .post('/d/admin/comment/update-status', dataForm)
+    handleCommentStatus: function (comment, status) {
+      let dataForm = { comment: comment, status: status };
+      axios
+        .post("/d/admin/comment/update-status", dataForm)
         .then((response) => {
           this.sbOptions = {
             status: true,
             type: "success",
             text: "Data has been updated!",
           };
-           
+
           this.$emit("saved", true);
-          
         })
         .catch((err) => {
           this.loading = false;
@@ -448,41 +518,40 @@ export default {
           };
         });
     },
-    deleteChoice: function(index){ 
-      this.newChoices.splice(index, 1); 
-       
+    deleteChoice: function (index) {
+      this.newChoices.splice(index, 1);
     },
-    clearChoice: function(index){ 
-      this.newChoices[index].content = '';
+    clearChoice: function (index) {
+      this.newChoices[index].content = "";
     },
-    addNewChoice: function(){
-      this.newChoices.push({}); 
-      
+    addNewChoice: function () {
+      this.newChoices.push({});
     },
-    newPost: function () { 
+    newPost: function () {
       this.$router.push({ name: this.newRedirect });
     },
-   
+
     uploader(editor) {
       editor.plugins.get("FileRepository").createUploadAdapter = (loader) => {
         return new UploadAdapter(loader);
       };
     },
 
-    fetchCategories: async function(){
-      await axios.get('/d/admin/fetch/non-paginate/categories').then((response)=>{
-        this.categoryList = response.data;
-        console.log(this.categoryList);
-      })
+    fetchCategories: async function () {
+      await axios
+        .get("/d/admin/fetch/non-paginate/categories")
+        .then((response) => {
+          this.categoryList = response.data;
+          console.log(this.categoryList);
+        });
     },
 
     submit: function () {
-     
       this.loading = true;
       let images = this.selectedImage.hasOwnProperty("id")
         ? this.selectedImage.id
-        : null; 
-       
+        : null;
+
       this.formObj.content = this.editorData;
       this.formObj.type = this.typePost;
       // Set status value
@@ -492,7 +561,7 @@ export default {
       if (this.posttype == "event" || this.posttype == "poll") {
         eventOnly = this.eventDate;
       }
-      
+
       if (this.posttype == "poll") {
         pollOnly = this.newChoices;
         this.formObj.poll_textbox_enabled = this.choiceTextBox;
@@ -504,14 +573,14 @@ export default {
         categories: this.categories,
         daterange: eventOnly,
         choices: pollOnly,
-      }; 
-      
+      };
+
       if (this.formObj.id) {
         let postID = this.formObj.id;
         let bdata = this.formObj;
         delete bdata["created_at"];
         delete bdata["updated_at"];
-        delete bdata["images"]; 
+        delete bdata["images"];
         delete bdata["user_id"];
         delete bdata["events"];
         delete bdata["poll_choices"];
@@ -596,8 +665,8 @@ export default {
       }
     },
   },
-   created() {
+  created() {
     this.fetchCategories();
-  }
+  },
 };
 </script>

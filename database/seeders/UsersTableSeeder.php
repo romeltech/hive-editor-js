@@ -17,8 +17,8 @@ class UsersTableSeeder extends Seeder
             'username' => 'admin',
             'email'      => 'admin@admin.com',
             'password'   => bcrypt('gag@112211'),
-            'role'      => 'gaadmin',
-            'status'     => 'active', // active, draft, trashed 
+            'role'      => 'superadmin',
+            'status'     => 'active', // active, draft, trashed
         ]);
         $user->save();
 
@@ -26,9 +26,26 @@ class UsersTableSeeder extends Seeder
             'user_id' => '1',
             'fullname'      => 'Steve Ayala',
             'position'   => 'Sr. Fullstack Developer',
-            'slug'      => 'moikzz214', 
+            'slug'      => 'moikzz214',
         ]);
         $profile->save();
-         
+
+
+        $user = new \App\Models\User([
+            'username' => 'romel',
+            'email' => 'romel.i@gagroup.net',
+            'password' => bcrypt('gag@112211'),
+            'role' => 'superadmin',
+            'status' => 'active', // active, draft, trashed
+        ]);
+        $user->save();
+        $profile = new \App\Models\Profile([
+            'user_id' => '2',
+            'fullname' => 'Romel Indemne',
+            'position' => 'President',
+            'slug' => 'mel',
+        ]);
+        $profile->save();
+
     }
 }
