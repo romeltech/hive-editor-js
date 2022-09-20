@@ -32,7 +32,8 @@ import Paragraph from "editorjs-paragraph-with-alignment";
 import Marker from "@editorjs/marker";
 // import AlignmentTuneTool from "editorjs-text-alignment-blocktune";
 import Quote from "@editorjs/quote";
-import NestedList from "@editorjs/nested-list";
+import List from "@editorjs/list";
+// import NestedList from "@editorjs/nested-list";
 import Table from "@editorjs/table";
 import RawTool from "@editorjs/raw";
 import CodeTool from "@editorjs/code";
@@ -156,8 +157,15 @@ export default {
             },
           },
           list: {
-            class: NestedList,
+            class: List,
+            inlineToolbar: true,
+            config: {
+              defaultStyle: "unordered",
+            },
           },
+          //   list: {
+          //     class: NestedList,
+          //   },
           image: SimpleImage,
           //   video: {
           //     class: VideoTool,
