@@ -30,18 +30,17 @@ import Header from "editorjs-header-with-alignment";
 import Underline from "@editorjs/underline";
 import Paragraph from "editorjs-paragraph-with-alignment";
 import Marker from "@editorjs/marker";
-import AlignmentTuneTool from "editorjs-text-alignment-blocktune";
+// import AlignmentTuneTool from "editorjs-text-alignment-blocktune";
 import Quote from "@editorjs/quote";
 import NestedList from "@editorjs/nested-list";
 import Table from "@editorjs/table";
 import RawTool from "@editorjs/raw";
 import CodeTool from "@editorjs/code";
 import Alert from "editorjs-alert";
-import ToggleBlock from "editorjs-toggle-block";
 import Embed from "@editorjs/embed";
 import ChangeCase from "editorjs-change-case";
 import SimpleImage from "@editorjs/simple-image";
-import ImageTool from "@editorjs/image";
+// import ImageTool from "@editorjs/image";
 // import VideoTool from "@weekwood/editorjs-video";
 // import AttachesTool from "@editorjs/attaches";
 
@@ -72,8 +71,10 @@ export default {
   watch: {
     propContent: {
       handler(val, oldVal) {
-        this.value = JSON.parse(val);
-        editor.blocks.render(this.value);
+        if (val) {
+          this.value = JSON.parse(val);
+          editor.blocks.render(this.value);
+        }
       },
       deep: true,
     },
@@ -86,7 +87,6 @@ export default {
       let pathToInsert = this.$baseUrl + "/file/" + this.selectedImage.path; // "https://aboudcrm.com/autohub/wp-content/uploads/2022/08/MicrosoftTeams-image-90.jpg";
 
       let lastIndex = editor.blocks.getBlocksCount();
-      console.log("lastIndex", lastIndex);
       // for image
       editor.blocks.insert(
         "image",
@@ -118,7 +118,6 @@ export default {
       editor.save().then((savedData) => {
         this.value = savedData;
         // emit value
-        // console.log("this.value", this.value);
         this.$emit("changed", JSON.stringify(this.value));
       });
     },
@@ -182,10 +181,6 @@ export default {
               messagePlaceholder: "Enter something",
             },
           },
-          toggle: {
-            class: ToggleBlock,
-            inlineToolbar: true,
-          },
           embed: {
             class: Embed,
             inlineToolbar: true,
@@ -203,10 +198,6 @@ export default {
         onReady: function () {
           //   console.log("ready");
         },
-        // onChange: function () {
-        //   console.log("change");
-        //   this.save();
-        // },
         onChange: this.save,
       });
     },
