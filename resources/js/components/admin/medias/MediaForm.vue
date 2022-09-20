@@ -102,7 +102,7 @@
                               </ValidationProvider>
                             </v-col>
                             <v-col md="12">
-                              <ContentEditor />
+                              <ContentEditor :prop-content="formObj.content" @changed="changeResponse" />
                               <!-- <ckeditor
                                 :editor="editor"
                                 v-model="editorData"
@@ -320,7 +320,7 @@
   </div>
 </template>
 <script>
-import ContentEditor from "../ui/editor/ContentEditor";
+import ContentEditor from "../ui/content/editor/ContentEditor";
 
 //import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed';
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -459,6 +459,7 @@ export default {
       choiceTextBox: false,
 
       selectedImage: {},
+      editorContent: "",
     };
   },
   watch: {
@@ -493,6 +494,10 @@ export default {
     },
   },
   methods: {
+    changeResponse(v) {
+      console.log("changeResponse", v);
+      this.editorContent = v;
+    },
     imageResponse: function (v) {
       this.selectedImage = v;
     },
@@ -552,7 +557,8 @@ export default {
         ? this.selectedImage.id
         : null;
 
-      this.formObj.content = this.editorData;
+      //   this.formObj.content = this.editorData;
+      this.formObj.content = this.editorContent;
       this.formObj.type = this.typePost;
       // Set status value
       this.formObj.status = this.statusSwitch == true ? "active" : "draft";
