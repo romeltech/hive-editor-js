@@ -1,5 +1,6 @@
 import store from "../store";
 import Home from "../components/admin/Home";
+import Feed from "../components/front/Feed";
 import ForbiddenPage from "../components/admin/ForbiddenPage";
 import NotFoundPage from "../components/admin/NotFoundPage";
 import Users from "../components/admin/users/Users";
@@ -70,17 +71,6 @@ export const routes = [
         path: "/notfound",
         component: NotFoundPage,
         name: "NotFoundPage",
-    },
-
-    {
-        path: "/d/home",
-        component: Home,
-        name: "home",
-        beforeEnter: (to, from, next) => {
-            auth.userObject.status == "active"
-                ? next()
-                : next({ name: "ForbiddenPage" });
-        },
     },
 
     /**
@@ -338,11 +328,31 @@ export const routes = [
      * Employee's Routes
      */
     {
-        path: "/d/articles/:id",
+        path: "/d/home",
+        component: Home,
+        name: "home",
+        beforeEnter: (to, from, next) => {
+            auth.userObject.status == "active"
+                ? next()
+                : next({ name: "ForbiddenPage" });
+        },
+    },
+    {
+        path: "/d/feed",
+        component: Feed,
+        name: "Feed",
+        beforeEnter: (to, from, next) => {
+            auth.userObject.status == "active"
+                ? next()
+                : next({ name: "ForbiddenPage" });
+        },
+    },
+    {
+        path: "/d/feed/articles/:id",
         component: SingleArticle,
         name: "SingleArticle",
         beforeEnter: (to, from, next) => {
-            employee.includes(auth.userObject.role) == true
+            auth.userObject.role !== ""
                 ? next()
                 : next({ name: "ForbiddenPage" });
         },

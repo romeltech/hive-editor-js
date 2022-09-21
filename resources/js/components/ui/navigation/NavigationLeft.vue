@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div>
     <v-list dense rounded class="nav-left">
       <!-- Navigation Items -->
 
@@ -26,10 +26,14 @@
           <!-- Notification Info here -->
         </v-list-item>
       </div>
-       <v-divider class="my-2"></v-divider>
-      <a href="https://gagconnect.gagroup.net/" target="_blank"> <v-img  max-width="250" src="/images/gag-connect-hive2.jpg"></v-img></a>
-       <v-divider class="my-2"></v-divider>
-      <a class="speak-up" href="https://speakup.gagroup.net/" target="_blank"> <v-img  max-width="250" src="/images/speakup.png"></v-img></a>
+      <v-divider class="my-2"></v-divider>
+      <a href="https://gagconnect.gagroup.net/" target="_blank">
+        <v-img max-width="250" src="/images/gag-connect-hive2.jpg"></v-img
+      ></a>
+      <v-divider class="my-2"></v-divider>
+      <a class="speak-up" href="https://speakup.gagroup.net/" target="_blank">
+        <v-img max-width="250" src="/images/speakup.png"></v-img
+      ></a>
     </v-list>
   </div>
 </template>
@@ -43,6 +47,11 @@ export default {
           title: "HOME",
           icon: "mdi-home-outline",
           location: "/d/home",
+        },
+        {
+          title: "Feed",
+          icon: "mdi-newspaper-variant-outline",
+          location: "/d/Feed",
         },
         {
           title: "NEWS & ARTICLES",

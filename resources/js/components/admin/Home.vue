@@ -25,17 +25,18 @@
           <v-sheet
             v-for="(item, index) in items"
             :key="item.id"
-            class="mx-auto py-3 px-6 main-content"
+            class="mx-auto pa-5 pb-2 main-content"
             rounded="lg"
           >
-            <div class="d-flex align-center justify-space-between mb-2">
-              <div class="text-subtitle-2">
-                {{ item.title }}
-              </div>
+            <div class="d-flex align-flex-start justify-space-between mb-5">
+              <avatar
+                :user="item.users"
+                :meta="{ status: true, post_date: item.created_at }"
+              ></avatar>
               <div style="width: 110px" class="text-right">
                 <v-chip small>{{ typepost[item.type] }}</v-chip>
               </div>
-              <small
+              <!-- <small
                 v-if="
                   item.events && (item.type == 'event' || item.type == 'poll')
                 "
@@ -53,7 +54,11 @@
                 {{
                   item.events ? formatDateHelper(item.events.date_end) : ""
                 }}</small
-              >
+              > -->
+            </div>
+
+            <div class="text-body-1 mb-2">
+              {{ item.title }}
             </div>
             <div v-if="item.images && item.images[0]" class="feature-image">
               <v-img
@@ -61,9 +66,9 @@
               ></v-img>
             </div>
 
-            <div class="section-content text-caption">
-              <!-- v-html="item.content" -->
-              <!-- <div
+            <!-- v-html="item.content" -->
+            <!-- <div class="section-content text-caption">
+              <div
                 ref="infoBox"
                 :style="`${
                   item.id === fullView
@@ -72,7 +77,7 @@
                 }`"
               >
                 <ContentRender :content-data="item.content" />
-              </div> -->
+              </div>
 
               <div
                 v-if="
@@ -131,40 +136,37 @@
                   <v-icon dark> mdi-hand-okay </v-icon>
                 </v-btn>
               </div>
-            </div>
+            </div> -->
             <div class="view-more-message">
               <v-icon color="blue darken-2" @click="viewMessage(item.id)">{{
                 item.id === fullView ? iconToggle : "mdi-inbox-arrow-down"
               }}</v-icon>
             </div>
-            <v-divider></v-divider>
-            <div class="section-like d-flex">
-              <div>
-                <v-btn small text @click="handleLike(item, index)"
-                  ><v-icon small>{{
-                    item.likes && item.likes.length > 0
-                      ? likeIcon[1]
-                      : likeIcon[0]
-                  }}</v-icon
-                  ><span v-if="item.likes_count > 0" class="font-weight-bold"
-                    >({{ item.likes_count }})</span
-                  ></v-btn
+            <v-divider class="mt-3 pb-2"></v-divider>
+            <div class="d-flex">
+              <v-btn class="mr-1" text small @click="handleLike(item, index)">
+                <v-icon>{{
+                  item.likes && item.likes.length > 0
+                    ? likeIcon[1]
+                    : likeIcon[0]
+                }}</v-icon>
+                <span v-if="item.likes_count > 0"
+                  >({{ item.likes_count }})</span
                 >
-                |
-                <v-btn small text
-                  >comment(<span class="font-weight-bold">{{
-                    item.comments.length
-                  }}</span
-                  >)</v-btn
-                >
-              </div>
-              <v-spacer></v-spacer>
-              <div class="post-datetime">
-                {{ formatDateHelper(item.created_at) }}
-              </div>
+              </v-btn>
+              <v-btn text small
+                >comment <span>({{ item.comments.length }})</span></v-btn
+              >
+              <v-btn
+                text
+                small
+                class="ml-auto"
+                @click="() => openArticle(item.id)"
+                >View Post</v-btn
+              >
             </div>
-            <v-divider></v-divider>
-            <div class="section-comment">
+
+            <!-- <div class="section-comment">
               <v-text-field
                 v-model="message[index]"
                 :append-outer-icon="message[index] ? 'mdi-send' : ''"
@@ -178,10 +180,10 @@
                 @click:append-outer="sendMessage(item, index)"
                 @click:clear="clearMessage(index)"
               ></v-text-field>
-            </div>
+            </div> -->
           </v-sheet>
 
-          <div v-if="items && items.length == 0" class="text-center py-5">
+          <div v-if="items && items.length == 0" class="text-center pt-2 pb-5">
             No result found.
           </div>
           <div v-else-if="dataLoaded" class="text-center py-5">
@@ -246,6 +248,14 @@ export default {
   },
 
   methods: {
+    openArticle(id) {
+      this.$router.push({
+        name: "SingleArticle",
+        params: {
+          id: id,
+        },
+      });
+    },
     handleLike: function (item, index) {
       let nlike = 1;
       if (item.likes && item.likes.length > 0 && item.likes[0].is_like == 0) {
@@ -410,6 +420,7 @@ export default {
         )
         .then((response) => {
           if (response.data && response.data.data.length > 0) {
+            console.log("response.data.data", response.data.data);
             response.data.data.forEach((i) => {
               if (i.content.includes("oembed")) {
                 let newContent = i.content

@@ -34,7 +34,8 @@ Auth::routes([
     'verify' => false, // Email Verification Routes...
 ]);
 Route::get('/', function () { return redirect('/d/home');});
-Route::get('/home', function () { return redirect('/d/home');}); 
+Route::get('/home', function () { return redirect('/d/home');});
+Route::get('/feed', function () { return redirect('/d/feed');});
 
 Route::group(['prefix'=>'d','as'=>'moderator.', 'middleware' => 'auth'], function(){
 
@@ -44,19 +45,19 @@ Route::group(['prefix'=>'d','as'=>'moderator.', 'middleware' => 'auth'], functio
     Route::get('/', [ModeratorController::class, 'moderator']);
     Route::get('/admin/{page}', [ModeratorController::class, 'moderator']);
     Route::get('/admin/{page}/{action}', [ModeratorController::class, 'moderator']);
-    Route::get('/admin/{page}/edit/{id}', [ModeratorController::class, 'moderator']); 
-    
+    Route::get('/admin/{page}/edit/{id}', [ModeratorController::class, 'moderator']);
+
     /**
      * Users
      */
-    
+
     //Route::get('/users/fetch/all', [UserController::class, 'getAllUsers'])->name('users.get.all');
     Route::get('/admin/users/fetch/{perPage}/{search}/{orderBy}', [UserController::class, 'fetch'])->name('users.paginate.fetch');
     Route::get('/admin/user/get/{id}', [UserController::class, 'getSingleUser'])->name('user.get.single');
     Route::post('/admin/user/status/update', [UserController::class, 'updateUserStatus'])->name('user.status.update');
     Route::post('/admin/user/save', [UserController::class, 'saveUserData'])->name('user.save.data');
     Route::post('/admin/user/check/email', [UserController::class, 'checkEmail'])->name('user.check.email');
-    Route::post('/admin/user/changepassword', [UserController::class, 'changePassword'])->name('user.change.password'); 
+    Route::post('/admin/user/changepassword', [UserController::class, 'changePassword'])->name('user.change.password');
 
     /**
      * News & Articles
@@ -66,16 +67,16 @@ Route::group(['prefix'=>'d','as'=>'moderator.', 'middleware' => 'auth'], functio
     Route::get('/admin/posts-frontend/{perPage}/{search}/{orderBy}', [PostController::class, 'fetchFrontend'])->name('posts.front.paginate.fetch');
     Route::post('/admin/media/save', [PostController::class, 'saveData'])->name('save.post.data');
     Route::get('/admin/media/get/{id}', [PostController::class, 'edit'])->name('show.single.post');
-    Route::post('/admin/post-editor/upload', [PostController::class, 'upload'])->name('upload.files'); 
-    Route::get('/admin/media/delete/{id}', [PostController::class, 'destroy'])->name('delete.post'); 
-    
-    // Media Images 
+    Route::post('/admin/post-editor/upload', [PostController::class, 'upload'])->name('upload.files');
+    Route::get('/admin/media/delete/{id}', [PostController::class, 'destroy'])->name('delete.post');
+
+    // Media Images
     Route::get('/admin/fetch/all/images', [ImageController::class, 'getMediaFiles'])->name('images.fetch.all');
     Route::get('/admin/fetch/by-user/images/{id}', [ImageController::class, 'getMediaFilesByUser'])->name('images.fetch.by-user');
-    Route::post('/admin/file/upload',  [ImageController::class, 'dropzoneUpload'])->name('dropzone.upload')->middleware('auth'); 
+    Route::post('/admin/file/upload',  [ImageController::class, 'dropzoneUpload'])->name('dropzone.upload')->middleware('auth');
 
     // Comments
-    Route::post('/admin/comment/update-status',  [CommentController::class, 'update'])->name('comment.update.status')->middleware('auth'); 
+    Route::post('/admin/comment/update-status',  [CommentController::class, 'update'])->name('comment.update.status')->middleware('auth');
 
     /**
      * Companies & Departments
@@ -101,19 +102,19 @@ Route::group(['prefix'=>'d','as'=>'home.', 'middleware' => 'auth'], function(){
     Route::get('/', [HomeController::class, 'home']);
     Route::get('/{page}', [HomeController::class, 'home']);
     Route::get('/{page}/{action}', [HomeController::class, 'home']);
-    Route::get('/{page}/edit/{id}', [HomeController::class, 'home']); 
-     
+    Route::get('/{page}/edit/{id}', [HomeController::class, 'home']);
+
      /**
      * Home Poll Answer
      */
-    Route::post('/home/poll-answer/form', [PostController::class, 'submitPollAnswer'])->name('home.poll.answer'); 
-    Route::post('/home/post-comment/form', [CommentController::class, 'submitComment'])->name('home.post.comments'); 
+    Route::post('/home/poll-answer/form', [PostController::class, 'submitPollAnswer'])->name('home.poll.answer');
+    Route::post('/home/post-comment/form', [CommentController::class, 'submitComment'])->name('home.post.comments');
 
     /**
      * Home Like
      */
     Route::post('/home/post-like/form',[LikeController::class, 'postLike'])->name('home.post.like');
 
-}); 
+});
 
 Route::get('/file/{path}',  [ImageController::class, 'showFile'])->name('file.show')->middleware('auth');
