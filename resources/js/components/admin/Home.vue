@@ -25,17 +25,16 @@
           <v-sheet
             v-for="(item, index) in items"
             :key="item.id"
-            class="mx-auto pt-2 px-10 pb-2 main-content"
+            class="mx-auto py-3 px-6 main-content"
             rounded="lg"
           >
-            <div v-if="item.images && item.images[0]" class="feature-image">
-              <img :src="`${$baseUrl + '/file/' + item.images[0].path}`" />
-            </div>
-            <div class="content-title text-h6">
-              {{ item.title }}
-              <small>
-                <v-chip x-small>{{ typepost[item.type] }}</v-chip>
-              </small>
+            <div class="d-flex align-center justify-space-between mb-2">
+              <div class="text-subtitle-2">
+                {{ item.title }}
+              </div>
+              <div style="width: 110px" class="text-right">
+                <v-chip small>{{ typepost[item.type] }}</v-chip>
+              </div>
               <small
                 v-if="
                   item.events && (item.type == 'event' || item.type == 'poll')
@@ -56,19 +55,25 @@
                 }}</small
               >
             </div>
+            <div v-if="item.images && item.images[0]" class="feature-image">
+              <v-img
+                :src="`${$baseUrl + '/file/' + item.images[0].path}`"
+              ></v-img>
+            </div>
 
             <div class="section-content text-caption">
-              <div
+              <!-- v-html="item.content" -->
+              <!-- <div
                 ref="infoBox"
                 :style="`${
                   item.id === fullView
                     ? 'max-height:' + maxHeight + '; overflow:' + overflow
                     : 'max-height:300px;overflow:hidden'
                 }`"
-                class="pa-4"
-                v-html="item.content"
-              ></div> 
-              
+              >
+                <ContentRender :content-data="item.content" />
+              </div> -->
+
               <div
                 v-if="
                   item.type == 'poll' &&
@@ -135,8 +140,15 @@
             <v-divider></v-divider>
             <div class="section-like d-flex">
               <div>
-                <v-btn small text @click="handleLike(item,index)"
-                  ><v-icon small>{{ item.likes && item.likes.length > 0 ? likeIcon[1]: likeIcon[0]}}</v-icon><span v-if="item.likes_count > 0" class="font-weight-bold">({{item.likes_count}})</span></v-btn
+                <v-btn small text @click="handleLike(item, index)"
+                  ><v-icon small>{{
+                    item.likes && item.likes.length > 0
+                      ? likeIcon[1]
+                      : likeIcon[0]
+                  }}</v-icon
+                  ><span v-if="item.likes_count > 0" class="font-weight-bold"
+                    >({{ item.likes_count }})</span
+                  ></v-btn
                 >
                 |
                 <v-btn small text
@@ -190,16 +202,18 @@
 </template>
 
 <script>
-import NavigationLeft from "./ui/navigation/NavigationLeft";
-import NavigationRight from "./ui/navigation/NavigationRight";
+import ContentRender from "../ui/content/render/ContentRender.vue";
+import NavigationLeft from "../ui/navigation/NavigationLeft";
+import NavigationRight from "../ui/navigation/NavigationRight";
 export default {
   components: {
     NavigationLeft,
     NavigationRight,
+    ContentRender,
   },
   data() {
-    return { 
-      likeIcon: ['mdi-thumb-up-outline', 'mdi-thumb-up'],
+    return {
+      likeIcon: ["mdi-thumb-up-outline", "mdi-thumb-up"],
       sbOptions: {},
       message: [],
       pageLoading: true,
@@ -219,7 +233,12 @@ export default {
       hasValue: [],
       pollAnswerObj: [],
       refreshOnly: [],
-      typepost: { post: "News & Article", event: "Event", poll: "Polls", training: "Training" },
+      typepost: {
+        post: "News & Article",
+        event: "Event",
+        poll: "Polls",
+        training: "Training",
+      },
       currentData: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
         .toISOString()
         .substr(0, 10),
@@ -227,15 +246,19 @@ export default {
   },
 
   methods: {
-    handleLike: function(item, index){
+    handleLike: function (item, index) {
       let nlike = 1;
-      if(item.likes && item.likes.length > 0 && item.likes[0].is_like == 0){
+      if (item.likes && item.likes.length > 0 && item.likes[0].is_like == 0) {
         nlike = 1;
-      }else if(item.likes && item.likes.length > 0 && item.likes[0].is_like == 1){
+      } else if (
+        item.likes &&
+        item.likes.length > 0 &&
+        item.likes[0].is_like == 1
+      ) {
         nlike = 0;
       }
-      let ndata = { 'post_id': item.id, is_like: nlike}
-      axios.post("/d/home/post-like/form", ndata).then((response) => { 
+      let ndata = { post_id: item.id, is_like: nlike };
+      axios.post("/d/home/post-like/form", ndata).then((response) => {
         this.refreshOnly = item;
         setTimeout(() => {
           this.page = item.curPage;
@@ -371,11 +394,11 @@ export default {
 
       this.fullView = item;
     },
- 
+
     async getAllData() {
       let orderby = ["updated_at", "desc"];
       let sort = orderby.toString();
-       
+
       await axios
         .get(
           "/d/admin/posts-frontend/" +
@@ -386,17 +409,21 @@ export default {
             this.page
         )
         .then((response) => {
-         
-          if (response.data && response.data.data.length > 0) { 
+          if (response.data && response.data.data.length > 0) {
             response.data.data.forEach((i) => {
-               
-                if(i.content.includes("oembed")){ 
-                  let newContent = i.content.replace(/<figure[^>]*>/g,'<div class="media">').replace(/<\/figure>/g,'</div>')
-                  .replace(/<oembed/,'<iframe width="560" height="300" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen').replace(/url/g,'src')
-                  .replace(/<\/oembed>/g,'</iframe>'); 
-                  i.content = newContent;
-                } 
-            
+              if (i.content.includes("oembed")) {
+                let newContent = i.content
+                  .replace(/<figure[^>]*>/g, '<div class="media">')
+                  .replace(/<\/figure>/g, "</div>")
+                  .replace(
+                    /<oembed/,
+                    '<iframe width="560" height="300" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen'
+                  )
+                  .replace(/url/g, "src")
+                  .replace(/<\/oembed>/g, "</iframe>");
+                i.content = newContent;
+              }
+
               var exists = this.items.some(function (field) {
                 return field.id === i.id;
               });
@@ -406,7 +433,6 @@ export default {
               }
 
               this.items.map((o, ii) => {
-               
                 if (!o.curPage) {
                   o.curPage = response.data.current_page;
                 }
@@ -422,7 +448,7 @@ export default {
 
           this.loading = false;
         });
-    }, 
+    },
 
     loadMoreImage: function () {
       this.page++;
@@ -431,7 +457,6 @@ export default {
   },
 
   mounted() {
-   
     this.getAllData().then(() => {
       this.pageLoading = false;
       this.onScroll();

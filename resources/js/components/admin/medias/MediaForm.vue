@@ -320,11 +320,11 @@
   </div>
 </template>
 <script>
-import ContentEditor from "../ui/content/editor/ContentEditor";
+import ContentEditor from "../../ui/content/editor/ContentEditor";
 
 //import HtmlEmbed from '@ckeditor/ckeditor5-html-embed/src/htmlembed';
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import UploadImage from "../studio/UploadImage";
+import UploadImage from "../../studio/UploadImage";
 import {
   ValidationObserver,
   ValidationProvider,

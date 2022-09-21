@@ -4,16 +4,15 @@
       <v-toolbar-title class="overline">{{ pagetitle }} User</v-toolbar-title>
     </v-app-bar>
     <v-container class="py-8">
-       <ValidationObserver ref="user_form_observer" v-slot="{ valid }">
-            <v-form ref="form">
-      <v-row>
-        <div class="col-12 col-md-9">
-         
+      <ValidationObserver ref="user_form_observer" v-slot="{ valid }">
+        <v-form ref="form">
+          <v-row>
+            <div class="col-12 col-md-9">
               <v-card :loading="loading">
                 <v-card-title>
                   <h4>{{ cardTitle }}</h4>
                 </v-card-title>
-                <v-card-text> 
+                <v-card-text>
                   <ValidationProvider
                     v-slot="{ errors }"
                     rules="required"
@@ -190,61 +189,66 @@
                     </v-autocomplete>
                   </ValidationProvider>
                   <v-row v-if="isAdmin || isModerator">
-                  <v-col cols="2" sm="12" md="2"  v-for="item in accessSlug" :key="item">
-                    <v-checkbox
-                      v-model="accessPage"
-                      :label="item" 
-                      :value="item"
-                      hide-details
-                    ></v-checkbox>
-                  </v-col>
-                  </v-row> 
+                    <v-col
+                      cols="2"
+                      sm="12"
+                      md="2"
+                      v-for="item in accessSlug"
+                      :key="item"
+                    >
+                      <v-checkbox
+                        v-model="accessPage"
+                        :label="item"
+                        :value="item"
+                        hide-details
+                      ></v-checkbox>
+                    </v-col>
+                  </v-row>
                 </v-card-text>
               </v-card>
-           
-        </div>
-        <div class="col-12 col-md-3">
-             <v-card :loading="loading">
-                        <v-card-text>
-                           <v-switch
+            </div>
+            <div class="col-12 col-md-3">
+              <v-card :loading="loading">
+                <v-card-text>
+                  <v-switch
                     style="max-width: 120px"
                     v-model="statusSwitch"
                     :color="`${statusSwitch == true ? 'success' : 'grey'}`"
                     :label="`${statusSwitch == true ? 'Active' : 'Disabled'}`"
                   ></v-switch>
-                          <div class="d-flex">
-                             <v-btn
-                              class="primary"
-                              :disabled="!valid"
-                              small
-                              @click="submit"
-                              >Save</v-btn
-                            >
-                            <v-spacer></v-spacer>
-                           
-                            <v-btn
-                              v-if="pagetitle == 'edit' && auth.role == 'superadmin'"
-                              text
-                              color="error"
-                              small
-                              @click="deleteUser()"
-                              >delete</v-btn
-                            >
-                          </div>
-                        </v-card-text>
-                      </v-card>
-                      <v-divider></v-divider>
-          <UploadImage
-            :selectedImage="selectedImage"
-            @selected="imageResponse"
-          />
-          <div class="mt-2" v-if="pagetitle === 'edit'">
-            <ChangePassword :user="userdata" />
-          </div>
-        </div> 
-      </v-row>
-       </v-form>
-          </ValidationObserver>
+                  <div class="d-flex">
+                    <v-btn
+                      class="primary"
+                      :disabled="!valid"
+                      small
+                      @click="submit"
+                      >Save</v-btn
+                    >
+                    <v-spacer></v-spacer>
+
+                    <v-btn
+                      v-if="pagetitle == 'edit' && auth.role == 'superadmin'"
+                      text
+                      color="error"
+                      small
+                      @click="deleteUser()"
+                      >delete</v-btn
+                    >
+                  </div>
+                </v-card-text>
+              </v-card>
+              <v-divider></v-divider>
+              <UploadImage
+                :selectedImage="selectedImage"
+                @selected="imageResponse"
+              />
+              <div class="mt-2" v-if="pagetitle === 'edit'">
+                <ChangePassword :user="userdata" />
+              </div>
+            </div>
+          </v-row>
+        </v-form>
+      </ValidationObserver>
     </v-container>
     <!-- actions and dialogs -->
     <snack-bar :snackbar-options="sbOptions"></snack-bar>
@@ -260,7 +264,7 @@ import {
   ValidationProvider,
 } from "vee-validate/dist/vee-validate.full";
 import ChangePassword from "./ChangePassword.vue";
-import UploadImage from "../studio/UploadImage";
+import UploadImage from "../../studio/UploadImage";
 export default {
   components: {
     ValidationProvider,
@@ -346,12 +350,12 @@ export default {
             this.usersObj.company = this.usersObj.profile.company_id;
             this.usersObj.department = this.usersObj.profile.department_id;
           }
-          if(this.usersObj.access){
+          if (this.usersObj.access) {
             let getCurrentAccess = [];
-            
-            this.usersObj.access.map((o,i)=>{
+
+            this.usersObj.access.map((o, i) => {
               getCurrentAccess[i] = o.slug;
-            })
+            });
             this.accessPage = getCurrentAccess;
           }
         }
@@ -408,7 +412,6 @@ export default {
       }
     },
     submit() {
-      
       this.sbOptions = {
         status: true,
         type: "info",
@@ -450,7 +453,7 @@ export default {
         },
         id: this.usersObj ? this.usersObj.id : null,
         image: images,
-        access: this.accessPage
+        access: this.accessPage,
       };
 
       // Check the email if exists

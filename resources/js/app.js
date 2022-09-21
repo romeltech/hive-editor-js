@@ -8,7 +8,7 @@ require("./bootstrap");
 
 // window.Vue = require('vue').default;
 import Vue from "vue";
-import CKEditor from '@ckeditor/ckeditor5-vue2';    
+import CKEditor from '@ckeditor/ckeditor5-vue2';
 import VueRouter from "vue-router";
 import store from "./store";
 import { routes } from "./plugins/routes";
@@ -33,7 +33,7 @@ const helpers_plugin = {
         };
 
         Vue.prototype.dateTimeFormatter = date => {
-            return new Date(date).toLocaleString("en-US", { 
+            return new Date(date).toLocaleString("en-US", {
                 minute: 'numeric',
                 hour: 'numeric',
                 day: "2-digit",
@@ -53,16 +53,16 @@ const helpers_plugin = {
 
             var d = new Date(date);
             d.setDate(d.getDate()-30);
-            let vdate = d.toLocaleString(); 
-            vdate = new Date(vdate).getTime(); 
-             
+            let vdate = d.toLocaleString();
+            vdate = new Date(vdate).getTime();
+
             if(ndate > vd && vdate < ndate && vd > vdate){
                 return 'orange accent-3';
             }else if(ndate <= vd){
                 return 'red accent-4 white--text';
             }
 
-            return null; 
+            return null;
         }
         // Base URL
         Vue.prototype.$baseUrl = window.location.origin;
@@ -86,15 +86,15 @@ Vue.use(helpers_plugin);
  */
 Vue.component(
     "navigation-main",
-    require("./components/admin/ui/navigation/NavigationMain.vue").default
+    require("./components/ui/navigation/NavigationMain.vue").default
 );
 Vue.component(
     "navigation-admin",
-    require("./components/admin/ui/admin/Navigation.vue").default
+    require("./components/ui/admin/Navigation.vue").default
 );
-Vue.component("snack-bar", require("./components/common/SnackBar.vue").default);
-Vue.component("dialog-loader", require("./components/common/DialogLoader.vue").default);
-Vue.component("confirmation-dialog", require("./components/common/ConfirmationDialog.vue").default);
+Vue.component("snack-bar", require("./components/ui/SnackBar.vue").default);
+Vue.component("dialog-loader", require("./components/ui/DialogLoader.vue").default);
+Vue.component("confirmation-dialog", require("./components/ui/ConfirmationDialog.vue").default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -102,7 +102,7 @@ Vue.component("confirmation-dialog", require("./components/common/ConfirmationDi
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 store.dispatch("fetchAuthUser").then(() => {
-    
+
     const app = new Vue({
         vuetify,
         store,
@@ -114,11 +114,11 @@ store.dispatch("fetchAuthUser").then(() => {
                 loginValid: true,
                 loginEmail: "",
                 loginEmailrules: [
-                    value => !!value || "Required"                   
+                    value => !!value || "Required"
                 ],
                 loginPassword: "",
                 loginPasswordrules: [
-                    value => !!value || "Required" 
+                    value => !!value || "Required"
                 ]
             };
         },
