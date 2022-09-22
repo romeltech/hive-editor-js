@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card v-if="loadingComponent == true">
+    <v-card v-if="loadingComponent == true" class="elevation-0">
       <v-skeleton-loader
         v-for="n in 5"
         :key="n"
@@ -9,10 +9,10 @@
         type="list-item-three-line"
       ></v-skeleton-loader>
     </v-card>
-    <v-list v-else dense rounded class="nav-left">
+    <v-list v-else dense nav class="nav-left rounded-lg px-5 py-5">
       <!-- Navigation Items -->
       <div v-for="item in commonNav" :key="item.title">
-        <v-list-item :to="item.location" class="pl-10" active-class="secondary">
+        <v-list-item :to="item.location" class="mb-1" active-class="secondary">
           <v-list-item-action class="mr-3">
             <v-icon small color="dark">{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -24,7 +24,7 @@
       </div>
       <v-divider class="my-2"></v-divider>
       <div v-for="item in secondaryNav" :key="item.title">
-        <v-list-item :to="item.location" class="pl-10" active-class="secondary">
+        <v-list-item :to="item.location" class="mb-1" active-class="secondary">
           <v-list-item-action class="mr-3">
             <v-icon small color="dark">{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -60,7 +60,7 @@ export default {
         {
           title: "Feed",
           icon: "mdi-newspaper-variant-outline",
-          location: "/d/feed",
+          location: "/e/feed",
         },
         {
           title: "NEWS & ARTICLES",

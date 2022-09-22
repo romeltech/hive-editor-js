@@ -46,6 +46,8 @@ Route::group(['prefix' => 'e', 'as' => 'employee.', 'middleware' => 'auth'], fun
      */
     Route::get('/feed', [DashboardController::class, 'employee'])->name('feed');
     Route::get('/feed/article/{id}', [DashboardController::class, 'employee'])->name('article.single');
+    Route::get('/fetch/article/single/{id}', [PostController::class, 'getSingleArticle'])->name('article.single');
+
 });
 
 

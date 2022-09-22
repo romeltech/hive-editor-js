@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card v-if="loadingComponent == true">
+    <v-card v-if="loadingComponent == true" class="elevation-0">
       <v-skeleton-loader
         v-for="n in 5"
         :key="n"
@@ -9,7 +9,7 @@
         type="list-item-three-line"
       ></v-skeleton-loader>
     </v-card>
-    <v-list v-else dense rounded>
+    <v-list v-else dense rounded class="rounded-lg">
       <h3 class="text-center">Congratulations!</h3>
       <v-divider class="my-2"></v-divider>
       <h5 class="text-center">Employee of the Year!</h5>

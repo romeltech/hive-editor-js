@@ -2,13 +2,9 @@
   <v-main class="grey lighten-3 mt-5 px-3">
     <v-container style="width: 100%; max-width: 1366px" class="mx-auto">
       <v-row>
-        <v-col cols="12" sm="12" md="3">
-          <!-- fixed-position -->
-          <v-sheet rounded="lg" min-height="268" class="">
-            <navigation-left></navigation-left>
-          </v-sheet>
+        <v-col cols="12" md="3" sm="12">
+          <navigation-left></navigation-left>
         </v-col>
-
         <v-col cols="12" md="6" sm="12">
           <div v-if="pageLoading == true">
             <v-card
@@ -34,7 +30,7 @@
             <v-sheet
               v-for="(item, index) in items"
               :key="item.id"
-              class="mx-auto pa-5 pb-2 main-content"
+              class="mx-auto pa-5 pb-2 mb-3"
               rounded="lg"
             >
               <div class="d-flex align-flex-start justify-space-between mb-5">
@@ -151,7 +147,10 @@
                   item.id === fullView ? iconToggle : "mdi-inbox-arrow-down"
                 }}</v-icon>
               </div>
-              <v-divider class="mt-3 pb-2"></v-divider>
+              <v-divider
+                class="mt-3 pb-2"
+                style="border-color: #f1f1f1"
+              ></v-divider>
               <div class="d-flex">
                 <v-btn class="mr-1" text small @click="handleLike(item, index)">
                   <v-icon small>{{
@@ -170,7 +169,7 @@
                   text
                   small
                   class="ml-auto"
-                  @click="() => openArticle(item.id)"
+                  @click="() => openArticle(item)"
                   >View Post</v-btn
                 >
               </div>
@@ -203,12 +202,8 @@
             </div>
           </div>
         </v-col>
-
-        <v-col cols="12" sm="12" md="3">
-          <!--  -->
-          <v-sheet rounded="lg" min-height="268" class="">
-            <navigation-right></navigation-right>
-          </v-sheet>
+        <v-col cols="12" md="3" sm="12">
+          <navigation-right></navigation-right>
         </v-col>
       </v-row>
     </v-container>
@@ -261,13 +256,18 @@ export default {
   },
 
   methods: {
-    openArticle(id) {
-      this.$router.push({
-        name: "SingleArticle",
-        params: {
-          id: id,
-        },
-      });
+    openArticle(item) {
+      // commit content
+      this.$store.commit("setSingleArticle", item);
+      // open the article in new route
+      setTimeout(() => {
+        this.$router.push({
+          name: "SingleArticle",
+          params: {
+            id: item.id,
+          },
+        });
+      }, 300);
     },
     handleLike: function (item, index) {
       let nlike = 1;
