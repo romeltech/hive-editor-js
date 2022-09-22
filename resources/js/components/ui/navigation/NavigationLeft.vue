@@ -1,8 +1,16 @@
 <template>
   <div>
-    <v-list dense rounded class="nav-left">
+    <v-card v-if="loadingComponent == true">
+      <v-skeleton-loader
+        v-for="n in 5"
+        :key="n"
+        class="mx-auto"
+        max-width="100%"
+        type="list-item-three-line"
+      ></v-skeleton-loader>
+    </v-card>
+    <v-list v-else dense rounded class="nav-left">
       <!-- Navigation Items -->
-
       <div v-for="item in commonNav" :key="item.title">
         <v-list-item :to="item.location" class="pl-10" active-class="secondary">
           <v-list-item-action class="mr-3">
@@ -42,6 +50,7 @@
 export default {
   data() {
     return {
+      loadingComponent: true,
       commonNav: [
         {
           title: "HOME",
@@ -51,7 +60,7 @@ export default {
         {
           title: "Feed",
           icon: "mdi-newspaper-variant-outline",
-          location: "/d/Feed",
+          location: "/d/feed",
         },
         {
           title: "NEWS & ARTICLES",
@@ -103,6 +112,10 @@ export default {
       ],
     };
   },
-  methods: {},
+  created() {
+    setTimeout(() => {
+      this.loadingComponent = false;
+    }, 300);
+  },
 };
 </script>

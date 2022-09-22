@@ -1,18 +1,6 @@
 <template>
   <v-main class="grey lighten-3 mt-5 px-3">
-    <v-container class="py-8" v-if="pageLoading == true">
-      <v-row>
-        <v-col cols="12">
-          <v-skeleton-loader
-            class="mx-auto"
-            max-width="100%"
-            type="list-item-avatar-three-line, image, article"
-          ></v-skeleton-loader>
-        </v-col>
-      </v-row>
-    </v-container>
-
-    <v-container v-else style="width: 100%; max-width: 1366px" class="mx-auto">
+    <v-container style="width: 100%; max-width: 1366px" class="mx-auto">
       <v-row>
         <v-col cols="12" sm="12" md="3">
           <!-- fixed-position -->
@@ -22,21 +10,42 @@
         </v-col>
 
         <v-col cols="12" md="6" sm="12">
-          <v-sheet
-            v-for="(item, index) in items"
-            :key="item.id"
-            class="mx-auto pa-5 pb-2 main-content"
-            rounded="lg"
-          >
-            <div class="d-flex align-flex-start justify-space-between mb-5">
-              <avatar
-                :user="item.users"
-                :meta="{ status: true, post_date: item.created_at }"
-              ></avatar>
-              <div style="width: 110px" class="text-right">
-                <v-chip small>{{ typepost[item.type] }}</v-chip>
+          <div v-if="pageLoading == true">
+            <v-card
+              v-for="n in 5"
+              :key="n"
+              class="rounded-lg elevation-0 pb-5 mb-2"
+            >
+              <v-skeleton-loader
+                class="mx-auto"
+                max-width="100%"
+                type="list-item-avatar-three-line"
+              ></v-skeleton-loader>
+              <div class="px-5">
+                <v-skeleton-loader
+                  class="mx-auto"
+                  max-width="100%"
+                  type="image"
+                ></v-skeleton-loader>
               </div>
-              <!-- <small
+            </v-card>
+          </div>
+          <div v-else>
+            <v-sheet
+              v-for="(item, index) in items"
+              :key="item.id"
+              class="mx-auto pa-5 pb-2 main-content"
+              rounded="lg"
+            >
+              <div class="d-flex align-flex-start justify-space-between mb-5">
+                <avatar
+                  :user="item.users"
+                  :meta="{ status: true, post_date: item.created_at }"
+                ></avatar>
+                <div style="width: 110px" class="text-right">
+                  <v-chip small>{{ typepost[item.type] }}</v-chip>
+                </div>
+                <!-- <small
                 v-if="
                   item.events && (item.type == 'event' || item.type == 'poll')
                 "
@@ -55,19 +64,19 @@
                   item.events ? formatDateHelper(item.events.date_end) : ""
                 }}</small
               > -->
-            </div>
+              </div>
 
-            <div class="text-body-1 mb-2">
-              {{ item.title }}
-            </div>
-            <div v-if="item.images && item.images[0]" class="feature-image">
-              <v-img
-                :src="`${$baseUrl + '/file/' + item.images[0].path}`"
-              ></v-img>
-            </div>
+              <div class="text-body-1 mb-2">
+                {{ item.title }}
+              </div>
+              <div v-if="item.images && item.images[0]" class="feature-image">
+                <v-img
+                  :src="`${$baseUrl + '/file/' + item.images[0].path}`"
+                ></v-img>
+              </div>
 
-            <!-- v-html="item.content" -->
-            <!-- <div class="section-content text-caption">
+              <!-- v-html="item.content" -->
+              <!-- <div class="section-content text-caption">
               <div
                 ref="infoBox"
                 :style="`${
@@ -137,36 +146,36 @@
                 </v-btn>
               </div>
             </div> -->
-            <div class="view-more-message">
-              <v-icon color="blue darken-2" @click="viewMessage(item.id)">{{
-                item.id === fullView ? iconToggle : "mdi-inbox-arrow-down"
-              }}</v-icon>
-            </div>
-            <v-divider class="mt-3 pb-2"></v-divider>
-            <div class="d-flex">
-              <v-btn class="mr-1" text small @click="handleLike(item, index)">
-                <v-icon small>{{
-                  item.likes && item.likes.length > 0
-                    ? likeIcon[1]
-                    : likeIcon[0]
+              <div class="view-more-message">
+                <v-icon color="blue darken-2" @click="viewMessage(item.id)">{{
+                  item.id === fullView ? iconToggle : "mdi-inbox-arrow-down"
                 }}</v-icon>
-                <span v-if="item.likes_count > 0"
-                  >({{ item.likes_count }})</span
+              </div>
+              <v-divider class="mt-3 pb-2"></v-divider>
+              <div class="d-flex">
+                <v-btn class="mr-1" text small @click="handleLike(item, index)">
+                  <v-icon small>{{
+                    item.likes && item.likes.length > 0
+                      ? likeIcon[1]
+                      : likeIcon[0]
+                  }}</v-icon>
+                  <span v-if="item.likes_count > 0"
+                    >({{ item.likes_count }})</span
+                  >
+                </v-btn>
+                <v-btn text small
+                  >comment <span>({{ item.comments.length }})</span></v-btn
                 >
-              </v-btn>
-              <v-btn text small
-                >comment <span>({{ item.comments.length }})</span></v-btn
-              >
-              <v-btn
-                text
-                small
-                class="ml-auto"
-                @click="() => openArticle(item.id)"
-                >View Post</v-btn
-              >
-            </div>
+                <v-btn
+                  text
+                  small
+                  class="ml-auto"
+                  @click="() => openArticle(item.id)"
+                  >View Post</v-btn
+                >
+              </div>
 
-            <!-- <div class="section-comment">
+              <!-- <div class="section-comment">
               <v-text-field
                 v-model="message[index]"
                 :append-outer-icon="message[index] ? 'mdi-send' : ''"
@@ -181,13 +190,17 @@
                 @click:clear="clearMessage(index)"
               ></v-text-field>
             </div> -->
-          </v-sheet>
+            </v-sheet>
 
-          <div v-if="items && items.length == 0" class="text-center pt-2 pb-5">
-            No result found.
-          </div>
-          <div v-else-if="dataLoaded" class="text-center py-5">
-            All posts has been loaded.
+            <div
+              v-if="items && items.length == 0"
+              class="text-center pt-2 pb-5"
+            >
+              No result found.
+            </div>
+            <div v-else-if="dataLoaded" class="text-center py-5">
+              All posts has been loaded.
+            </div>
           </div>
         </v-col>
 

@@ -9,6 +9,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ModeratorController;
 use App\Http\Controllers\DepartmentController;
 
@@ -33,9 +34,22 @@ Auth::routes([
     //'reset' => false, // Password Reset Routes...
     'verify' => false, // Email Verification Routes...
 ]);
-Route::get('/', function () { return redirect('/d/home');});
-Route::get('/home', function () { return redirect('/d/home');});
-Route::get('/feed', function () { return redirect('/d/feed');});
+
+/**
+ * Employees
+ */
+Route::get('/', function () { return redirect('/e/home');});
+Route::get('/home', [DashboardController::class, 'home'])->name('app.home')->middleware('auth');
+Route::group(['prefix' => 'e', 'as' => 'employee.', 'middleware' => 'auth'], function(){
+    /**
+     * Feed
+     */
+    Route::get('/feed', [DashboardController::class, 'employee'])->name('feed');
+    Route::get('/feed/article/{id}', [DashboardController::class, 'employee'])->name('article.single');
+});
+
+
+
 
 Route::group(['prefix'=>'d','as'=>'moderator.', 'middleware' => 'auth'], function(){
 

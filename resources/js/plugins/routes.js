@@ -328,7 +328,7 @@ export const routes = [
      * Employee's Routes
      */
     {
-        path: "/d/home",
+        path: "/e/home",
         component: Home,
         name: "home",
         beforeEnter: (to, from, next) => {
@@ -338,7 +338,7 @@ export const routes = [
         },
     },
     {
-        path: "/d/feed",
+        path: "/e/feed",
         component: Feed,
         name: "Feed",
         beforeEnter: (to, from, next) => {
@@ -348,7 +348,7 @@ export const routes = [
         },
     },
     {
-        path: "/d/feed/articles/:id",
+        path: "/e/feed/article/:id",
         component: SingleArticle,
         name: "SingleArticle",
         beforeEnter: (to, from, next) => {
