@@ -25,7 +25,43 @@
     <!-- <link rel="icon" href="{{ asset('images/fav.png') }}" sizes="192x192"> -->
     <!-- <link rel="apple-touch-icon" href="{{ asset('images/fav.png') }}"> -->
     <meta name="msapplication-TileImage" content="asset('images/fav.png')">
-    <style>.cls-1{fill:#5b5e5e}.cls-2{fill:#cba82c}.loader-container{width:100%;height:100vh;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.loader-wrapper{width:100%;max-width:200px;margin:0 auto}.ga-loader{display:block;-webkit-transition:ease-out .3s;-o-transition:ease-out .3s;transition:ease-out .3s}.ga-loaded{display:none}</style>
+    <style>
+        .cls-1 {
+            fill: #5b5e5e
+        }
+
+        .cls-2 {
+            fill: #cba82c
+        }
+
+        .loader-container {
+            width: 100%;
+            height: 100vh;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center
+        }
+
+        .loader-wrapper {
+            width: 100%;
+            max-width: 200px;
+            margin: 0 auto
+        }
+
+        .ga-loader {
+            display: block;
+            -webkit-transition: ease-out .3s;
+            -o-transition: ease-out .3s;
+            transition: ease-out .3s
+        }
+
+        .ga-loaded {
+            display: none
+        }
+    </style>
 </head>
 
 <body class="dashboard">
@@ -40,10 +76,10 @@
                     <router-view></router-view>
                 </v-main>
                 <!-- <div>
-                <footer> 
+                <footer>
                     <v-sheet class="  pa-7"  min-height="10vh" >
                         <small class="black--text ">GAG’S OFFICIAL NETWORK © 2022 ALL RIGHTS RESERVED.</small>
-                    </v-sheet> 
+                    </v-sheet>
                 </footer>
                 </div> -->
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
